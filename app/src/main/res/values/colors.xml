@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#DF0274</color>
+    <color name="colorPrimaryVariant">#9A4880</color>
+    <color name="colorOnPrimary">#FFFFFFFF</color>
+
+    <color name="titleColor">#DF0274</color>
+    <color name="subTitleColor">#9A4880</color>
+
+    <color name="textColor">@android:color/white</color>
+    <color name="subTextColor">@android:color/secondary_text_dark</color>
+</resources>

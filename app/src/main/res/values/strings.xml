@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Revolver</string>
+
+    <string name="connection">Connection</string>
+    <string name="connection_note">Check network connection</string>
+    <string name="database" translatable="false">Database</string>.
+    <string name="default_database_note">This database is used as default</string>
+    <string name="default_link_note">This link is used as default</string>
+    <string name="home" translatable="false">Home</string>
+    <string name="informations">Informations</string>
+    <string name="link">Link</string>
+    <string name="links">Links</string>
+    <string name="linkbar">Linkbar</string>
+    <string name="linkbar_note">Show linkbar</string>
+    <string name="linksbtn">Links button</string>
+    <string name="linksbtn_note">Show links button</string>
+    <string name="navigationview">Navigationview</string>
+    <string name="navigationview_note">Show navigationview</string>
+    <string name="settings">Settings</string>
+    <string name="toolbar">Toolbar</string>
+    <string name="toolbar_note">Show toolbar</string>
+
+    <string name="nav_header_subtitle" traslatable="false" translatable="false">Innovative bridge by Infodati S.p.A.</string>
+    <string name="nav_header_title" translatable="false">Revolver</string>
+
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <string name="subtitle_general">GENERAL</string>
+    <string name="subtitle_graphics">GRAPHIC</string>
+    <string name="substitle_storage">STORAGE</string>
+</resources>

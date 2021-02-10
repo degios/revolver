@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:tag="Settings"
+    tools:context=".fragment.SettingsFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title_general"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:textSize="14dp"
+        android:textColor="@color/titleColor"
+        android:text="@string/subtitle_general"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_connection"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="14dp"
+                android:text="@string/connection"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_connection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:textAlignment="textEnd"
+                android:textSize="14dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_connection_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/subTextColor"
+            android:text="@string/connection_note"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_link_description"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="14dp"
+                android:text="@string/link"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_links"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:textAlignment="textEnd"
+                android:textSize="14dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_link_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/subTextColor"
+            android:text="@string/default_link_note"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View style="@style/Divider.Horizontal"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title_graphics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:textSize="14dp"
+        android:textColor="@color/titleColor"
+        android:text="@string/subtitle_graphics"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5sp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_navigationview"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textSize="14dp"
+                    android:text="@string/navigationview"/>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_navigationview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:textAlignment="textEnd"
+                    android:textSize="14dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_navigationview_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/subTextColor"
+            android:text="@string/navigationview_note"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_toolbar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="14dp"
+                android:text="@string/toolbar"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:textAlignment="textEnd"
+                android:textSize="14dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_toolbar_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/subTextColor"
+            android:text="@string/toolbar_note"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_linkbar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="14dp"
+                android:text="@string/linkbar"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_linkbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:textAlignment="textEnd"
+                android:textSize="14dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_linkbar_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/subTextColor"
+            android:text="@string/linkbar_note"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_linksbtn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="14dp"
+                android:text="@string/linksbtn"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_linksbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:textAlignment="textEnd"
+                android:textSize="14dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_linksbtn_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/subTextColor"
+            android:text="@string/linksbtn_note"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View style="@style/Divider.Horizontal"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title_storage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:textSize="14dp"
+        android:textColor="@color/titleColor"
+        android:text="@string/substitle_storage"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_database_description"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="14dp"
+                android:text="@string/database"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_databases"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:textAlignment="textEnd"
+                android:textSize="14dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_database_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/subTextColor"
+            android:text="@string/default_database_note"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

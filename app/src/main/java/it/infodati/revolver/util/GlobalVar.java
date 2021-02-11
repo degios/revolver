@@ -12,25 +12,48 @@ public class GlobalVar {
     private static GlobalVar instance = new GlobalVar();
 
     public static final String DATABASE_NAME = "DATABASE_NAME";
+    public static final String LINK_ID = "LINK_ID";
 
-    private String prefs_name;
-    private String database_name;
+    private String prefsName;
+    private String databaseName;
+
+    private boolean drawerEnabled;
+    private boolean toolbarEnabled;
+    private boolean bottombarEnabled;
+    private boolean floatingEnabled;
+
+    private int linkId = 0;
+
 
     private GlobalVar() {}
     public static GlobalVar getInstance() { return GlobalVar.instance; }
 
     // setter
-    public void setPrefsName(String name) { this.prefs_name = name; }
-    public void setDatabaseName(String name) { this.database_name = name; }
+    public void setPrefsName(String name) { this.prefsName = name; }
+    public void setDatabaseName(String name) { this.databaseName = name; }
+
+    public void setDrawerEnabled(boolean enabled) { this.drawerEnabled = enabled; }
+    public void setToolbarEnabled(boolean enabled) { this.toolbarEnabled = enabled; }
+    public void setBottombarEnabled(boolean enabled) { this.bottombarEnabled = enabled; }
+    public void setFloatingEnabled(boolean enabled) { this.floatingEnabled = enabled; }
+
+    public void setLinkId(int value) { this.linkId = value; }
 
     // getter
-    public String getPrefsName() { return this.prefs_name; }
+    public String getPrefsName() { return this.prefsName; }
     public String getDatabaseName() {
-        if (this.database_name==null || this.database_name.trim().isEmpty()) {
-            this.database_name = DatabaseStrings.DATABASE_DEMO;
+        if (this.databaseName==null || this.databaseName.trim().isEmpty()) {
+            this.databaseName = DatabaseStrings.DATABASE_DEMO;
         }
-        return this.database_name;
+        return this.databaseName;
     }
+
+    public boolean isDrawerEnabled() { return this.drawerEnabled; }
+    public boolean isToolbarEnabled() { return this.toolbarEnabled; }
+    public boolean isBottombarEnabled() { return this.bottombarEnabled; }
+    public boolean isFloatingEnabled() { return this.floatingEnabled; }
+
+    public int getLinkId() { return this.linkId; }
 
     public int getListIndexByString(ArrayList<Object> list, Object obj) {
         int position = 0;

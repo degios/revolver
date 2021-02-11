@@ -11,15 +11,15 @@
     <string name="link">Collegamento</string>
     <string name="default_link_note">Collegamento predefinito</string>
     <string name="toolbar">Barra degli strumenti</string>
-    <string name="linkbar">Barra dei collegamenti</string>
-    <string name="navigationview">Barra laterale</string>
+    <string name="bottombar">Barra dei collegamenti</string>
+    <string name="drawer">Barra laterale</string>
     <string name="default_database_note">Database predefinito</string>
-    <string name="navigationview_note">Mostra barra laterale</string>
-    <string name="linkbar_note">Mostra barra dei collegamenti</string>
+    <string name="drawer_note">Mostra barra laterale</string>
+    <string name="bottombar_note">Mostra barra dei collegamenti</string>
     <string name="toolbar_note">Mostra barra degli strumenti</string>
     <string name="links">Collegamenti</string>
-    <string name="linksbtn">Pulsante collegamenti</string>
-    <string name="linksbtn_note">Mostra pulsante collegamenti</string>
+    <string name="floating">Pulsante collegamenti</string>
+    <string name="floating_note">Mostra pulsante collegamenti</string>
     <string name="connection">Connessione</string>
     <string name="connection_note">Controlla connessione di rete</string>
 </resources>

@@ -16,46 +16,7 @@
         android:textColor="@color/titleColor"
         android:text="@string/subtitle_general"/>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5sp"
-        android:orientation="vertical">
-
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textview_connection"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:textSize="14dp"
-                android:text="@string/connection"/>
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch_connection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="marquee"
-                android:textAlignment="textEnd"
-                android:textSize="14dp" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_connection_note"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="12dp"
-            android:textColor="@color/subTextColor"
-            android:text="@string/connection_note"/>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5sp"
@@ -117,15 +78,15 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textview_navigationview"
+                    android:id="@+id/textview_drawer"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:textSize="14dp"
-                    android:text="@string/navigationview"/>
+                    android:text="@string/drawer"/>
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switch_navigationview"
+                    android:id="@+id/switch_drawer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
@@ -135,12 +96,12 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_navigationview_note"
+            android:id="@+id/textview_drawer_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12dp"
             android:textColor="@color/subTextColor"
-            android:text="@string/navigationview_note"/>
+            android:text="@string/drawer_note"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -195,15 +156,15 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textview_linkbar"
+                android:id="@+id/textview_bottombar"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textSize="14dp"
-                android:text="@string/linkbar"/>
+                android:text="@string/bottombar"/>
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch_linkbar"
+                android:id="@+id/switch_bottombar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
@@ -218,7 +179,7 @@
             android:layout_height="wrap_content"
             android:textSize="12dp"
             android:textColor="@color/subTextColor"
-            android:text="@string/linkbar_note"/>
+            android:text="@string/bottombar_note"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -234,15 +195,15 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textview_linksbtn"
+                android:id="@+id/textview_floating"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textSize="14dp"
-                android:text="@string/linksbtn"/>
+                android:text="@string/floating"/>
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch_linksbtn"
+                android:id="@+id/switch_floating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
@@ -252,12 +213,12 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_linksbtn_note"
+            android:id="@+id/textview_floating_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12dp"
             android:textColor="@color/subTextColor"
-            android:text="@string/linksbtn_note"/>
+            android:text="@string/floating_note"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

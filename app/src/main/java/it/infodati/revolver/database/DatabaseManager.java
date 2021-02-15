@@ -200,4 +200,19 @@ public class DatabaseManager {
             return getAllLinks(FIELD_DESCRIPTION_ENG);
         }
     }
+
+    // Actions
+    public Link getAction(int id) { return getLink(id); }
+    public Link getAction(String orderBy, int limit) { return getLink(orderBy, limit); }
+    public Link getFirstAction() {
+        return getFirstLink();
+    }
+    public Link getFirstOrderedAction() { return getFirstOrderedLink(); }
+    public Link getLastAction() { return getLastLink(); }
+    public Link getLastOrderedAction() { return getLastOrderedLink(); }
+    public List<Link> getAllActions(String orderBy) { return getAllLinks(orderBy); }
+    public List<Link> getAllActions() {
+        return getAllLinks();
+    }
+    public List<Link> getAllOrderedActions() { return getAllOrderedLinks(); }
 }

@@ -57,7 +57,7 @@ public class LinksActivity extends AppCompatActivity {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                Log.i("REFRESH", "onRefresh CategoriesActivity called from SwipeRefreshLayout");
+//                Log.i("REFRESH", "onRefresh LinksActivity called from SwipeRefreshLayout");
                 fragment.loadData();
                 swipe.setRefreshing(false);
             }

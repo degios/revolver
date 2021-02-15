@@ -72,6 +72,8 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        list.add(new Link(0,"","Home"));
 /*
         if (list!=null)
             Snackbar.make( spinner, "[" + String.valueOf(list.size()) + "] " + " funds loaded", Snackbar.LENGTH_LONG)

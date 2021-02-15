@@ -57,6 +57,7 @@ public class GlobalVar {
     public boolean isFloatingEnabled() { return this.floatingEnabled; }
 
     public int getLinkId() { return this.linkId; }
+    public int getActionId() { return this.getLinkId(); }
 
     public int getListIndexByString(ArrayList<Object> list, Object obj) {
         int position = 0;

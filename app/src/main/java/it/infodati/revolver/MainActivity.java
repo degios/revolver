@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,15 +21,14 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 import it.infodati.revolver.database.DatabaseManager;
 import it.infodati.revolver.database.DatabaseStrings;
+import it.infodati.revolver.fragment.ActionsFragment;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private SwipeRefreshLayout swipe;
-//    private MainFragment fragment;
+    private ActionsFragment fragment;
 /*
     private AppCompatEditText editURL;
     private AppCompatButton buttonLoad;
@@ -69,12 +69,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        fragment = new ActionsFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
         swipe = findViewById(R.id.swipe);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                Log.i("REFRESH", "onRefresh FundsActivity called from SwipeRefreshLayout");
+//                Log.i("REFRESH", "onRefresh MainActivity called from SwipeRefreshLayout");
                 loadInterface();
+                fragment.loadData();
                 swipe.setRefreshing(false);
             }
         });
@@ -285,9 +290,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            Toast.makeText(getApplicationContext(), "ERROR Internet connection not permitted!", Toast.LENGTH_LONG).show();
         }
 
-//        drawerLayout.refreshDrawableState();
-//        drawerLayout.invalidate();
-//        toggle.syncState();
+        drawerLayout.refreshDrawableState();
+        drawerLayout.invalidate();
+        toggle.syncState();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            swipe.setRefreshing(true);
+            loadInterface();
+            fragment.loadData();
+            swipe.setRefreshing(false);
+        }
     }
 
 /*

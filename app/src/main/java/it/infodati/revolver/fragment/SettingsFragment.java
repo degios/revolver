@@ -15,10 +15,15 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import it.infodati.revolver.R;
+import it.infodati.revolver.database.DatabaseManager;
 import it.infodati.revolver.database.DatabaseStrings;
+import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
 public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
@@ -57,54 +62,50 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     public void loadSpinnerLinksData() {
-/*
-        List<Fund> list = null;
+        List<Link> list = null;
         try {
             DatabaseManager databaseManager = new DatabaseManager(getActivity());
-            list = databaseManager.getAllOrderedFunds();
+            list = databaseManager.getAllOrderedLinks();
             databaseManager.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-*/
 /*
         if (list!=null)
             Snackbar.make( spinner, "[" + String.valueOf(list.size()) + "] " + " funds loaded", Snackbar.LENGTH_LONG)
                     .setAction( "[" + String.valueOf(list.size()) + "] " + " funds loaded", null)
                     .show();
-*//*
+*/
 
         if (list!=null) {
-            ArrayAdapter adapter = new ArrayAdapter<Fund>(getActivity(),
+            ArrayAdapter adapter = new ArrayAdapter<Link>(getActivity(),
                     android.R.layout.simple_spinner_item, list);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner_funds.setAdapter(adapter);
+            spinnerLinks.setAdapter(adapter);
 
-            if (GlobalVar.getInstance().getFundId()>0) {
-                Fund model = null;
+            if (GlobalVar.getInstance().getLinkId()>0) {
+                Link model = null;
                 try {
                     DatabaseManager databaseManager = new DatabaseManager(getActivity());
-                    model = databaseManager.getFund(GlobalVar.getInstance().getFundId());
+                    model = databaseManager.getLink(GlobalVar.getInstance().getLinkId());
                     databaseManager.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 if (model!=null) {
                     int position = GlobalVar.getInstance().getListIndexByString((ArrayList<Object>)(ArrayList<?>)(list), model);
-*/
 /*
-                    Snackbar.make( spinner_categories, "[" + String.valueOf(model.getId()) + "][" + String.valueOf(position) + "] " + " fund position", Snackbar.LENGTH_LONG)
-                            .setAction( "[" + String.valueOf(position) + "] " + " fund position", null)
+                    Snackbar.make( spinnerLinks, "[" + String.valueOf(model.getId()) + "][" + String.valueOf(position) + "] " + " fund position", Snackbar.LENGTH_LONG)
+                            .setAction( "[" + String.valueOf(position) + "] " + " link position", null)
                             .show();
-*//*
+*/
 
                     if (position>0) {
-                        spinner_funds.setSelection(position);
+                        spinnerLinks.setSelection(position);
                     }
                 }
             }
         }
-*/
     }
 
     public void loadSwitches() {
@@ -141,7 +142,21 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        if (parent.getId() == R.id.spinner_databases) {
+        if (parent.getId() == R.id.spinner_links) {
+            Link model = (Link) parent.getItemAtPosition(position);
+            try {
+                editor.putInt(GlobalVar.LINK_ID,model.getId());
+                editor.apply();
+/*
+            Snackbar.make( view, "[" + String.valueOf(model.getId()) + "] " + model.getDescription() + " selected", Snackbar.LENGTH_LONG)
+                    .setAction( "[" + String.valueOf(model.getId()) + "] " + model.getDescription() + " selected", null)
+                    .show();
+*/
+                GlobalVar.getInstance().setLinkId(sharedPreferences.getInt(GlobalVar.LINK_ID,0));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (parent.getId() == R.id.spinner_databases) {
             String name = (String) parent.getItemAtPosition(position);
             try {
                 if (!sharedPreferences.getString(GlobalVar.DATABASE_NAME,DatabaseStrings.DATABASE_DEMO).equals(name)) {

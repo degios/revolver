@@ -29,4 +29,24 @@
     <string name="subtitle_general">GENERAL</string>
     <string name="subtitle_graphics">GRAPHIC</string>
     <string name="substitle_storage">STORAGE</string>
+
+    <!--    All languages-->
+    <string name="ALL_demo_link_1" translatable="false">https://demoinfinity4.edigest.it/revolver/jsp/index.jsp</string>
+    <string name="ALL_demo_link_2" translatable="false">https://demoinfinity4.edigest.it/revolver/jsp/index.jsp?userLogin=visitatori&amp;userPassword=visitatori</string>
+    <string name="ALL_demo_link_3" translatable="false">https://demoinfinity4.edigest.it/revolver/jsp/index.jsp?userLogin=timbratore&amp;userPassword=timbratore</string>
+    <string name="ALL_demo_link_4" translatable="false">https://demoinfinity4.edigest.it/revolver/jsp/index.jsp?userLogin=antonio.ghiotto&amp;userPassword=antoniog11</string>
+
+    <!--    English-->
+    <string name="ENG_all" translatable="false">All</string>
+    <string name="ENG_demo_link_1_desc" translatable="false">Login</string>
+    <string name="ENG_demo_link_2_desc" translatable="false">Visitor log</string>
+    <string name="ENG_demo_link_3_desc" translatable="false">Time registration</string>
+    <string name="ENG_demo_link_4_desc" translatable="false">User</string>
+
+    <!--    Italian-->
+    <string name="ITA_all" translatable="false">Tutti/e</string>
+    <string name="ITA_demo_link_1_desc" translatable="false">Autenticazione</string>
+    <string name="ITA_demo_link_2_desc" translatable="false">Visitatori</string>
+    <string name="ITA_demo_link_3_desc" translatable="false">Rilevazione presenze</string>
+    <string name="ITA_demo_link_4_desc" translatable="false">Utente</string>
 </resources>

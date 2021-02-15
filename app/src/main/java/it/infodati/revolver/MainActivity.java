@@ -25,7 +25,11 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+
+import it.infodati.revolver.database.DatabaseManager;
 import it.infodati.revolver.database.DatabaseStrings;
+import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -226,7 +230,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences sharedPreferences = getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
+
+        if (GlobalVar.getInstance().getDatabaseName().equals(DatabaseStrings.DATABASE_DEMO)) {
+            Link lastLink = databaseManager.getLastLink();
+            if (lastLink.getId() <= 0) {
+                ArrayList<Link> links = new ArrayList<Link>();
+                links.add(new Link(1, getString(R.string.ALL_demo_link_1), getString(R.string.ENG_demo_link_1_desc), getString(R.string.ITA_demo_link_1_desc), "", ""));
+                links.add(new Link(2, getString(R.string.ALL_demo_link_2), getString(R.string.ENG_demo_link_2_desc), getString(R.string.ITA_demo_link_2_desc), "", ""));
+                links.add(new Link(3, getString(R.string.ALL_demo_link_3), getString(R.string.ENG_demo_link_3_desc), getString(R.string.ITA_demo_link_3_desc), "", ""));
+                links.add(new Link(4, getString(R.string.ALL_demo_link_4), getString(R.string.ENG_demo_link_4_desc), getString(R.string.ITA_demo_link_4_desc), "", ""));
+
+                for (Link link : links)
+                    databaseManager.createLink(link);
+
+                editor.putInt(GlobalVar.LINK_ID,1);
+                editor.apply();
+            }
+        }
         GlobalVar.getInstance().setLinkId(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getInt(GlobalVar.LINK_ID, 0));
+
+        databaseManager.close();
     }
 
     private void loadInterface() {

@@ -180,6 +180,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int itemId = item.getItemId();
         if (itemId==R.id.nav_home) {
             // Instanciate specific fragment
+        } else if (itemId == R.id.nav_links) {
+            activityClassName = this.getClass().getPackage().getName()+"."+"LinksActivity";
         } else if (itemId == R.id.nav_settings) {
             activityClassName = this.getClass().getPackage().getName()+"."+"SettingsActivity";
         }

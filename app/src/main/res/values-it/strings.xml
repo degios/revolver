@@ -22,4 +22,15 @@
     <string name="floating_note">Mostra pulsante collegamenti</string>
     <string name="connection">Connessione</string>
     <string name="connection_note">Controlla connessione di rete</string>
+    <string name="default_icon">Icona predefinita</string>
+    <string name="default_choice">Opzione di default scelta nelle impostazioni</string>
+    <string name="icon">Icona</string>
+    <string name="description">Descrizione</string>
+    <string name="note">Note</string>
+    <string name="delete">Elimina</string>
+    <string name="save">Salva</string>
+    <string name="add_link">Aggiungi collegamento</string>
+    <string name="modify_link">Modifica collegamento</string>
+    <string name="confirm_delete">Confermi cancellazione?</string>
+    <string name="yes">Sì</string>
 </resources>

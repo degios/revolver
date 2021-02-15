@@ -28,6 +28,7 @@ import it.infodati.revolver.util.GlobalVar;
 
 public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
+    private SwitchCompat switchButtonRemove;
     private AppCompatSpinner spinnerLinks;
     private SwitchCompat switchDrawer;
     private SwitchCompat switchToolbar;
@@ -46,6 +47,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        switchButtonRemove = view.findViewById(R.id.switch_button_remove);
         spinnerLinks = view.findViewById(R.id.spinner_links);
         switchDrawer = view.findViewById(R.id.switch_drawer);
         switchToolbar = view.findViewById(R.id.switch_toolbar);

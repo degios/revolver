@@ -138,7 +138,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String fragmentClassName = null;
 
         int itemId = item.getItemId();
-        if (itemId == R.id.menu_settings) {
+        if (itemId == R.id.menu_links) {
+            activityClassName = this.getClass().getPackage().getName()+"."+"LinksActivity";
+        } else if (itemId == R.id.menu_settings) {
             activityClassName = this.getClass().getPackage().getName()+"."+"SettingsActivity";
         }
 

@@ -27,10 +27,15 @@
     <string name="icon">Icona</string>
     <string name="description">Descrizione</string>
     <string name="note">Note</string>
-    <string name="delete">Elimina</string>
     <string name="save">Salva</string>
     <string name="add_link">Aggiungi collegamento</string>
     <string name="modify_link">Modifica collegamento</string>
     <string name="confirm_delete">Confermi cancellazione?</string>
     <string name="yes">Sì</string>
+    <string name="remove">Rimuovi</string>
+    <string name="delete">Elimina</string>
+    <string name="delete_link">Elimina collegamento</string>
+    <string name="remove_link">Rimuovi collegamento</string>
+    <string name="button_remove">Pulsante rimuovi</string>
+    <string name="button_remove_note">Mostra pulsante rimuovi</string>
 </resources>

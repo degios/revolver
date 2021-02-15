@@ -3,8 +3,11 @@ package it.infodati.revolver;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -13,6 +16,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import it.infodati.revolver.database.DatabaseManager;
 import it.infodati.revolver.model.Link;
+import it.infodati.revolver.util.GlobalVar;
+
 import com.google.android.material.snackbar.Snackbar;
 
 public class LinkActivity extends AppCompatActivity {
@@ -52,14 +57,49 @@ public class LinkActivity extends AppCompatActivity {
         editTextDescription = findViewById(R.id.edittext_description);
         editTextNote = findViewById(R.id.edittext_note);
         buttonDelete = findViewById(R.id.button_delete);
-        if (id>0) {
+        if (id>0 && GlobalVar.getInstance().isButtonRemoveEnabeld()) {
             buttonDelete.setVisibility(View.VISIBLE);
         } else {
             buttonDelete.setVisibility(View.INVISIBLE);
+            buttonDelete.getLayoutParams().width = 0;
         }
         buttonSave = findViewById(R.id.button_save);
 
         loadData();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_link, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_remove) {
+            Snackbar snackbar = Snackbar
+                    .make(editTextUrl, getResources().getText(R.string.confirm_delete), Snackbar.LENGTH_LONG)
+                    .setAction(getResources().getText(R.string.yes), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            try {
+                                DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
+                                databaseManager.removeLink(id);
+                                databaseManager.close();
+
+                                setResult(Activity.RESULT_OK);
+                                finish();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+            snackbar.show();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     private void loadData() {

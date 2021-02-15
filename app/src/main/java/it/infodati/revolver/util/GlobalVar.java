@@ -17,6 +17,7 @@ public class GlobalVar {
     private String prefsName;
     private String databaseName;
 
+    private boolean buttonRemoveEnabled;
     private boolean drawerEnabled;
     private boolean toolbarEnabled;
     private boolean bottombarEnabled;
@@ -32,6 +33,7 @@ public class GlobalVar {
     public void setPrefsName(String name) { this.prefsName = name; }
     public void setDatabaseName(String name) { this.databaseName = name; }
 
+    public void setButtonRemoveEnabled(boolean enabled) { this.buttonRemoveEnabled = enabled; }
     public void setDrawerEnabled(boolean enabled) { this.drawerEnabled = enabled; }
     public void setToolbarEnabled(boolean enabled) { this.toolbarEnabled = enabled; }
     public void setBottombarEnabled(boolean enabled) { this.bottombarEnabled = enabled; }
@@ -48,6 +50,7 @@ public class GlobalVar {
         return this.databaseName;
     }
 
+    public boolean isButtonRemoveEnabeld() { return this.buttonRemoveEnabled; }
     public boolean isDrawerEnabled() { return this.drawerEnabled; }
     public boolean isToolbarEnabled() { return this.toolbarEnabled; }
     public boolean isBottombarEnabled() { return this.bottombarEnabled; }

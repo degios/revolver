@@ -14,6 +14,7 @@ public class GlobalVar {
     public static final String TOOLBAR_ENABLED = "TOOLBAR_ENABLED";
     public static final String BOTTOMBAR_ENABLED = "BOTTOMBAR_ENABLED";
     public static final String FLOATING_ENABLED = "FLOATING_ENABLED";
+    public static final String SUBACTIVITY_ENABLED = "SUBACTIVITY_ENABLED";
     public static final String SUBTOOLBAR_ENABLED = "SUBTOOLBAR_ENABLED";
     public static final String BUTTONREMOVE_ENABLED = "BUTTONREMOVE_ENABLED";
     public static final String LINK_ID = "LINK_ID";
@@ -25,6 +26,7 @@ public class GlobalVar {
     private boolean toolbarEnabled;
     private boolean bottombarEnabled;
     private boolean floatingEnabled;
+    private boolean subActivityEnabled;
     private boolean subToolbarEnabled;
     private boolean buttonRemoveEnabled;
 
@@ -41,6 +43,7 @@ public class GlobalVar {
     public void setToolbarEnabled(boolean enabled) { this.toolbarEnabled = enabled; }
     public void setBottombarEnabled(boolean enabled) { this.bottombarEnabled = enabled; }
     public void setFloatingEnabled(boolean enabled) { this.floatingEnabled = enabled; }
+    public void setSubactivityEnabled(boolean enabled) { this.subActivityEnabled = enabled; }
     public void setSubToolbarEnabled(boolean enabled) { this.subToolbarEnabled = enabled; }
     public void setButtonRemoveEnabled(boolean enabled) { this.buttonRemoveEnabled = enabled; }
 
@@ -58,6 +61,7 @@ public class GlobalVar {
     public boolean isToolbarEnabled() { return this.toolbarEnabled; }
     public boolean isBottombarEnabled() { return this.bottombarEnabled; }
     public boolean isFloatingEnabled() { return this.floatingEnabled; }
+    public boolean isSubActivityEnabled() { return this.subActivityEnabled; }
     public boolean isSubToolbarEnabled() { return this.subToolbarEnabled; }
     public boolean isButtonRemoveEnabeld() { return this.buttonRemoveEnabled; }
 

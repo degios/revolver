@@ -33,6 +33,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     private SwitchCompat switchBottombar;
     private SwitchCompat switchFloating;
     private AppCompatSpinner spinnerLinks;
+    private SwitchCompat switchSubActivity;
     public SwitchCompat switchSubToolbar;
     private SwitchCompat switchButtonRemove;
     private AppCompatSpinner spinnerDatabases;
@@ -52,6 +53,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         switchBottombar = view.findViewById(R.id.switch_bottombar);
         switchFloating = view.findViewById(R.id.switch_floating);
         spinnerLinks = view.findViewById(R.id.spinner_links);
+        switchSubActivity = view.findViewById(R.id.switch_subactivity);
         switchSubToolbar = view.findViewById(R.id.switch_subtoolbar);
         switchButtonRemove = view.findViewById(R.id.switch_button_remove);
         spinnerDatabases = view.findViewById(R.id.spinner_databases);
@@ -64,6 +66,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         switchBottombar.setOnCheckedChangeListener(this);
         switchFloating.setOnCheckedChangeListener(this);
         spinnerLinks.setOnItemSelectedListener(this);
+        switchSubActivity.setOnCheckedChangeListener(this);
         switchSubToolbar.setOnCheckedChangeListener(this);
         switchButtonRemove.setOnCheckedChangeListener(this);
         spinnerDatabases.setOnItemSelectedListener(this);
@@ -121,6 +124,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         this.switchToolbar.setChecked(GlobalVar.getInstance().isToolbarEnabled());
         this.switchBottombar.setChecked(GlobalVar.getInstance().isBottombarEnabled());
         this.switchFloating.setChecked(GlobalVar.getInstance().isFloatingEnabled());
+        this.switchSubActivity.setChecked(GlobalVar.getInstance().isSubActivityEnabled());
         this.switchSubToolbar.setChecked(GlobalVar.getInstance().isSubToolbarEnabled());
         this.switchButtonRemove.setChecked(GlobalVar.getInstance().isButtonRemoveEnabeld());
     }
@@ -212,6 +216,12 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
                 editor.apply();
             }
             GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.FLOATING_ENABLED,false));
+        } else if (buttonView.getId() == R.id.switch_subactivity) {
+            if (sharedPreferences.getBoolean(GlobalVar.SUBACTIVITY_ENABLED,false)!=isChecked) {
+                editor.putBoolean(GlobalVar.SUBACTIVITY_ENABLED,isChecked);
+                editor.apply();
+            }
+            GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.SUBTOOLBAR_ENABLED,false));
         } else if (buttonView.getId() == R.id.switch_subtoolbar) {
             if (sharedPreferences.getBoolean(GlobalVar.SUBTOOLBAR_ENABLED,false)!=isChecked) {
                 editor.putBoolean(GlobalVar.SUBTOOLBAR_ENABLED,isChecked);

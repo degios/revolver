@@ -2,6 +2,8 @@
     <string name="app_name">Revolver</string>
 
     <string name="action">Action</string>
+    <string name="activity">Activity</string>
+    <string name="activity_note">Open action as activity</string>
     <string name="add_action">Add action</string>
     <string name="add_link">Add link</string>
     <string name="button_remove">Button remove</string>

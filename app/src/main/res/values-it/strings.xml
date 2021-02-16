@@ -38,4 +38,6 @@
     <string name="subtitle_links">COLLEGAMENTI</string>
     <string name="subtitle_actions">AZIONI</string>
     <string name="action">Azione</string>
+    <string name="activity">Attività</string>
+    <string name="activity_note">Apri azione come attività</string>
 </resources>

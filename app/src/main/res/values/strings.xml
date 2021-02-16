@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Revolver</string>
 
+    <string name="action">Action</string>
     <string name="add_action">Add action</string>
     <string name="add_link">Add link</string>
     <string name="button_remove">Button remove</string>
@@ -26,8 +27,6 @@
     <string name="bottombar_note">Show linkbar</string>
     <string name="floating">Links button</string>
     <string name="floating_note">Show links button</string>
-    <string name="drawer">Navigationview</string>
-    <string name="drawer_note">Show navigationview</string>
     <string name="modify_link">Modify link</string>
     <string name="note">Note</string>
     <string name="remove">Remove</string>
@@ -45,8 +44,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
 
-    <string name="subtitle_general">GENERAL</string>
-    <string name="subtitle_graphics">GRAPHIC</string>
+    <string name="subtitle_actions">ACTIONS</string>
+    <string name="subtitle_home" translatable="false">HOME</string>
+    <string name="subtitle_links">LINKS</string>
     <string name="substitle_storage">STORAGE</string>
 
     <!--    All languages-->

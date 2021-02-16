@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import it.infodati.revolver.ActionActivity;
 import it.infodati.revolver.LinkActivity;
 import it.infodati.revolver.R;
 import it.infodati.revolver.adapter.ActionsAdapter;
@@ -77,11 +78,9 @@ public class ActionsFragment extends Fragment implements ListItemClickListener, 
     @Override
     public void onListItemClick(int position) {
         Link model = (Link) adapter.getItem(position);
-/*
         Intent intent = new Intent(getActivity(), ActionActivity.class);
         intent.putExtra(getResources().getString(R.string.id).toString(),model.getId());
         startActivityForResult(intent, 0);
-*/
     }
 
     private class QueryData extends AsyncTask {

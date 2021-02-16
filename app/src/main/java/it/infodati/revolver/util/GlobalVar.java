@@ -17,11 +17,12 @@ public class GlobalVar {
     private String prefsName;
     private String databaseName;
 
-    private boolean buttonRemoveEnabled;
     private boolean drawerEnabled;
     private boolean toolbarEnabled;
     private boolean bottombarEnabled;
     private boolean floatingEnabled;
+    private boolean subToolbarEnabled;
+    private boolean buttonRemoveEnabled;
 
     private int linkId = 0;
 
@@ -33,11 +34,12 @@ public class GlobalVar {
     public void setPrefsName(String name) { this.prefsName = name; }
     public void setDatabaseName(String name) { this.databaseName = name; }
 
-    public void setButtonRemoveEnabled(boolean enabled) { this.buttonRemoveEnabled = enabled; }
     public void setDrawerEnabled(boolean enabled) { this.drawerEnabled = enabled; }
     public void setToolbarEnabled(boolean enabled) { this.toolbarEnabled = enabled; }
     public void setBottombarEnabled(boolean enabled) { this.bottombarEnabled = enabled; }
     public void setFloatingEnabled(boolean enabled) { this.floatingEnabled = enabled; }
+    public void setSubToolbarEnabled(boolean enabled) { this.subToolbarEnabled = enabled; }
+    public void setButtonRemoveEnabled(boolean enabled) { this.buttonRemoveEnabled = enabled; }
 
     public void setLinkId(int value) { this.linkId = value; }
 
@@ -50,11 +52,12 @@ public class GlobalVar {
         return this.databaseName;
     }
 
-    public boolean isButtonRemoveEnabeld() { return this.buttonRemoveEnabled; }
     public boolean isDrawerEnabled() { return this.drawerEnabled; }
     public boolean isToolbarEnabled() { return this.toolbarEnabled; }
     public boolean isBottombarEnabled() { return this.bottombarEnabled; }
     public boolean isFloatingEnabled() { return this.floatingEnabled; }
+    public boolean isSubToolbarEnabled() { return this.subToolbarEnabled; }
+    public boolean isButtonRemoveEnabeld() { return this.buttonRemoveEnabled; }
 
     public int getLinkId() { return this.linkId; }
     public int getActionId() { return this.getLinkId(); }

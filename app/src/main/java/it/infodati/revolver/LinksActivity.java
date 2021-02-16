@@ -18,6 +18,8 @@ import it.infodati.revolver.fragment.LinksFragment;
 
 public class LinksActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+    private ActionBar actionBar;
     private SwipeRefreshLayout swipe;
     private LinksFragment fragment;
 
@@ -26,11 +28,11 @@ public class LinksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_links);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.links);
         setSupportActionBar(toolbar);
 
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         try {
             actionBar.setDisplayHomeAsUpEnabled(true);
         } catch (Exception e) {

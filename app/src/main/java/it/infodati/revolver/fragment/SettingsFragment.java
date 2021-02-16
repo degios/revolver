@@ -29,12 +29,12 @@ import it.infodati.revolver.util.GlobalVar;
 
 public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
 
-    private SwitchCompat switchButtonRemove;
-    private AppCompatSpinner spinnerLinks;
-    private SwitchCompat switchDrawer;
     private SwitchCompat switchToolbar;
     private SwitchCompat switchBottombar;
     private SwitchCompat switchFloating;
+    private AppCompatSpinner spinnerLinks;
+    public SwitchCompat switchSubToolbar;
+    private SwitchCompat switchButtonRemove;
     private AppCompatSpinner spinnerDatabases;
 
     @Override
@@ -48,24 +48,24 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        switchButtonRemove = view.findViewById(R.id.switch_button_remove);
-        spinnerLinks = view.findViewById(R.id.spinner_links);
-        switchDrawer = view.findViewById(R.id.switch_drawer);
         switchToolbar = view.findViewById(R.id.switch_toolbar);
         switchBottombar = view.findViewById(R.id.switch_bottombar);
         switchFloating = view.findViewById(R.id.switch_floating);
+        spinnerLinks = view.findViewById(R.id.spinner_links);
+        switchSubToolbar = view.findViewById(R.id.switch_subtoolbar);
+        switchButtonRemove = view.findViewById(R.id.switch_button_remove);
         spinnerDatabases = view.findViewById(R.id.spinner_databases);
 
-        this.loadSpinnerLinksData();
         this.loadSwitches();
+        this.loadSpinnerLinksData();
         this.loadSpinnerDatabasesData();
 
-        switchButtonRemove.setOnCheckedChangeListener(this);
-        spinnerLinks.setOnItemSelectedListener(this);
-        switchDrawer.setOnCheckedChangeListener(this);
         switchToolbar.setOnCheckedChangeListener(this);
         switchBottombar.setOnCheckedChangeListener(this);
         switchFloating.setOnCheckedChangeListener(this);
+        spinnerLinks.setOnItemSelectedListener(this);
+        switchSubToolbar.setOnCheckedChangeListener(this);
+        switchButtonRemove.setOnCheckedChangeListener(this);
         spinnerDatabases.setOnItemSelectedListener(this);
     }
 
@@ -118,11 +118,11 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     public void loadSwitches() {
-        this.switchButtonRemove.setChecked(GlobalVar.getInstance().isButtonRemoveEnabeld());
-        this.switchDrawer.setChecked(GlobalVar.getInstance().isDrawerEnabled());
         this.switchToolbar.setChecked(GlobalVar.getInstance().isToolbarEnabled());
         this.switchBottombar.setChecked(GlobalVar.getInstance().isBottombarEnabled());
         this.switchFloating.setChecked(GlobalVar.getInstance().isFloatingEnabled());
+        this.switchSubToolbar.setChecked(GlobalVar.getInstance().isSubToolbarEnabled());
+        this.switchButtonRemove.setChecked(GlobalVar.getInstance().isButtonRemoveEnabeld());
     }
 
     public void loadSpinnerDatabasesData() {
@@ -191,16 +191,16 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (buttonView.getId() == R.id.switch_button_remove) {
-            GlobalVar.getInstance().setButtonRemoveEnabled(isChecked);
-        } else if (buttonView.getId() == R.id.switch_drawer) {
-            GlobalVar.getInstance().setDrawerEnabled(isChecked);
-        } else if (buttonView.getId() == R.id.switch_toolbar) {
+        if (buttonView.getId() == R.id.switch_toolbar) {
             GlobalVar.getInstance().setToolbarEnabled(isChecked);
         } else if (buttonView.getId() == R.id.switch_bottombar) {
             GlobalVar.getInstance().setBottombarEnabled(isChecked);
         } else if (buttonView.getId() == R.id.switch_floating) {
             GlobalVar.getInstance().setFloatingEnabled(isChecked);
+        } else if (buttonView.getId() == R.id.switch_subtoolbar) {
+            GlobalVar.getInstance().setSubToolbarEnabled(isChecked);
+        } else if (buttonView.getId() == R.id.switch_button_remove) {
+            GlobalVar.getInstance().setButtonRemoveEnabled(isChecked);
         }
     }
 }

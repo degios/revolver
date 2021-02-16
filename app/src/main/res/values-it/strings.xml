@@ -5,16 +5,12 @@
     <string name="settings">Impostazioni</string>
     <string name="navigation_drawer_close">Chiudi barra laterale</string>
     <string name="navigation_drawer_open">Apri barra laterale</string>
-    <string name="subtitle_general">GENERALI</string>
-    <string name="subtitle_graphics">GRAFICHE</string>
     <string name="substitle_storage">ARCHIVIAZIONE</string>
     <string name="link">Collegamento</string>
     <string name="default_link_note">Collegamento predefinito</string>
     <string name="toolbar">Barra degli strumenti</string>
     <string name="bottombar">Barra dei collegamenti</string>
-    <string name="drawer">Barra laterale</string>
     <string name="default_database_note">Database predefinito</string>
-    <string name="drawer_note">Mostra barra laterale</string>
     <string name="bottombar_note">Mostra barra dei collegamenti</string>
     <string name="toolbar_note">Mostra barra degli strumenti</string>
     <string name="links">Collegamenti</string>
@@ -39,4 +35,7 @@
     <string name="button_remove">Pulsante rimuovi</string>
     <string name="button_remove_note">Mostra pulsante rimuovi</string>
     <string name="add_action">Aggiungi azione</string>
+    <string name="subtitle_links">COLLEGAMENTI</string>
+    <string name="subtitle_actions">AZIONI</string>
+    <string name="action">Azione</string>
 </resources>

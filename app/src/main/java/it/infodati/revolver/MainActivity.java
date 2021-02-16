@@ -262,37 +262,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadInterface() {
-        Menu navigationMenu = navigationView.getMenu();
-
-        navigationMenu.clear();
-        navigationView.inflateMenu(R.menu.activity_main_drawer);
-
-        if (GlobalVar.isNetwork(getApplicationContext())) {
-//            Toast.makeText(getApplicationContext(), "Internet connection permitted", Toast.LENGTH_LONG).show();
-
-//          onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
-
-/*
-            int menuIndex = 0;
-            MenuItem menuItem;
-
-            navigationMenu.add(R.id.nav_custom, 2101, 2101, "Transactions");
-            menuItem = navigationMenu.findItem(2101);
-            menuItem.setIcon(android.R.drawable.ic_menu_share);
-
-            navigationMenu.add(R.id.nav_custom, 2102, 2102, "Trend");
-            menuItem = navigationMenu.findItem(2102);
-            menuItem.setIcon(android.R.drawable.ic_menu_sort_by_size);
-*/
-
-        } else {
-//            Toast.makeText(getApplicationContext(), "ERROR Internet connection not permitted!", Toast.LENGTH_LONG).show();
-        }
-
-        drawerLayout.refreshDrawableState();
-        drawerLayout.invalidate();
-        toggle.syncState();
-
         if (!GlobalVar.getInstance().isToolbarEnabled())
             actionBar.hide();
     }

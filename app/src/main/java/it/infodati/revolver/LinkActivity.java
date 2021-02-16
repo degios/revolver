@@ -78,24 +78,26 @@ public class LinkActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.menu_remove) {
-            Snackbar snackbar = Snackbar
-                    .make(editTextUrl, getResources().getText(R.string.confirm_delete), Snackbar.LENGTH_LONG)
-                    .setAction(getResources().getText(R.string.yes), new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            try {
-                                DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
-                                databaseManager.removeLink(id);
-                                databaseManager.close();
+            if (id>0) {
+                Snackbar snackbar = Snackbar
+                        .make(editTextUrl, getResources().getText(R.string.confirm_delete), Snackbar.LENGTH_LONG)
+                        .setAction(getResources().getText(R.string.yes), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                try {
+                                    DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
+                                    databaseManager.removeLink(id);
+                                    databaseManager.close();
 
-                                setResult(Activity.RESULT_OK);
-                                finish();
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                                    setResult(Activity.RESULT_OK);
+                                    finish();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                    });
-            snackbar.show();
+                        });
+                snackbar.show();
+            }
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -119,24 +121,26 @@ public class LinkActivity extends AppCompatActivity {
     }
 
     public void onDeleteBtnClick(View v) {
-        Snackbar snackbar = Snackbar
-                .make(v, getResources().getText(R.string.confirm_delete), Snackbar.LENGTH_LONG)
-                .setAction(getResources().getText(R.string.yes), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        try {
-                            DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
-                            databaseManager.removeLink(id);
-                            databaseManager.close();
+        if (id>0) {
+            Snackbar snackbar = Snackbar
+                    .make(v, getResources().getText(R.string.confirm_delete), Snackbar.LENGTH_LONG)
+                    .setAction(getResources().getText(R.string.yes), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            try {
+                                DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
+                                databaseManager.removeLink(id);
+                                databaseManager.close();
 
-                            setResult(Activity.RESULT_OK);
-                            finish();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                                setResult(Activity.RESULT_OK);
+                                finish();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                });
-        snackbar.show();
+                    });
+            snackbar.show();
+        }
     }
 
     public void onSaveBtnClick(View v) {

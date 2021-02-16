@@ -304,6 +304,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             swipe.setRefreshing(true);
             loadInterface();
             fragment.loadData();
+            fragment.loadInterface();
             swipe.setRefreshing(false);
         }
     }

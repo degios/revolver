@@ -1,5 +1,6 @@
 package it.infodati.revolver.fragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,19 +14,24 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
+import it.infodati.revolver.LinkActivity;
 import it.infodati.revolver.R;
 import it.infodati.revolver.adapter.ActionsAdapter;
 import it.infodati.revolver.database.DatabaseManager;
 import it.infodati.revolver.listener.ListItemClickListener;
 import it.infodati.revolver.model.Link;
+import it.infodati.revolver.util.GlobalVar;
 
 public class ActionsFragment extends Fragment implements ListItemClickListener, LoadDataFragment {
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private ActionsAdapter adapter;
+    private FloatingActionButton fab;
 
     @Nullable
     @Override
@@ -45,11 +51,27 @@ public class ActionsFragment extends Fragment implements ListItemClickListener, 
         adapter = new ActionsAdapter(this);
         recyclerView.setAdapter(adapter);
 
+        fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LinkActivity.class);
+                intent.putExtra(getResources().getString(R.string.id).toString(),0);
+                startActivityForResult(intent, 0);
+            }
+        });
+
         this.loadData();
+        this.loadInterface();
     }
 
     public void loadData() {
         new QueryData().execute();
+    }
+
+    public void loadInterface() {
+        if (!GlobalVar.getInstance().isFloatingEnabled())
+            fab.hide();
     }
 
     @Override

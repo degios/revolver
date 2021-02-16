@@ -191,16 +191,39 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         if (buttonView.getId() == R.id.switch_toolbar) {
-            GlobalVar.getInstance().setToolbarEnabled(isChecked);
+            if (sharedPreferences.getBoolean(GlobalVar.TOOLBAR_ENABLED,false)!=isChecked) {
+                editor.putBoolean(GlobalVar.TOOLBAR_ENABLED, isChecked);
+                editor.apply();
+            }
+            GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.TOOLBAR_ENABLED,false));
         } else if (buttonView.getId() == R.id.switch_bottombar) {
-            GlobalVar.getInstance().setBottombarEnabled(isChecked);
+            if (sharedPreferences.getBoolean(GlobalVar.BOTTOMBAR_ENABLED,false)!=isChecked) {
+                editor.putBoolean(GlobalVar.BOTTOMBAR_ENABLED,isChecked);
+                editor.apply();
+            }
+            GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.BOTTOMBAR_ENABLED,false));
         } else if (buttonView.getId() == R.id.switch_floating) {
-            GlobalVar.getInstance().setFloatingEnabled(isChecked);
+            if (sharedPreferences.getBoolean(GlobalVar.FLOATING_ENABLED,false)!=isChecked) {
+                editor.putBoolean(GlobalVar.FLOATING_ENABLED,isChecked);
+                editor.apply();
+            }
+            GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.FLOATING_ENABLED,false));
         } else if (buttonView.getId() == R.id.switch_subtoolbar) {
-            GlobalVar.getInstance().setSubToolbarEnabled(isChecked);
+            if (sharedPreferences.getBoolean(GlobalVar.SUBTOOLBAR_ENABLED,false)!=isChecked) {
+                editor.putBoolean(GlobalVar.SUBTOOLBAR_ENABLED,isChecked);
+                editor.apply();
+            }
+            GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.SUBTOOLBAR_ENABLED,false));
         } else if (buttonView.getId() == R.id.switch_button_remove) {
-            GlobalVar.getInstance().setButtonRemoveEnabled(isChecked);
+            if (sharedPreferences.getBoolean(GlobalVar.BUTTONREMOVE_ENABLED,false)!=isChecked) {
+                editor.putBoolean(GlobalVar.BUTTONREMOVE_ENABLED,isChecked);
+                editor.apply();
+            }
+            GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.BUTTONREMOVE_ENABLED,false));
         }
     }
 }

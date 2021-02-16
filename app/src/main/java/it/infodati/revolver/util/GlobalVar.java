@@ -11,13 +11,17 @@ import it.infodati.revolver.database.DatabaseStrings;
 public class GlobalVar {
     private static GlobalVar instance = new GlobalVar();
 
-    public static final String DATABASE_NAME = "DATABASE_NAME";
+    public static final String TOOLBAR_ENABLED = "TOOLBAR_ENABLED";
+    public static final String BOTTOMBAR_ENABLED = "BOTTOMBAR_ENABLED";
+    public static final String FLOATING_ENABLED = "FLOATING_ENABLED";
+    public static final String SUBTOOLBAR_ENABLED = "SUBTOOLBAR_ENABLED";
+    public static final String BUTTONREMOVE_ENABLED = "BUTTONREMOVE_ENABLED";
     public static final String LINK_ID = "LINK_ID";
+    public static final String DATABASE_NAME = "DATABASE_NAME";
 
     private String prefsName;
     private String databaseName;
 
-    private boolean drawerEnabled;
     private boolean toolbarEnabled;
     private boolean bottombarEnabled;
     private boolean floatingEnabled;
@@ -34,7 +38,6 @@ public class GlobalVar {
     public void setPrefsName(String name) { this.prefsName = name; }
     public void setDatabaseName(String name) { this.databaseName = name; }
 
-    public void setDrawerEnabled(boolean enabled) { this.drawerEnabled = enabled; }
     public void setToolbarEnabled(boolean enabled) { this.toolbarEnabled = enabled; }
     public void setBottombarEnabled(boolean enabled) { this.bottombarEnabled = enabled; }
     public void setFloatingEnabled(boolean enabled) { this.floatingEnabled = enabled; }
@@ -52,7 +55,6 @@ public class GlobalVar {
         return this.databaseName;
     }
 
-    public boolean isDrawerEnabled() { return this.drawerEnabled; }
     public boolean isToolbarEnabled() { return this.toolbarEnabled; }
     public boolean isBottombarEnabled() { return this.bottombarEnabled; }
     public boolean isFloatingEnabled() { return this.floatingEnabled; }

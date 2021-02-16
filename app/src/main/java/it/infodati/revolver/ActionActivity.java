@@ -147,6 +147,7 @@ public class ActionActivity extends AppCompatActivity {
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
             webView.setVisibility(View.INVISIBLE);
+            actionBar.show();
             progressBar.setVisibility(View.VISIBLE);
         }
 
@@ -159,6 +160,7 @@ public class ActionActivity extends AppCompatActivity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            actionBar.hide();
             webView.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
         }

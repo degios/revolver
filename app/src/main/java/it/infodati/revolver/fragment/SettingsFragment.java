@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +27,7 @@ import it.infodati.revolver.database.DatabaseStrings;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
-public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
 
     private SwitchCompat switchButtonRemove;
     private AppCompatSpinner spinnerLinks;
@@ -59,7 +60,12 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         this.loadSwitches();
         this.loadSpinnerDatabasesData();
 
+        switchButtonRemove.setOnCheckedChangeListener(this);
         spinnerLinks.setOnItemSelectedListener(this);
+        switchDrawer.setOnCheckedChangeListener(this);
+        switchToolbar.setOnCheckedChangeListener(this);
+        switchBottombar.setOnCheckedChangeListener(this);
+        switchFloating.setOnCheckedChangeListener(this);
         spinnerDatabases.setOnItemSelectedListener(this);
     }
 
@@ -73,7 +79,6 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
             e.printStackTrace();
         }
 
-        list.add(new Link(0,"","Home"));
 /*
         if (list!=null)
             Snackbar.make( spinner, "[" + String.valueOf(list.size()) + "] " + " funds loaded", Snackbar.LENGTH_LONG)
@@ -113,7 +118,11 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     public void loadSwitches() {
-        // Load switches values (enabled/disabled)
+        this.switchButtonRemove.setChecked(GlobalVar.getInstance().isButtonRemoveEnabeld());
+        this.switchDrawer.setChecked(GlobalVar.getInstance().isDrawerEnabled());
+        this.switchToolbar.setChecked(GlobalVar.getInstance().isToolbarEnabled());
+        this.switchBottombar.setChecked(GlobalVar.getInstance().isBottombarEnabled());
+        this.switchFloating.setChecked(GlobalVar.getInstance().isFloatingEnabled());
     }
 
     public void loadSpinnerDatabasesData() {
@@ -178,5 +187,20 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (buttonView.getId() == R.id.switch_button_remove) {
+            GlobalVar.getInstance().setButtonRemoveEnabled(isChecked);
+        } else if (buttonView.getId() == R.id.switch_drawer) {
+            GlobalVar.getInstance().setDrawerEnabled(isChecked);
+        } else if (buttonView.getId() == R.id.switch_toolbar) {
+            GlobalVar.getInstance().setToolbarEnabled(isChecked);
+        } else if (buttonView.getId() == R.id.switch_bottombar) {
+            GlobalVar.getInstance().setBottombarEnabled(isChecked);
+        } else if (buttonView.getId() == R.id.switch_floating) {
+            GlobalVar.getInstance().setFloatingEnabled(isChecked);
+        }
     }
 }

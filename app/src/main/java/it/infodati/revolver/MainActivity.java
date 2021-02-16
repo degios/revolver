@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         actionBar = getSupportActionBar();
-//        actionBar.hide();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -293,6 +292,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.refreshDrawableState();
         drawerLayout.invalidate();
         toggle.syncState();
+
+        if (!GlobalVar.getInstance().isToolbarEnabled())
+            actionBar.hide();
     }
 
     @Override

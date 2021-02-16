@@ -38,4 +38,5 @@
     <string name="remove_link">Rimuovi collegamento</string>
     <string name="button_remove">Pulsante rimuovi</string>
     <string name="button_remove_note">Mostra pulsante rimuovi</string>
+    <string name="add_action">Aggiungi azione</string>
 </resources>

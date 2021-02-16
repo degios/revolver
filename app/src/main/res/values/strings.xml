@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Revolver</string>
 
+    <string name="add_action">Add action</string>
     <string name="add_link">Add link</string>
     <string name="button_remove">Button remove</string>
     <string name="button_remove_note">Show button remove</string>

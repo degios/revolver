@@ -6,6 +6,7 @@
     <string name="activity_note">Open action as activity</string>
     <string name="add_action">Add action</string>
     <string name="add_link">Add link</string>
+    <string name="back_again">Press again to exit</string>
     <string name="button_remove">Button remove</string>
     <string name="button_remove_note">Show button remove</string>
     <string name="confirm_delete">Confirm delete?</string>

@@ -40,4 +40,5 @@
     <string name="action">Azione</string>
     <string name="activity">Attività</string>
     <string name="activity_note">Apri azione come attività</string>
+    <string name="back_again">Premi ancora per uscire</string>
 </resources>

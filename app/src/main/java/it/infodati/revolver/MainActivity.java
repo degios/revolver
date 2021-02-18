@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle toggle;
     private SwipeRefreshLayout swipe;
     private Fragment fragment;
+    private Snackbar snackBar;
 /*
     private AppCompatEditText editURL;
     private AppCompatButton buttonLoad;
@@ -89,6 +91,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        snackBar = Snackbar.make(swipe,R.string.back_again,Snackbar.LENGTH_SHORT);
+
         this.loadInterface();
     }
 
@@ -113,7 +117,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         if (doDefault)
-            super.onBackPressed();
+            if (snackBar.isShown()) {
+                super.onBackPressed();
+            } else {
+                snackBar.show();
+            }
     }
 
     @Override

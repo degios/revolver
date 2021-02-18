@@ -32,7 +32,7 @@ import it.infodati.revolver.listener.ListItemClickListener;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
-public class ActionFragment extends Fragment {
+public class ActionFragment extends Fragment implements LoadDataFragment, LoadInterfaceFragment {
 
     private ProgressBar progressBar;
     private WebView webView;
@@ -55,8 +55,16 @@ public class ActionFragment extends Fragment {
         this.loadData();
     }
 
+    public boolean goBack() {
+        if (this.webView.canGoBack()) {
+            this.webView.goBack();
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    private void loadInterface() {
+    public void loadInterface() {
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
         webView.setWebViewClient(new ActionFragment.WebViewClient());

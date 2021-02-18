@@ -28,7 +28,7 @@ import it.infodati.revolver.listener.ListItemClickListener;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
-public class ActionsFragment extends Fragment implements ListItemClickListener, LoadDataFragment {
+public class ActionsFragment extends Fragment implements ListItemClickListener, LoadDataFragment, LoadInterfaceFragment {
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;

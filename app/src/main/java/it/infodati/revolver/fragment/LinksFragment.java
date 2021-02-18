@@ -24,7 +24,7 @@ import it.infodati.revolver.model.Link;
 
 import java.util.List;
 
-public class LinksFragment extends Fragment implements ListItemClickListener, LoadDataFragment {
+public class LinksFragment extends Fragment implements ListItemClickListener, LoadDataFragment, LoadInterfaceFragment {
 
     private ProgressBar progressBar;
     private LinearLayoutCompat defaultChoice;
@@ -56,6 +56,8 @@ public class LinksFragment extends Fragment implements ListItemClickListener, Lo
     public void loadData() {
         new QueryData().execute();
     }
+
+    public void loadInterface() {}
 
     @Override
     public void onListItemClick(int position) {

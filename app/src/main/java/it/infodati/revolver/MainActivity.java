@@ -19,6 +19,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -28,7 +29,10 @@ import java.util.ArrayList;
 
 import it.infodati.revolver.database.DatabaseManager;
 import it.infodati.revolver.database.DatabaseStrings;
+import it.infodati.revolver.fragment.ActionFragment;
 import it.infodati.revolver.fragment.ActionsFragment;
+import it.infodati.revolver.fragment.LoadDataFragment;
+import it.infodati.revolver.fragment.LoadInterfaceFragment;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private SwipeRefreshLayout swipe;
-    private ActionsFragment fragment;
+    private Fragment fragment;
 /*
     private AppCompatEditText editURL;
     private AppCompatButton buttonLoad;
@@ -79,7 +83,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onRefresh() {
 //                Log.i("REFRESH", "onRefresh MainActivity called from SwipeRefreshLayout");
                 loadInterface();
-                fragment.loadData();
+                ((LoadDataFragment) fragment).loadData();
+                ((LoadInterfaceFragment) fragment).loadInterface();
                 swipe.setRefreshing(false);
             }
         });
@@ -89,12 +94,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
+        boolean doDefault = true;
+
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
+            doDefault = false;
         } else {
-            super.onBackPressed();
+            Fragment actionFragment = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+            if (actionFragment instanceof ActionFragment) {
+                if (!((ActionFragment) actionFragment).goBack()) {
+                    fragment = new ActionsFragment();
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                    setTitle(getResources().getString(R.string.home));
+                }
+                doDefault = false;
+            }
         }
+        if (doDefault)
+            super.onBackPressed();
     }
 
     @Override
@@ -139,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
             setTitle(item.getTitle());
+            this.fragment = fragment;
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -182,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
             setTitle(item.getTitle());
+            this.fragment = fragment;
         }
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
@@ -247,8 +268,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (resultCode == Activity.RESULT_OK) {
             swipe.setRefreshing(true);
             loadInterface();
-            fragment.loadData();
-            fragment.loadInterface();
+            ((LoadDataFragment) fragment).loadData();
+            ((LoadInterfaceFragment) fragment).loadInterface();
             swipe.setRefreshing(false);
         }
     }

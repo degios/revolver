@@ -9,7 +9,7 @@
         <item
             android:id="@+id/nav_home"
             android:orderInCategory="11001"
-            android:icon="@android:drawable/ic_menu_revert"
+            android:icon="@drawable/ic_outline_home_24"
             android:title="Home" />
     </group>
     <group
@@ -22,7 +22,7 @@
         <item
             android:id="@+id/nav_settings"
             android:orderInCategory="31001"
-            android:icon="@android:drawable/ic_menu_preferences"
+            android:icon="@drawable/ic_outline_settings_24"
             android:title="@string/settings" />
 <!--
         <item

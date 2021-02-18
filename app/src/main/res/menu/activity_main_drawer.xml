@@ -8,7 +8,7 @@
         android:checkableBehavior="none">
         <item
             android:id="@+id/nav_home"
-            android:orderInCategory="1101"
+            android:orderInCategory="11001"
             android:icon="@android:drawable/ic_menu_revert"
             android:title="Home" />
     </group>
@@ -21,14 +21,16 @@
         android:checkableBehavior="none">
         <item
             android:id="@+id/nav_settings"
-            android:orderInCategory="3101"
+            android:orderInCategory="31001"
             android:icon="@android:drawable/ic_menu_preferences"
             android:title="@string/settings" />
+<!--
         <item
             android:id="@+id/nav_links"
-            android:orderInCategory="3102"
+            android:orderInCategory="31002"
             android:icon="@android:drawable/ic_menu_share"
             android:title="@string/links" />
+-->
     </group>
 
 </menu>

@@ -17,16 +17,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.infodati.revolver.database.DatabaseManager;
 import it.infodati.revolver.database.DatabaseStrings;
@@ -47,11 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SwipeRefreshLayout swipe;
     private Fragment fragment;
     private Snackbar snackBar;
-/*
-    private AppCompatEditText editURL;
-    private AppCompatButton buttonLoad;
-    private WebView webView;
-*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +72,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+/*
         fragment = new ActionsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         setTitle(getResources().getString(R.string.home));
+*/
 
         swipe = findViewById(R.id.swipe);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -94,6 +94,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         snackBar = Snackbar.make(swipe,R.string.back_again,Snackbar.LENGTH_SHORT);
 
         this.loadInterface();
+
+        int menuIndex = (GlobalVar.getInstance().getLinkId()>0 ? GlobalVar.getInstance().CUSTOM_MIN+GlobalVar.getInstance().getLinkId() : R.id.nav_home );
+        MenuItem menuItem = navigationView.getMenu().findItem(menuIndex);
+        if (menuItem==null)
+            menuIndex = R.id.nav_home;
+        onNavigationItemSelected(navigationView.getMenu().findItem(menuIndex));
     }
 
     @Override
@@ -134,12 +140,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Class activity = null;
         String activityClassName = null;
+        boolean activityWithResult = false;
         Fragment fragment = null;
         String fragmentClassName = null;
 
         int itemId = item.getItemId();
-        if (itemId == R.id.menu_links) {
+        if (itemId == R.id.menu_add) {
+            activityClassName = this.getClass().getPackage().getName()+"."+"LinkActivity";
+            GlobalVar.getInstance().setCurrentLinkId(0);
+            activityWithResult = true;
+/*
+        } else if (itemId == R.id.menu_links) {
             activityClassName = this.getClass().getPackage().getName()+"."+"LinksActivity";
+*/
         } else if (itemId == R.id.menu_settings) {
             activityClassName = this.getClass().getPackage().getName()+"."+"SettingsActivity";
         }
@@ -160,7 +173,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (activity != null) {
             Intent intent = new Intent(this, activity);
-            startActivity(intent);
+            intent.putExtra(getResources().getString(R.string.id).toString(),GlobalVar.getInstance().getCurrentLinkId());
+            if (activityWithResult) {
+                startActivityForResult(intent, 0);
+            } else {
+                startActivity(intent);
+            }
             return true;
         } else if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -177,16 +195,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Class activity = null;
         String activityClassName = null;
+        boolean activityWithResult = false;
         Fragment fragment = null;
         String fragmentClassName = null;
 
         int itemId = item.getItemId();
         if (itemId==R.id.nav_home) {
             fragmentClassName = this.getClass().getPackage().getName()+".fragment."+"ActionsFragment";
+/*
         } else if (itemId == R.id.nav_links) {
             activityClassName = this.getClass().getPackage().getName()+"."+"LinksActivity";
+*/
         } else if (itemId == R.id.nav_settings) {
             activityClassName = this.getClass().getPackage().getName()+"."+"SettingsActivity";
+        } else if (itemId >=GlobalVar.getInstance().CUSTOM_MIN && itemId <=GlobalVar.getInstance().CUSTOM_MAX) {
+            fragmentClassName = this.getClass().getPackage().getName()+".fragment."+"ActionFragment";
+            GlobalVar.getInstance().setCurrentLinkId(itemId-GlobalVar.getInstance().CUSTOM_MIN);
         }
 
         if (activityClassName != null) {
@@ -205,7 +229,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (activity != null) {
             Intent intent = new Intent(this, activity);
-            startActivity(intent);
+            intent.putExtra(getResources().getString(R.string.id).toString(),GlobalVar.getInstance().getCurrentLinkId());
+            if (activityWithResult) {
+                startActivityForResult(intent, 0);
+            } else {
+                startActivity(intent);
+            }
         } else if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
@@ -268,6 +297,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void loadInterface() {
         if (!GlobalVar.getInstance().isToolbarEnabled())
             actionBar.hide();
+
+        int menuIndex = 0;
+        Menu navigationMenu = navigationView.getMenu();
+        MenuItem menuItem;
+
+        navigationMenu.clear();
+        navigationView.inflateMenu(R.menu.activity_main_drawer);
+
+        DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
+        List<Link> list = databaseManager.getAllOrderedActions();
+        databaseManager.close();
+        if (list!=null) {
+            for (Link link : list) {
+                menuIndex = GlobalVar.getInstance().CUSTOM_MIN + link.getId();
+                navigationMenu.add(R.id.nav_custom, menuIndex, menuIndex, link.getDescription());
+                menuItem = navigationMenu.findItem(menuIndex);
+                menuItem.setIcon(android.R.drawable.ic_menu_share);
+            }
+        }
     }
 
     @Override
@@ -281,16 +329,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             swipe.setRefreshing(false);
         }
     }
-
-/*
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && this.webView.canGoBack()) {
-            this.webView.goBack();
-            return true;
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
-*/
 }

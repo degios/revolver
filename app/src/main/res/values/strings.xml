@@ -10,6 +10,7 @@
     <string name="button_remove">Button remove</string>
     <string name="button_remove_note">Show button remove</string>
     <string name="confirm_delete">Confirm delete?</string>
+    <string name="confirm_modify">Confirm modify?</string>
     <string name="connection">Connection</string>
     <string name="connection_note">Check network connection</string>
     <string name="database" translatable="false">Database</string>.

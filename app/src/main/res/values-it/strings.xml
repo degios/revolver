@@ -41,4 +41,5 @@
     <string name="activity">Attività</string>
     <string name="activity_note">Apri azione come attività</string>
     <string name="back_again">Premi ancora per uscire</string>
+    <string name="confirm_modify">Confermi modifica?</string>
 </resources>

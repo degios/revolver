@@ -20,6 +20,9 @@ public class GlobalVar {
     public static final String LINK_ID = "LINK_ID";
     public static final String DATABASE_NAME = "DATABASE_NAME";
 
+    public static final int CUSTOM_MIN = 20000;
+    public static final int CUSTOM_MAX = 29999;
+
     private String prefsName;
     private String databaseName;
 

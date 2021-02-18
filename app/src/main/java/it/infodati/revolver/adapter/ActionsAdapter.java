@@ -15,6 +15,7 @@ import java.util.List;
 
 import it.infodati.revolver.R;
 import it.infodati.revolver.listener.ListItemClickListener;
+import it.infodati.revolver.listener.ListItemLongClickListener;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
@@ -22,11 +23,13 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
 
     private List<Link> list;
     private final ListItemClickListener onClickListener;
+    private final ListItemLongClickListener onLongClickListener;
 
 
     // Constructor
     public ActionsAdapter(Fragment fragment) {
         this.onClickListener = (ListItemClickListener) fragment;
+        this.onLongClickListener = (ListItemLongClickListener) fragment;
     }
 
     @NonNull
@@ -64,7 +67,7 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
     }
 
     // Inner ViewHolder
-    public class ActionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ActionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         private final TextView id;
         private final ImageView icon;
@@ -78,12 +81,19 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
             this.description = (TextView) itemView.findViewById(R.id.description);
 
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         public void bind(Link model) {
             this.id.setText(String.valueOf(model.getId()));
             this.description.setText(model.getDescription());
-            this.description.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+
+            // Set as preferred
+            if (GlobalVar.getInstance().getLinkId()==model.getId()) {
+                this.description.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
+            } else {
+                this.description.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+            }
         }
 
         private void bindOrHideTextView(TextView textView, String data) {
@@ -104,6 +114,12 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
         public void onClick(View v) {
             int position = getAdapterPosition();
             onClickListener.onListItemClick(position);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            int position = getAdapterPosition();
+            return onLongClickListener.onListItemLongClick(position);
         }
     }
 }

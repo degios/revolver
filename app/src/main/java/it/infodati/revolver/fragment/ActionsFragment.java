@@ -1,5 +1,6 @@
 package it.infodati.revolver.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -25,10 +27,11 @@ import it.infodati.revolver.R;
 import it.infodati.revolver.adapter.ActionsAdapter;
 import it.infodati.revolver.database.DatabaseManager;
 import it.infodati.revolver.listener.ListItemClickListener;
+import it.infodati.revolver.listener.ListItemLongClickListener;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
-public class ActionsFragment extends Fragment implements ListItemClickListener, LoadDataFragment, LoadInterfaceFragment {
+public class ActionsFragment extends Fragment implements ListItemClickListener, ListItemLongClickListener, LoadDataFragment, LoadInterfaceFragment {
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
@@ -97,6 +100,43 @@ public class ActionsFragment extends Fragment implements ListItemClickListener, 
             ActionFragment actionFragment = new ActionFragment();
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, actionFragment).commit();
         }
+    }
+
+    @Override
+    public boolean onListItemLongClick(int position) {
+        Link model = (Link) adapter.getItem(position);
+/*
+        Snackbar snackbar = Snackbar
+                .make(recyclerView, getResources().getText(R.string.confirm_delete), Snackbar.LENGTH_LONG)
+                .setAction(getResources().getText(R.string.yes), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        try {
+                            DatabaseManager databaseManager = new DatabaseManager(getActivity());
+                            databaseManager.removeLink(model.getId());
+                            databaseManager.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        loadData();
+                    }
+                });
+        snackbar.show();
+*/
+        Snackbar snackbar = Snackbar
+                .make(recyclerView, getResources().getText(R.string.confirm_modify), Snackbar.LENGTH_LONG)
+                .setAction(getResources().getText(R.string.yes), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        GlobalVar.getInstance().setCurrentLinkId(model.getId());
+                        Intent intent = new Intent(getActivity(), LinkActivity.class);
+                        intent.putExtra(getResources().getString(R.string.id).toString(),model.getId());
+                        startActivityForResult(intent, 0);
+                    }
+                });
+        snackbar.show();
+
+        return true;
     }
 
     private class QueryData extends AsyncTask {

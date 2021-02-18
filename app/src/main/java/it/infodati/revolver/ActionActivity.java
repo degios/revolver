@@ -133,20 +133,23 @@ public class ActionActivity extends AppCompatActivity {
             if (model!=null) {
                 if (!model.getDescription().toString().isEmpty())
                     toolbar.setTitle(model.getDescription().toString());
-                if (!model.getUrl().toString().isEmpty())
+                if (!model.getUrl().toString().isEmpty()) {
                     webView.loadUrl(model.getUrl().toString());
+                    actionBar.show();
+                    progressBar.setMax(100);
+                    progressBar.setProgress(1);
+                }
             } else {
-                webView.setVisibility(View.VISIBLE);
+                actionBar.hide();
                 progressBar.setVisibility(View.GONE);
             }
         }
     }
 
     private class WebViewClient extends android.webkit.WebViewClient {
-                @Override
+        @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            webView.setVisibility(View.INVISIBLE);
             actionBar.show();
             progressBar.setVisibility(View.VISIBLE);
         }
@@ -161,8 +164,14 @@ public class ActionActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             actionBar.hide();
-            webView.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    private class WebChromeClient extends android.webkit.WebChromeClient {
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            progressBar.setProgress(newProgress);
         }
     }
 }

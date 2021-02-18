@@ -42,4 +42,6 @@
     <string name="activity_note">Apri azione come attività</string>
     <string name="back_again">Premi ancora per uscire</string>
     <string name="confirm_modify">Confermi modifica?</string>
+    <string name="subblock">Blocca</string>
+    <string name="subblock_note">Blocca uscita da azione</string>
 </resources>

@@ -37,6 +37,8 @@
     <string name="remove_link">Remove link</string>
     <string name="save">Save</string>
     <string name="settings">Settings</string>
+    <string name="subblock">Block</string>
+    <string name="subblock_note">Block exit from action</string>
     <string name="toolbar">Toolbar</string>
     <string name="toolbar_note">Show toolbar</string>
     <string name="url" translatable="false">Url</string>

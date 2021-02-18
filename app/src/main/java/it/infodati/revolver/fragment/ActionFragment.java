@@ -59,9 +59,8 @@ public class ActionFragment extends Fragment implements LoadDataFragment, LoadIn
         if (this.webView.canGoBack()) {
             this.webView.goBack();
             return true;
-        } else {
-            return false;
         }
+        return (GlobalVar.getInstance().isSubBlockEnabled() ? true : false);
     }
 
     public void loadInterface() {

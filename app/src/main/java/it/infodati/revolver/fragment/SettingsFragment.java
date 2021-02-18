@@ -33,6 +33,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     private SwitchCompat switchBottombar;
     private SwitchCompat switchFloating;
     private AppCompatSpinner spinnerLinks;
+    private SwitchCompat switchSubBlock;
     private SwitchCompat switchSubActivity;
     public SwitchCompat switchSubToolbar;
     private SwitchCompat switchButtonRemove;
@@ -53,6 +54,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         switchBottombar = view.findViewById(R.id.switch_bottombar);
         switchFloating = view.findViewById(R.id.switch_floating);
         spinnerLinks = view.findViewById(R.id.spinner_links);
+        switchSubBlock = view.findViewById(R.id.switch_subblock);
         switchSubActivity = view.findViewById(R.id.switch_subactivity);
         switchSubToolbar = view.findViewById(R.id.switch_subtoolbar);
         switchButtonRemove = view.findViewById(R.id.switch_button_remove);
@@ -66,6 +68,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         switchBottombar.setOnCheckedChangeListener(this);
         switchFloating.setOnCheckedChangeListener(this);
         spinnerLinks.setOnItemSelectedListener(this);
+        switchSubBlock.setOnCheckedChangeListener(this);
         switchSubActivity.setOnCheckedChangeListener(this);
         switchSubToolbar.setOnCheckedChangeListener(this);
         switchButtonRemove.setOnCheckedChangeListener(this);
@@ -124,6 +127,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         this.switchToolbar.setChecked(GlobalVar.getInstance().isToolbarEnabled());
         this.switchBottombar.setChecked(GlobalVar.getInstance().isBottombarEnabled());
         this.switchFloating.setChecked(GlobalVar.getInstance().isFloatingEnabled());
+        this.switchSubBlock.setChecked(GlobalVar.getInstance().isSubBlockEnabled());
         this.switchSubActivity.setChecked(GlobalVar.getInstance().isSubActivityEnabled());
         this.switchSubToolbar.setChecked(GlobalVar.getInstance().isSubToolbarEnabled());
         this.switchButtonRemove.setChecked(GlobalVar.getInstance().isButtonRemoveEnabeld());
@@ -209,31 +213,37 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
                 editor.putBoolean(GlobalVar.BOTTOMBAR_ENABLED,isChecked);
                 editor.apply();
             }
-            GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.BOTTOMBAR_ENABLED,false));
+            GlobalVar.getInstance().setBottombarEnabled(sharedPreferences.getBoolean(GlobalVar.BOTTOMBAR_ENABLED,false));
         } else if (buttonView.getId() == R.id.switch_floating) {
             if (sharedPreferences.getBoolean(GlobalVar.FLOATING_ENABLED,false)!=isChecked) {
                 editor.putBoolean(GlobalVar.FLOATING_ENABLED,isChecked);
                 editor.apply();
             }
-            GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.FLOATING_ENABLED,false));
+            GlobalVar.getInstance().setFloatingEnabled(sharedPreferences.getBoolean(GlobalVar.FLOATING_ENABLED,false));
+        } else if (buttonView.getId() == R.id.switch_subblock) {
+            if (sharedPreferences.getBoolean(GlobalVar.SUBBLOCK_ENABLED,false)!=isChecked) {
+                editor.putBoolean(GlobalVar.SUBBLOCK_ENABLED,isChecked);
+                editor.apply();
+            }
+            GlobalVar.getInstance().setSubBlockEnabled(sharedPreferences.getBoolean(GlobalVar.SUBBLOCK_ENABLED,false));
         } else if (buttonView.getId() == R.id.switch_subactivity) {
             if (sharedPreferences.getBoolean(GlobalVar.SUBACTIVITY_ENABLED,false)!=isChecked) {
                 editor.putBoolean(GlobalVar.SUBACTIVITY_ENABLED,isChecked);
                 editor.apply();
             }
-            GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.SUBTOOLBAR_ENABLED,false));
+            GlobalVar.getInstance().setSubactivityEnabled(sharedPreferences.getBoolean(GlobalVar.SUBACTIVITY_ENABLED,false));
         } else if (buttonView.getId() == R.id.switch_subtoolbar) {
             if (sharedPreferences.getBoolean(GlobalVar.SUBTOOLBAR_ENABLED,false)!=isChecked) {
                 editor.putBoolean(GlobalVar.SUBTOOLBAR_ENABLED,isChecked);
                 editor.apply();
             }
-            GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.SUBTOOLBAR_ENABLED,false));
+            GlobalVar.getInstance().setSubToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.SUBTOOLBAR_ENABLED,false));
         } else if (buttonView.getId() == R.id.switch_button_remove) {
             if (sharedPreferences.getBoolean(GlobalVar.BUTTONREMOVE_ENABLED,false)!=isChecked) {
                 editor.putBoolean(GlobalVar.BUTTONREMOVE_ENABLED,isChecked);
                 editor.apply();
             }
-            GlobalVar.getInstance().setToolbarEnabled(sharedPreferences.getBoolean(GlobalVar.BUTTONREMOVE_ENABLED,false));
+            GlobalVar.getInstance().setButtonRemoveEnabled(sharedPreferences.getBoolean(GlobalVar.BUTTONREMOVE_ENABLED,false));
         }
     }
 }

@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,8 +57,9 @@ public class ActionsFragment extends Fragment implements ListItemClickListener, 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GlobalVar.getInstance().setCurrentLinkId(0);
                 Intent intent = new Intent(getActivity(), LinkActivity.class);
-                intent.putExtra(getResources().getString(R.string.id).toString(),0);
+                intent.putExtra(getResources().getString(R.string.id).toString(), 0);
                 startActivityForResult(intent, 0);
             }
         });
@@ -71,16 +73,30 @@ public class ActionsFragment extends Fragment implements ListItemClickListener, 
     }
 
     public void loadInterface() {
-        if (!GlobalVar.getInstance().isFloatingEnabled())
+        if (GlobalVar.getInstance().isFloatingEnabled()) {
+            fab.show();
+        } else {
             fab.hide();
+        }
+        if (GlobalVar.getInstance().isToolbarEnabled()) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        } else {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        }
     }
 
     @Override
     public void onListItemClick(int position) {
         Link model = (Link) adapter.getItem(position);
-        Intent intent = new Intent(getActivity(), ActionActivity.class);
-        intent.putExtra(getResources().getString(R.string.id).toString(),model.getId());
-        startActivityForResult(intent, 0);
+        GlobalVar.getInstance().setCurrentLinkId(model.getId());
+        if (GlobalVar.getInstance().isSubActivityEnabled()) {
+            Intent intent = new Intent(getActivity(), ActionActivity.class);
+            intent.putExtra(getResources().getString(R.string.id).toString(), model.getId());
+            startActivityForResult(intent, 0);
+        } else {
+            ActionFragment actionFragment = new ActionFragment();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, actionFragment).commit();
+        }
     }
 
     private class QueryData extends AsyncTask {

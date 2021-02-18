@@ -31,6 +31,7 @@ public class GlobalVar {
     private boolean buttonRemoveEnabled;
 
     private int linkId = 0;
+    private int currentLinkId = 0;
 
 
     private GlobalVar() {}
@@ -48,6 +49,7 @@ public class GlobalVar {
     public void setButtonRemoveEnabled(boolean enabled) { this.buttonRemoveEnabled = enabled; }
 
     public void setLinkId(int value) { this.linkId = value; }
+    public void setCurrentLinkId(int value) { this.currentLinkId = value; }
 
     // getter
     public String getPrefsName() { return this.prefsName; }
@@ -66,7 +68,7 @@ public class GlobalVar {
     public boolean isButtonRemoveEnabeld() { return this.buttonRemoveEnabled; }
 
     public int getLinkId() { return this.linkId; }
-    public int getActionId() { return this.getLinkId(); }
+    public int getCurrentLinkId() { return this.currentLinkId; }
 
     public int getListIndexByString(ArrayList<Object> list, Object obj) {
         int position = 0;

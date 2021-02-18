@@ -20,24 +20,17 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ProgressBar
-        android:id="@+id/progressbar"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:background="@android:color/transparent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="1"
-        android:progressTint="@color/colorPrimary"
-        android:visibility="invisible" />
+        android:layout_height="match_parent">
 
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"/>
+        <FrameLayout
+            android:id="@+id/content_frame"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

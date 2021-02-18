@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragment = new ActionsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        setTitle(getResources().getString(R.string.home));
 
         swipe = findViewById(R.id.swipe);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -84,38 +85,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         this.loadInterface();
-
-/*
-        webView = findViewById(R.id.webView);
-        webView.setWebViewClient(new WebViewClient());
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setLoadsImagesAutomatically(true);
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setBuiltInZoomControls(true);
-        webView.getSettings().setSupportZoom(true);
-        webView.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
-*/
-//        webView.setScrollBarStyle(WebView.SCROLLBARS_INSIDE_OVERLAY);
-/*
-        webView.getSettings().getUseWideViewPort();
-        webView.setInitialScale(1);
-*/
-
-/*
-        editURL = findViewById(R.id.editURL);
-
-        buttonLoad = findViewById(R.id.buttonLoad);
-        buttonLoad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = editURL.getText().toString();
-
-                if (!url.isEmpty())
-                    webView.loadUrl(url);
-            }
-        });
-*/
     }
 
     @Override
@@ -185,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int itemId = item.getItemId();
         if (itemId==R.id.nav_home) {
-            // Instanciate specific fragment
+            fragmentClassName = this.getClass().getPackage().getName()+".fragment."+"ActionsFragment";
         } else if (itemId == R.id.nav_links) {
             activityClassName = this.getClass().getPackage().getName()+"."+"LinksActivity";
         } else if (itemId == R.id.nav_settings) {

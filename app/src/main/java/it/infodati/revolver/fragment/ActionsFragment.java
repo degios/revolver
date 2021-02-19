@@ -123,18 +123,22 @@ public class ActionsFragment extends Fragment implements ListItemClickListener, 
                 });
         snackbar.show();
 */
+/*
         Snackbar snackbar = Snackbar
                 .make(recyclerView, getResources().getText(R.string.confirm_modify), Snackbar.LENGTH_LONG)
                 .setAction(getResources().getText(R.string.yes), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+*/
                         GlobalVar.getInstance().setCurrentLinkId(model.getId());
                         Intent intent = new Intent(getActivity(), LinkActivity.class);
                         intent.putExtra(getResources().getString(R.string.id).toString(),model.getId());
                         startActivityForResult(intent, 0);
+/*
                     }
                 });
         snackbar.show();
+*/
 
         return true;
     }

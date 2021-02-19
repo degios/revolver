@@ -23,6 +23,9 @@ import com.google.android.material.snackbar.Snackbar;
 public class LinkActivity extends AppCompatActivity {
 
     private int id;
+    private String url;
+    private String description;
+    private String note;
 
     private AppCompatEditText editTextUrl;
     private AppCompatEditText editTextDescription;
@@ -37,6 +40,9 @@ public class LinkActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getIntExtra(getResources().getString(R.string.id).toString(),0);
+        url = intent.getStringExtra(getResources().getString(R.string.url));
+        description = intent.getStringExtra(getResources().getString(R.string.description));
+        note = intent.getStringExtra(getResources().getString(R.string.note));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         if (id>0) {
@@ -68,21 +74,32 @@ public class LinkActivity extends AppCompatActivity {
         loadData();
 
         if (id==0) {
+            if (url!=null && !url.isEmpty())
+                editTextUrl.setText(url);
+            if (description!=null && !description.isEmpty())
+                editTextDescription.setText(description);
+            if (note!=null && !note.isEmpty())
+                editTextNote.setText(note);
+        }
+/*
             String action = intent.getAction();
             String type = intent.getType();
             String scheme = intent.getScheme();
 
             if (Intent.ACTION_SEND.equals(action) && type != null) {
                 String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+*/
 /*
                 Snackbar.make( editTextUrl, "[" + type.toString() + "][" + scheme + "] " + sharedText, Snackbar.LENGTH_LONG)
                         .setAction( "[" + type.toString() + "][" + scheme + "] " + sharedText, null)
                         .show();
-*/
+*//*
+
                 if (sharedText.trim().toUpperCase().startsWith("HTTP"))
                     editTextUrl.setText(sharedText);
             }
         }
+*/
     }
 
     @Override

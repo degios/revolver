@@ -92,11 +92,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.loadInterface();
 
-        int menuIndex = (GlobalVar.getInstance().getLinkId()>0 ? GlobalVar.getInstance().CUSTOM_MIN+GlobalVar.getInstance().getLinkId() : R.id.nav_home );
-        MenuItem menuItem = navigationView.getMenu().findItem(menuIndex);
-        if (menuItem==null)
-            menuIndex = R.id.nav_home;
-        onNavigationItemSelected(navigationView.getMenu().findItem(menuIndex));
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+        String scheme = intent.getScheme();
+        String sharedText = "";
+
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+/*
+                Snackbar.make( editTextUrl, "[" + type.toString() + "][" + scheme + "] " + sharedText, Snackbar.LENGTH_LONG)
+                        .setAction( "[" + type.toString() + "][" + scheme + "] " + sharedText, null)
+                        .show();
+*/
+
+                if (!sharedText.trim().toUpperCase().startsWith("HTTP"))
+                    sharedText = "";
+        }
+
+        if (sharedText!=null && !sharedText.isEmpty()) {
+            intent = new Intent(this, LinkActivity.class);
+            intent.putExtra(getResources().getString(R.string.id).toString(),0);
+            intent.putExtra(getResources().getString(R.string.url), sharedText);
+            startActivityForResult(intent, 0);
+        } else {
+            int menuIndex = (GlobalVar.getInstance().getLinkId() > 0 ? GlobalVar.getInstance().CUSTOM_MIN + GlobalVar.getInstance().getLinkId() : R.id.nav_home);
+            MenuItem menuItem = navigationView.getMenu().findItem(menuIndex);
+            if (menuItem == null)
+                menuIndex = R.id.nav_home;
+            onNavigationItemSelected(navigationView.getMenu().findItem(menuIndex));
+        }
     }
 
     @Override

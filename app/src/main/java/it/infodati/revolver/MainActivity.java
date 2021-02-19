@@ -299,6 +299,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             swipe.setEnabled(false);
 
         int menuIndex = 0;
+        int menuOrder = GlobalVar.getInstance().CUSTOM_MIN;
         Menu navigationMenu = navigationView.getMenu();
         MenuItem menuItem;
 
@@ -309,11 +310,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (list!=null) {
             for (Link link : list) {
                 menuIndex = GlobalVar.getInstance().CUSTOM_MIN + link.getId();
-                navigationMenu.add(R.id.nav_custom, menuIndex, menuIndex, link.getDescription());
+                menuOrder += 1;
+                navigationMenu.add(R.id.nav_custom, menuIndex, menuOrder, link.getDescription());
                 menuItem = navigationMenu.findItem(menuIndex);
                 menuItem.setIcon(android.R.drawable.ic_menu_share);
             }
         }
+        drawerLayout.refreshDrawableState();
+        drawerLayout.invalidate();
+        toggle.syncState();
     }
 
     @Override

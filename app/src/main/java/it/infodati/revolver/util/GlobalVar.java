@@ -15,7 +15,9 @@ public class GlobalVar {
     public static final String TOOLBAR_ENABLED = "TOOLBAR_ENABLED";
     public static final String BOTTOMBAR_ENABLED = "BOTTOMBAR_ENABLED";
     public static final String FLOATING_ENABLED = "FLOATING_ENABLED";
+    public static final String SWIPE_ENABLED = "SWIPE_ENABLED";
     public static final String SUBBLOCK_ENABLED = "SUBBLOCK_ENABLED";
+    public static final String SUBSWIPE_ENABLED = "SUBSWIPE_ENABLED";
     public static final String SUBACTIVITY_ENABLED = "SUBACTIVITY_ENABLED";
     public static final String SUBTOOLBAR_ENABLED = "SUBTOOLBAR_ENABLED";
     public static final String BUTTONREMOVE_ENABLED = "BUTTONREMOVE_ENABLED";
@@ -31,7 +33,9 @@ public class GlobalVar {
     private boolean toolbarEnabled;
     private boolean bottombarEnabled;
     private boolean floatingEnabled;
+    private boolean swipeEnabled;
     private boolean subBlockEnabled;
+    private boolean subSwipeEnabled;
     private boolean subActivityEnabled;
     private boolean subToolbarEnabled;
     private boolean buttonRemoveEnabled;
@@ -52,8 +56,10 @@ public class GlobalVar {
     public void setToolbarEnabled(boolean enabled) { this.toolbarEnabled = enabled; }
     public void setBottombarEnabled(boolean enabled) { this.bottombarEnabled = enabled; }
     public void setFloatingEnabled(boolean enabled) { this.floatingEnabled = enabled; }
+    public void setSwipeEnabled(boolean enabled) { this.swipeEnabled = enabled; }
     public void setSubBlockEnabled(boolean enabled) { this.subBlockEnabled = enabled; }
-    public void setSubactivityEnabled(boolean enabled) { this.subActivityEnabled = enabled; }
+    public void setSubActivityEnabled(boolean enabled) { this.subActivityEnabled = enabled; }
+    public void setSubSwipeEnabled(boolean enabled) { this.subSwipeEnabled = enabled; }
     public void setSubToolbarEnabled(boolean enabled) { this.subToolbarEnabled = enabled; }
     public void setButtonRemoveEnabled(boolean enabled) { this.buttonRemoveEnabled = enabled; }
 
@@ -77,9 +83,11 @@ public class GlobalVar {
     public boolean isToolbarEnabled() { return this.toolbarEnabled; }
     public boolean isBottombarEnabled() { return this.bottombarEnabled; }
     public boolean isFloatingEnabled() { return this.floatingEnabled; }
+    public boolean isSwipeEnabled() { return this.swipeEnabled; }
     public boolean isSubBlockEnabled() { return this.subBlockEnabled; }
     public boolean isSubActivityEnabled() { return this.subActivityEnabled; }
     public boolean isSubToolbarEnabled() { return this.subToolbarEnabled; }
+    public boolean isSubSwipeEnabled() { return this.subSwipeEnabled; }
     public boolean isButtonRemoveEnabeld() { return this.buttonRemoveEnabled; }
 
     public int getLinkId() { return this.linkId; }

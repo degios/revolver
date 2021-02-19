@@ -44,4 +44,9 @@
     <string name="confirm_modify">Confermi modifica?</string>
     <string name="subblock">Blocca</string>
     <string name="subblock_note">Blocca uscita da azione</string>
+    <string name="refresh">Aggiorna</string>
+    <string name="swipe">Scorri</string>
+    <string name="swipe_note">Abilita aggiornamento su scorrimento verticale</string>
+    <string name="subswipe">Scorri</string>
+    <string name="subswipe_note">Abilita aggiornamento su scorrimento verticale</string>
 </resources>

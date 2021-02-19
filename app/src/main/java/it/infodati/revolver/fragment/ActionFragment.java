@@ -61,7 +61,7 @@ public class ActionFragment extends Fragment implements LoadDataFragment, LoadIn
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.setWebChromeClient(new ActionFragment.WebChromeClient());
         webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setBuiltInZoomControls(false);
         webView.getSettings().setSupportZoom(true);
         webView.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
 //        webView.setScrollBarStyle(WebView.SCROLLBARS_INSIDE_OVERLAY);

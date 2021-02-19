@@ -17,13 +17,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -264,9 +261,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GlobalVar.getInstance().setToolbarEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.TOOLBAR_ENABLED, false));
         GlobalVar.getInstance().setBottombarEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.BOTTOMBAR_ENABLED, false));
         GlobalVar.getInstance().setFloatingEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.FLOATING_ENABLED, false));
+        GlobalVar.getInstance().setSwipeEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SWIPE_ENABLED, false));
         GlobalVar.getInstance().setSubBlockEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBBLOCK_ENABLED, false));
-        GlobalVar.getInstance().setSubactivityEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBACTIVITY_ENABLED, false));
+        GlobalVar.getInstance().setSubActivityEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBACTIVITY_ENABLED, false));
         GlobalVar.getInstance().setSubToolbarEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBTOOLBAR_ENABLED, false));
+        GlobalVar.getInstance().setSubSwipeEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBSWIPE_ENABLED, false));
         GlobalVar.getInstance().setButtonRemoveEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.BUTTONREMOVE_ENABLED, false));
         GlobalVar.getInstance().setDatabaseName(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getString(GlobalVar.DATABASE_NAME, DatabaseStrings.DATABASE_DEMO));
 
@@ -295,6 +294,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void loadInterface() {
         if (!GlobalVar.getInstance().isToolbarEnabled())
             actionBar.hide();
+
+        if (!GlobalVar.getInstance().isSwipeEnabled())
+            swipe.setEnabled(false);
 
         int menuIndex = 0;
         Menu navigationMenu = navigationView.getMenu();

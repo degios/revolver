@@ -66,6 +66,23 @@ public class LinkActivity extends AppCompatActivity {
         buttonSave = findViewById(R.id.button_save);
 
         loadData();
+
+        if (id==0) {
+            String action = intent.getAction();
+            String type = intent.getType();
+            String scheme = intent.getScheme();
+
+            if (Intent.ACTION_SEND.equals(action) && type != null) {
+                String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+/*
+                Snackbar.make( editTextUrl, "[" + type.toString() + "][" + scheme + "] " + sharedText, Snackbar.LENGTH_LONG)
+                        .setAction( "[" + type.toString() + "][" + scheme + "] " + sharedText, null)
+                        .show();
+*/
+                if (sharedText.trim().toUpperCase().startsWith("HTTP"))
+                    editTextUrl.setText(sharedText);
+            }
+        }
     }
 
     @Override

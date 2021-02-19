@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import it.infodati.revolver.LinkActivity;
 import it.infodati.revolver.R;
 import it.infodati.revolver.adapter.LinksAdapter;
-import it.infodati.revolver.database.DatabaseManager;
+import it.infodati.revolver.dao.LinkDao;
 import it.infodati.revolver.listener.ListItemClickListener;
 import it.infodati.revolver.model.Link;
 
@@ -84,14 +84,7 @@ public class LinksFragment extends Fragment implements ListItemClickListener, Lo
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
 
-            List<Link> list = null;
-            try {
-            DatabaseManager databaseManager =  new DatabaseManager(getActivity());
-            list = databaseManager.getAllOrderedLinks();
-            databaseManager.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            List<Link> list = LinkDao.getAllOrderedLinks();
 /*
             if (list!=null)
                 Snackbar.make( progressBar, "[" + String.valueOf(list.size()) + "] " + " links loaded", Snackbar.LENGTH_LONG)

@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 
 import java.util.ArrayList;
 
+import it.infodati.revolver.database.DatabaseHelper;
 import it.infodati.revolver.database.DatabaseStrings;
 
 public class GlobalVar {
@@ -38,6 +39,8 @@ public class GlobalVar {
     private int linkId = 0;
     private int currentLinkId = 0;
 
+    private DatabaseHelper databaseHelper ;
+
 
     private GlobalVar() {}
     public static GlobalVar getInstance() { return GlobalVar.instance; }
@@ -56,6 +59,11 @@ public class GlobalVar {
 
     public void setLinkId(int value) { this.linkId = value; }
     public void setCurrentLinkId(int value) { this.currentLinkId = value; }
+
+    public void setDatabaseHelper(Context context) {
+        if (this.databaseHelper == null)
+            this.databaseHelper = new DatabaseHelper(context);
+    }
 
     // getter
     public String getPrefsName() { return this.prefsName; }
@@ -76,6 +84,8 @@ public class GlobalVar {
 
     public int getLinkId() { return this.linkId; }
     public int getCurrentLinkId() { return this.currentLinkId; }
+
+    public DatabaseHelper getDatabaseHelper() { return this.databaseHelper; }
 
     public int getListIndexByString(ArrayList<Object> list, Object obj) {
         int position = 0;

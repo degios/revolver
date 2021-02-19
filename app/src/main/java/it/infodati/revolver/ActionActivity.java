@@ -23,8 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import java.util.List;
 
-import it.infodati.revolver.database.DatabaseManager;
-import it.infodati.revolver.fragment.LinksFragment;
+import it.infodati.revolver.dao.LinkDao;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
@@ -121,15 +120,7 @@ public class ActionActivity extends AppCompatActivity {
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
 
-            Link model = null;
-            try {
-                DatabaseManager databaseManager =  new DatabaseManager(getApplicationContext());
-                model = databaseManager.getLink(id);
-                databaseManager.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            Link model = LinkDao.getLink(id);
             if (model!=null) {
                 if (!model.getDescription().toString().isEmpty())
                     toolbar.setTitle(model.getDescription().toString());

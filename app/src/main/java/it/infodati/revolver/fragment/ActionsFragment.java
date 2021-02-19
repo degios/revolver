@@ -25,7 +25,7 @@ import it.infodati.revolver.ActionActivity;
 import it.infodati.revolver.LinkActivity;
 import it.infodati.revolver.R;
 import it.infodati.revolver.adapter.ActionsAdapter;
-import it.infodati.revolver.database.DatabaseManager;
+import it.infodati.revolver.dao.LinkDao;
 import it.infodati.revolver.listener.ListItemClickListener;
 import it.infodati.revolver.listener.ListItemLongClickListener;
 import it.infodati.revolver.model.Link;
@@ -155,14 +155,7 @@ public class ActionsFragment extends Fragment implements ListItemClickListener, 
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
 
-            List<Link> list = null;
-            try {
-            DatabaseManager databaseManager =  new DatabaseManager(getActivity());
-            list = databaseManager.getAllOrderedActions();
-            databaseManager.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            List<Link> list = LinkDao.getAllOrderedLinks();
 /*
             if (list!=null)
                 Snackbar.make( progressBar, "[" + String.valueOf(list.size()) + "] " + " actions loaded", Snackbar.LENGTH_LONG)

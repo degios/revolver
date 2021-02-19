@@ -16,19 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
-
-import it.infodati.revolver.ActionActivity;
-import it.infodati.revolver.LinkActivity;
 import it.infodati.revolver.R;
-import it.infodati.revolver.adapter.ActionsAdapter;
-import it.infodati.revolver.database.DatabaseManager;
-import it.infodati.revolver.listener.ListItemClickListener;
+import it.infodati.revolver.dao.LinkDao;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
@@ -99,15 +89,7 @@ public class ActionFragment extends Fragment implements LoadDataFragment, LoadIn
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
 
-            Link model = null;
-            try {
-                DatabaseManager databaseManager =  new DatabaseManager(getActivity());
-                model = databaseManager.getLink(GlobalVar.getInstance().getCurrentLinkId());
-                databaseManager.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            Link model = LinkDao.getLink(GlobalVar.getInstance().getCurrentLinkId());
             if (model!=null) {
 /*
                 if (!model.getDescription().toString().isEmpty())

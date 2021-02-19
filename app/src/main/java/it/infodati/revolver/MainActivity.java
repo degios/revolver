@@ -31,7 +31,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.infodati.revolver.database.DatabaseManager;
+import it.infodati.revolver.dao.LinkDao;
 import it.infodati.revolver.database.DatabaseStrings;
 import it.infodati.revolver.fragment.ActionFragment;
 import it.infodati.revolver.fragment.ActionsFragment;
@@ -260,6 +260,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadData() {
+        GlobalVar.getInstance().setDatabaseHelper(getApplicationContext());
         GlobalVar.getInstance().setToolbarEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.TOOLBAR_ENABLED, false));
         GlobalVar.getInstance().setBottombarEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.BOTTOMBAR_ENABLED, false));
         GlobalVar.getInstance().setFloatingEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.FLOATING_ENABLED, false));
@@ -272,10 +273,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences sharedPreferences = getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
-
         if (GlobalVar.getInstance().getDatabaseName().equals(DatabaseStrings.DATABASE_DEMO)) {
-            Link lastLink = databaseManager.getLastLink();
+            Link lastLink = LinkDao.getLastLink();
             if (lastLink.getId() <= 0) {
                 ArrayList<Link> links = new ArrayList<Link>();
                 links.add(new Link(1, getString(R.string.ALL_demo_link_1), getString(R.string.ENG_demo_link_1_desc), getString(R.string.ITA_demo_link_1_desc), "", ""));
@@ -284,15 +283,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 links.add(new Link(4, getString(R.string.ALL_demo_link_4), getString(R.string.ENG_demo_link_4_desc), getString(R.string.ITA_demo_link_4_desc), "", ""));
 
                 for (Link link : links)
-                    databaseManager.createLink(link);
+                    LinkDao.createLink(link);
 
                 editor.putInt(GlobalVar.LINK_ID,1);
                 editor.apply();
             }
         }
         GlobalVar.getInstance().setLinkId(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getInt(GlobalVar.LINK_ID, 0));
-
-        databaseManager.close();
     }
 
     private void loadInterface() {
@@ -306,9 +303,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationMenu.clear();
         navigationView.inflateMenu(R.menu.activity_main_drawer);
 
-        DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
-        List<Link> list = databaseManager.getAllOrderedActions();
-        databaseManager.close();
+        List<Link> list = LinkDao.getAllOrderedLinks();
         if (list!=null) {
             for (Link link : list) {
                 menuIndex = GlobalVar.getInstance().CUSTOM_MIN + link.getId();

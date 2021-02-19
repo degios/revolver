@@ -14,7 +14,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.Toolbar;
 
-import it.infodati.revolver.database.DatabaseManager;
+import it.infodati.revolver.dao.LinkDao;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
@@ -84,16 +84,9 @@ public class LinkActivity extends AppCompatActivity {
                         .setAction(getResources().getText(R.string.yes), new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                try {
-                                    DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
-                                    databaseManager.removeLink(id);
-                                    databaseManager.close();
-
-                                    setResult(Activity.RESULT_OK);
-                                    finish();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+                                LinkDao.removeLink(id);
+                                setResult(Activity.RESULT_OK);
+                                finish();
                             }
                         });
                 snackbar.show();
@@ -105,14 +98,7 @@ public class LinkActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        Link model = null;
-        try {
-            DatabaseManager databaseManager = new DatabaseManager(this);
-            model = databaseManager.getLink(this.id);
-            databaseManager.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Link model = LinkDao.getLink(this.id);
         if (model!=null) {
             editTextUrl.setText(model.getUrl());
             editTextDescription.setText(model.getDescription());
@@ -127,16 +113,9 @@ public class LinkActivity extends AppCompatActivity {
                     .setAction(getResources().getText(R.string.yes), new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            try {
-                                DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
-                                databaseManager.removeLink(id);
-                                databaseManager.close();
-
-                                setResult(Activity.RESULT_OK);
-                                finish();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                            LinkDao.removeLink(id);
+                            setResult(Activity.RESULT_OK);
+                            finish();
                         }
                     });
             snackbar.show();
@@ -145,21 +124,15 @@ public class LinkActivity extends AppCompatActivity {
 
     public void onSaveBtnClick(View v) {
         int id;
-        try {
-            DatabaseManager databaseManager = new DatabaseManager(this);
-            if (this.id>0) {
-                id = this.id;
-            } else {
-                id = databaseManager.getLastLink().getId()+1;
-            }
-            databaseManager.createLink(
-                    new Link(id, editTextUrl.getText().toString(), editTextDescription.getText().toString(), editTextNote.getText().toString()));
-            databaseManager.close();
-
-            setResult(Activity.RESULT_OK);
-            this.finish();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (this.id>0) {
+            id = this.id;
+        } else {
+            id = LinkDao.getLastLink().getId()+1;
         }
+        LinkDao.createLink(
+                new Link(id, editTextUrl.getText().toString(), editTextDescription.getText().toString(), editTextNote.getText().toString()));
+
+        setResult(Activity.RESULT_OK);
+        this.finish();
     }
 }

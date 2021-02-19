@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.infodati.revolver.R;
-import it.infodati.revolver.database.DatabaseManager;
+import it.infodati.revolver.dao.LinkDao;
 import it.infodati.revolver.database.DatabaseStrings;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
@@ -76,15 +76,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     public void loadSpinnerLinksData() {
-        List<Link> list = null;
-        try {
-            DatabaseManager databaseManager = new DatabaseManager(getActivity());
-            list = databaseManager.getAllOrderedLinks();
-            databaseManager.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        List<Link> list = LinkDao.getAllOrderedLinks();
 /*
         if (list!=null)
             Snackbar.make( spinner, "[" + String.valueOf(list.size()) + "] " + " funds loaded", Snackbar.LENGTH_LONG)
@@ -99,14 +91,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
             spinnerLinks.setAdapter(adapter);
 
             if (GlobalVar.getInstance().getLinkId()>0) {
-                Link model = null;
-                try {
-                    DatabaseManager databaseManager = new DatabaseManager(getActivity());
-                    model = databaseManager.getLink(GlobalVar.getInstance().getLinkId());
-                    databaseManager.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                Link model = LinkDao.getLink(GlobalVar.getInstance().getLinkId());
                 if (model!=null) {
                     int position = GlobalVar.getInstance().getListIndexByString((ArrayList<Object>)(ArrayList<?>)(list), model);
 /*

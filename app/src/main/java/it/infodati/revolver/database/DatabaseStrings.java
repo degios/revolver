@@ -7,6 +7,7 @@ public class DatabaseStrings {
     public static final String DATABASE_REAL = "revolver.sqlite";
 
     // Tables names
+    public static final String TABLE_ICONS = "icons";
     public static final String TABLE_LINKS = "links";
 
     // Common columns names3
@@ -14,6 +15,7 @@ public class DatabaseStrings {
     public static final String FIELD_DESCRIPTION_ITA = "description_ita";
     public static final String FIELD_ICON = "icon";
     public static final String FIELD_ID = "id";
+    public static final String FIELD_NAME = "name";
     public static final String FIELD_NOTE_ENG = "note_eng";
     public static final String FIELD_NOTE_ITA = "note_ita";
     public static final String FIELD_URL = "url";

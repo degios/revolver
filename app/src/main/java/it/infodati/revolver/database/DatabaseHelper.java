@@ -23,8 +23,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + FIELD_URL + " TEXT NOT NULL, "
             + FIELD_DESCRIPTION_ENG + " TEXT NOT NULL UNIQUE, "
             + FIELD_DESCRIPTION_ITA + " TEXT NOT NULL UNIQUE, "
-            + FIELD_NOTE_ENG + " TEXT, "
-            + FIELD_NOTE_ITA + " TEXT, "
             + FIELD_ICON + " TEXT "
             + ")";
 

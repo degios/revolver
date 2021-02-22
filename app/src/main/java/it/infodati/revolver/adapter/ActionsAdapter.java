@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
+import java.net.URL;
 import java.util.List;
 
 import it.infodati.revolver.R;
@@ -24,6 +27,7 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
     private List<Link> list;
     private final ListItemClickListener onClickListener;
     private final ListItemLongClickListener onLongClickListener;
+    private Context context;
 
 
     // Constructor
@@ -94,6 +98,11 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
             } else {
                 this.description.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             }
+
+//            Glide.with(this.icon.getContext()).load(model.getUrl()).error(android.R.drawable.ic_menu_agenda);
+            //CERCA PER SHORTCUT ICON: es. Raiplay
+            String faviconUrl = model.getUrl()+"/favicon.ico";
+            Glide.with(this.icon.getContext()).load(faviconUrl).error(android.R.drawable.ic_menu_agenda).into(this.icon);
         }
 
         private void bindOrHideTextView(TextView textView, String data) {

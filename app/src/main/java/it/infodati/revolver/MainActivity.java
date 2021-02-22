@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,9 +112,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (sharedText!=null && !sharedText.isEmpty()) {
+            String host = "";
+            try {
+                host = new URL(sharedText).getHost();
+            } catch (Exception e) {
+                host = "";
+            }
+
             intent = new Intent(this, LinkActivity.class);
             intent.putExtra(getResources().getString(R.string.id).toString(),0);
             intent.putExtra(getResources().getString(R.string.url), sharedText);
+            intent.putExtra(getResources().getString(R.string.description), host);
             startActivityForResult(intent, 0);
         } else {
             int menuIndex = (GlobalVar.getInstance().getLinkId() > 0 ? GlobalVar.getInstance().CUSTOM_MIN + GlobalVar.getInstance().getLinkId() : R.id.nav_home);
@@ -291,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GlobalVar.getInstance().setSubActivityEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBACTIVITY_ENABLED, false));
         GlobalVar.getInstance().setSubToolbarEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBTOOLBAR_ENABLED, false));
         GlobalVar.getInstance().setSubSwipeEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBSWIPE_ENABLED, false));
+        GlobalVar.getInstance().setSubZoomEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBZOOM_ENABLED, false));
         GlobalVar.getInstance().setButtonRemoveEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.BUTTONREMOVE_ENABLED, false));
         GlobalVar.getInstance().setDatabaseName(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getString(GlobalVar.DATABASE_NAME, DatabaseStrings.DATABASE_DEMO));
 

@@ -2,13 +2,17 @@ package it.infodati.revolver.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
@@ -56,19 +60,38 @@ public class ActionFragment extends Fragment implements LoadDataFragment, LoadIn
     public void loadInterface() {
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
-        webView.setWebViewClient(new ActionFragment.WebViewClient());
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setLoadsImagesAutomatically(true);
-        webView.setWebChromeClient(new ActionFragment.WebChromeClient());
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setBuiltInZoomControls(false);
-        webView.getSettings().setSupportZoom(true);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadsImagesAutomatically(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setAppCacheEnabled(true);
+        webSettings.setBuiltInZoomControls(GlobalVar.getInstance().isSubZoomEnabled());
+        webSettings.setSupportZoom(true);
+
+/*
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setSupportMultipleWindows(true);
+*/
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            webSettings.setMixedContentMode( WebSettings.MIXED_CONTENT_ALWAYS_ALLOW );
+        }
+
+        webSettings.setSavePassword(true);
+        webSettings.setSaveFormData(true);
+
+        //Cookie manager for the webview
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+
+        //        webView.getSettings().getUseWideViewPort();
+
         webView.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
 //        webView.setScrollBarStyle(WebView.SCROLLBARS_INSIDE_OVERLAY);
-/*
-        webView.getSettings().getUseWideViewPort();
-        webView.setInitialScale(1);
-*/
+//        webView.setInitialScale(1);
+
+        webView.setWebViewClient(new ActionFragment.WebViewClient());
+        webView.setWebChromeClient(new ActionFragment.WebChromeClient());
     }
 
     public void loadData() {
@@ -124,7 +147,26 @@ public class ActionFragment extends Fragment implements LoadDataFragment, LoadIn
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            view.loadUrl(request.getUrl().toString());
+            String url = request.getUrl().toString();
+
+            if( url.startsWith("http:") || url.startsWith("https:") ) {
+                view.loadUrl(url);
+            }
+            // Otherwise allow the OS to handle it
+            else if (url.startsWith("tel:")) {
+                Intent tel = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
+                startActivity(tel);
+            }
+            //This is again specific for my website
+            else if (url.startsWith("mailto:")) {
+                Intent mail = new Intent(Intent.ACTION_SEND);
+                mail.setType("application/octet-stream");
+                String AdressMail = new String(url.replace("mailto:" , "")) ;
+                mail.putExtra(Intent.EXTRA_EMAIL, new String[]{ AdressMail });
+                mail.putExtra(Intent.EXTRA_SUBJECT, "");
+                mail.putExtra(Intent.EXTRA_TEXT, "");
+                startActivity(mail);
+            }
             return true;
         }
 

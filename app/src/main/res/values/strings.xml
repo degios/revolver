@@ -42,6 +42,8 @@
     <string name="subblock_note">Block exit from action</string>
     <string name="subswipe">Swipe</string>
     <string name="subswipe_note">Enable swipe refresh</string>
+    <string name="subzoom">Zoom</string>
+    <string name="subzoom_note">Enable built-in zoom control</string>
     <string name="swipe">Swipe</string>
     <string name="swipe_note">Enable swipe refresh</string>
     <string name="toolbar">Toolbar</string>

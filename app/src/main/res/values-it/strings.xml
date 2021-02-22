@@ -49,4 +49,6 @@
     <string name="swipe_note">Abilita aggiornamento su scorrimento verticale</string>
     <string name="subswipe">Scorri</string>
     <string name="subswipe_note">Abilita aggiornamento su scorrimento verticale</string>
+    <string name="subzoom">Zoom</string>
+    <string name="subzoom_note">Attiva lo zoom contestuale</string>
 </resources>

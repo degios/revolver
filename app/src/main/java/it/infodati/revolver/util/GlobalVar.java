@@ -18,6 +18,7 @@ public class GlobalVar {
     public static final String SWIPE_ENABLED = "SWIPE_ENABLED";
     public static final String SUBBLOCK_ENABLED = "SUBBLOCK_ENABLED";
     public static final String SUBSWIPE_ENABLED = "SUBSWIPE_ENABLED";
+    public static final String SUBZOOM_ENABLED = "SUBZOOM_ENABLED";
     public static final String SUBACTIVITY_ENABLED = "SUBACTIVITY_ENABLED";
     public static final String SUBTOOLBAR_ENABLED = "SUBTOOLBAR_ENABLED";
     public static final String BUTTONREMOVE_ENABLED = "BUTTONREMOVE_ENABLED";
@@ -36,6 +37,7 @@ public class GlobalVar {
     private boolean swipeEnabled;
     private boolean subBlockEnabled;
     private boolean subSwipeEnabled;
+    private boolean subZoomEnabled;
     private boolean subActivityEnabled;
     private boolean subToolbarEnabled;
     private boolean buttonRemoveEnabled;
@@ -60,6 +62,7 @@ public class GlobalVar {
     public void setSubBlockEnabled(boolean enabled) { this.subBlockEnabled = enabled; }
     public void setSubActivityEnabled(boolean enabled) { this.subActivityEnabled = enabled; }
     public void setSubSwipeEnabled(boolean enabled) { this.subSwipeEnabled = enabled; }
+    public void setSubZoomEnabled(boolean enabled) { this.subZoomEnabled = enabled; }
     public void setSubToolbarEnabled(boolean enabled) { this.subToolbarEnabled = enabled; }
     public void setButtonRemoveEnabled(boolean enabled) { this.buttonRemoveEnabled = enabled; }
 
@@ -88,6 +91,7 @@ public class GlobalVar {
     public boolean isSubActivityEnabled() { return this.subActivityEnabled; }
     public boolean isSubToolbarEnabled() { return this.subToolbarEnabled; }
     public boolean isSubSwipeEnabled() { return this.subSwipeEnabled; }
+    public boolean isSubZoomEnabled() { return this.subZoomEnabled; }
     public boolean isButtonRemoveEnabeld() { return this.buttonRemoveEnabled; }
 
     public int getLinkId() { return this.linkId; }

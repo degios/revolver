@@ -35,6 +35,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     private SwitchCompat switchSwipe;
     private AppCompatSpinner spinnerLinks;
     private SwitchCompat switchSubBlock;
+    private SwitchCompat switchSubZoom;
     private SwitchCompat switchSubSwipe;
     private SwitchCompat switchSubActivity;
     public SwitchCompat switchSubToolbar;
@@ -58,6 +59,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         switchSwipe = view.findViewById(R.id.switch_swipe);
         spinnerLinks = view.findViewById(R.id.spinner_links);
         switchSubBlock = view.findViewById(R.id.switch_subblock);
+        switchSubZoom = view.findViewById(R.id.switch_subzoom);
         switchSubSwipe = view.findViewById(R.id.switch_subswipe);
         switchSubActivity = view.findViewById(R.id.switch_subactivity);
         switchSubToolbar = view.findViewById(R.id.switch_subtoolbar);
@@ -74,6 +76,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         switchSwipe.setOnCheckedChangeListener(this);
         spinnerLinks.setOnItemSelectedListener(this);
         switchSubBlock.setOnCheckedChangeListener(this);
+        switchSubZoom.setOnCheckedChangeListener(this);
         switchSubSwipe.setOnCheckedChangeListener(this);
         switchSubActivity.setOnCheckedChangeListener(this);
         switchSubToolbar.setOnCheckedChangeListener(this);
@@ -82,11 +85,14 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     public void loadSpinnerLinksData() {
+        Link homeLink = new Link(0,"", getResources().getString(R.string.home));
+
         List<Link> list = LinkDao.getAllOrderedLinks();
+        list.add(0, homeLink);
 /*
         if (list!=null)
-            Snackbar.make( spinner, "[" + String.valueOf(list.size()) + "] " + " funds loaded", Snackbar.LENGTH_LONG)
-                    .setAction( "[" + String.valueOf(list.size()) + "] " + " funds loaded", null)
+            Snackbar.make( spinner, "[" + String.valueOf(list.size()) + "] " + " links loaded", Snackbar.LENGTH_LONG)
+                    .setAction( "[" + String.valueOf(list.size()) + "] " + " links loaded", null)
                     .show();
 */
 
@@ -96,20 +102,22 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerLinks.setAdapter(adapter);
 
+            int position = 0;
             if (GlobalVar.getInstance().getLinkId()>0) {
                 Link model = LinkDao.getLink(GlobalVar.getInstance().getLinkId());
                 if (model!=null) {
-                    int position = GlobalVar.getInstance().getListIndexByString((ArrayList<Object>)(ArrayList<?>)(list), model);
+                    position = GlobalVar.getInstance().getListIndexByString((ArrayList<Object>)(ArrayList<?>)(list), model);
 /*
                     Snackbar.make( spinnerLinks, "[" + String.valueOf(model.getId()) + "][" + String.valueOf(position) + "] " + " fund position", Snackbar.LENGTH_LONG)
                             .setAction( "[" + String.valueOf(position) + "] " + " link position", null)
                             .show();
 */
-
-                    if (position>0) {
-                        spinnerLinks.setSelection(position);
-                    }
                 }
+            } else {
+                position = 0;
+            }
+            if (position>=0) {
+                spinnerLinks.setSelection(position);
             }
         }
     }
@@ -120,6 +128,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         this.switchFloating.setChecked(GlobalVar.getInstance().isFloatingEnabled());
         this.switchSwipe.setChecked(GlobalVar.getInstance().isSwipeEnabled());
         this.switchSubBlock.setChecked(GlobalVar.getInstance().isSubBlockEnabled());
+        this.switchSubZoom.setChecked(GlobalVar.getInstance().isSubZoomEnabled());
         this.switchSubSwipe.setChecked(GlobalVar.getInstance().isSubSwipeEnabled());
         this.switchSubActivity.setChecked(GlobalVar.getInstance().isSubActivityEnabled());
         this.switchSubToolbar.setChecked(GlobalVar.getInstance().isSubToolbarEnabled());
@@ -225,6 +234,12 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
                 editor.apply();
             }
             GlobalVar.getInstance().setSubBlockEnabled(sharedPreferences.getBoolean(GlobalVar.SUBBLOCK_ENABLED,false));
+        } else if (buttonView.getId() == R.id.switch_subzoom) {
+            if (sharedPreferences.getBoolean(GlobalVar.SUBZOOM_ENABLED,false)!=isChecked) {
+                editor.putBoolean(GlobalVar.SUBZOOM_ENABLED,isChecked);
+                editor.apply();
+            }
+            GlobalVar.getInstance().setSubZoomEnabled(sharedPreferences.getBoolean(GlobalVar.SUBZOOM_ENABLED,false));
         } else if (buttonView.getId() == R.id.switch_subswipe) {
             if (sharedPreferences.getBoolean(GlobalVar.SUBSWIPE_ENABLED,false)!=isChecked) {
                 editor.putBoolean(GlobalVar.SUBSWIPE_ENABLED,isChecked);

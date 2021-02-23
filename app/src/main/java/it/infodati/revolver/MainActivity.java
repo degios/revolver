@@ -186,6 +186,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 */
         } else if (itemId == R.id.menu_settings) {
             activityClassName = this.getClass().getPackage().getName()+"."+"SettingsActivity";
+        } else if (itemId == R.id.menu_refresh) {
+            loadInterface();
+            onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
         }
 
         if (activityClassName != null) {

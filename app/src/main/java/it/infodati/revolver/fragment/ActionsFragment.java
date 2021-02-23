@@ -53,7 +53,7 @@ public class ActionsFragment extends Fragment implements ListItemClickListener, 
         recyclerView = view.findViewById(R.id.recyclerview);
 //        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        adapter = new ActionsAdapter(this);
+        adapter = new ActionsAdapter(this, ActionsAdapter.LISTVEW);
         recyclerView.setAdapter(adapter);
 
         fab = view.findViewById(R.id.fab);

@@ -23,16 +23,21 @@ import it.infodati.revolver.util.GlobalVar;
 
 public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionViewHolder> {
 
+    public static int LISTVIEW = 0;
+    public static int GRIDVIEW = 1;
+
     private List<Link> list;
     private final ListItemClickListener onClickListener;
     private final ListItemLongClickListener onLongClickListener;
     private Context context;
+    private int itemViewType;
 
 
     // Constructor
-    public ActionsAdapter(Fragment fragment) {
+    public ActionsAdapter(Fragment fragment, int itemViewType) {
         this.onClickListener = (ListItemClickListener) fragment;
         this.onLongClickListener = (ListItemLongClickListener) fragment;
+        this.itemViewType = itemViewType;
     }
 
     @NonNull
@@ -47,6 +52,11 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
     @Override
     public void onBindViewHolder(@NonNull ActionViewHolder holder, int position) {
         holder.bind(list.get(position));
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return this.itemViewType;
     }
 
     @Override

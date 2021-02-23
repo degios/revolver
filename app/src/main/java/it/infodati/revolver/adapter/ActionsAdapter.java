@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.net.URL;
 import java.util.List;
 
 import it.infodati.revolver.R;
@@ -39,7 +38,7 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
     @NonNull
     @Override
     public ActionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_actions, parent, false);
         return new ActionViewHolder(view);
@@ -99,10 +98,13 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
                 this.description.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             }
 
-//            Glide.with(this.icon.getContext()).load(model.getUrl()).error(android.R.drawable.ic_menu_agenda);
-            //CERCA PER SHORTCUT ICON: es. Raiplay
-            String faviconUrl = model.getUrl()+"/favicon.ico";
-            Glide.with(this.icon.getContext()).load(faviconUrl).error(android.R.drawable.ic_menu_agenda).into(this.icon);
+            String iconName = context.getResources().getResourceEntryName(android.R.drawable.ic_menu_myplaces);
+            int iconId = context.getResources().getIdentifier(iconName, "drawable", "android");
+            if (model.getIcon()!=null && model.getIcon().trim().toUpperCase().startsWith("HTTP")) {
+                Glide.with(this.icon.getContext()).load(model.getIcon()).error(iconId).into(this.icon);
+            } else {
+                this.icon.setImageResource(iconId);
+            }
         }
 
         private void bindOrHideTextView(TextView textView, String data) {

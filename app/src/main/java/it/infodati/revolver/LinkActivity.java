@@ -39,13 +39,10 @@ public class LinkActivity extends AppCompatActivity {
 
     private int id;
     private String url;
-    private String title;
-    private String icon;
 
     private AppCompatEditText editTextUrl;
     private AppCompatEditText editTextTitle;
     private ImageView imageViewIcon;
-    private AppCompatButton buttonDownload;
     private AppCompatButton buttonDelete;
     private AppCompatButton buttonSave;
     private ProgressBar progressBar;
@@ -59,7 +56,6 @@ public class LinkActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getIntExtra(getResources().getString(R.string.id).toString(),0);
         url = intent.getStringExtra(getResources().getString(R.string.url));
-        title = intent.getStringExtra(getResources().getString(R.string.title));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         if (id>0) {
@@ -79,7 +75,6 @@ public class LinkActivity extends AppCompatActivity {
         editTextUrl = findViewById(R.id.edittext_url);
         editTextTitle = findViewById(R.id.edittext_title);
         imageViewIcon = findViewById(R.id.imageview_icon);
-        buttonDownload = findViewById(R.id.button_download);
         buttonDelete = findViewById(R.id.button_delete);
         if (id>0 && GlobalVar.getInstance().isButtonRemoveEnabeld()) {
             buttonDelete.setVisibility(View.VISIBLE);
@@ -96,14 +91,10 @@ public class LinkActivity extends AppCompatActivity {
         loadData();
 
         if (id==0) {
-            if (url!=null && !url.isEmpty())
+            if (url!=null && !url.isEmpty()) {
                 editTextUrl.setText(url);
-            if (title!=null && !title.isEmpty())
-                editTextTitle.setText(title);
-
-            String iconName = getApplicationContext().getResources().getResourceEntryName(android.R.drawable.ic_menu_myplaces);
-            int iconId = getApplicationContext().getResources().getIdentifier(iconName, "drawable", "android");
-            this.imageViewIcon.setImageResource(iconId);
+                onDownloadBtnClick(webView);
+            }
         }
     }
 
@@ -137,6 +128,9 @@ public class LinkActivity extends AppCompatActivity {
     }
 
     public void loadInterface() {
+        progressBar.setVisibility(View.GONE);
+        webView.setVisibility(View.GONE);
+
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setLoadsImagesAutomatically(true);

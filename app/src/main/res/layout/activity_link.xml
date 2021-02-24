@@ -23,6 +23,7 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="5sp"
         android:scrollbars="vertical">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -45,8 +46,10 @@
                 android:id="@+id/edittext_url"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
+                android:layout_alignParentTop="true"
                 android:layout_gravity="left|top"
+                android:layout_marginTop="0dp"
+                android:singleLine="true"
                 android:textSize="16sp" />
 
             <ProgressBar
@@ -74,13 +77,32 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imageview_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="6dp"
-                    android:contentDescription="@string/icon"
-                    android:src="@android:drawable/ic_menu_myplaces" />
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:layout_gravity="left|top"
+                        android:textSize="14sp"
+                        android:textColor="@color/subTextColor"
+                        android:text="@string/icon"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageview_icon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@string/icon"
+                        android:onClick="onDownloadBtnClick"
+                        android:src="@android:drawable/ic_menu_myplaces" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -110,28 +132,9 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button_download"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textSize="14sp"
-                    android:text="@string/download"
-                    android:drawableLeft="@android:drawable/ic_menu_camera"
-                    android:onClick="onDownloadBtnClick"/>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/view_two_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton

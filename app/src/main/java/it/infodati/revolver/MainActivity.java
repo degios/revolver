@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             intent = new Intent(this, LinkActivity.class);
             intent.putExtra(getResources().getString(R.string.id).toString(),0);
             intent.putExtra(getResources().getString(R.string.url), sharedText);
-            intent.putExtra(getResources().getString(R.string.description), host);
             startActivityForResult(intent, 0);
         } else {
             int menuIndex = (GlobalVar.getInstance().getLinkId() > 0 ? GlobalVar.getInstance().CUSTOM_MIN + GlobalVar.getInstance().getLinkId() : R.id.nav_home);

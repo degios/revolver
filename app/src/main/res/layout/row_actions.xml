@@ -30,6 +30,7 @@
             android:layout_height="50dp"
             android:layout_marginEnd="6dp"
             android:contentDescription="@string/icon"
+            android:paddingRight="15sp"
             android:src="@android:drawable/ic_menu_myplaces" />
 
         <androidx.appcompat.widget.LinearLayoutCompat

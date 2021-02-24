@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
 /*
         fragment = new ActionsFragment();
@@ -360,7 +361,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 byte[] arIcon = link.getIcon();
                 if (arIcon!=null && arIcon.length>0) {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(arIcon, 0, arIcon.length);
-                    Drawable drawable = (Drawable) new BitmapDrawable(bitmap);
+                    Drawable drawable = (Drawable) new BitmapDrawable(getResources(), bitmap);
                     menuItem.setIcon(drawable);
                 } else {
                     menuItem.setIcon(android.R.drawable.ic_menu_share);

@@ -2,10 +2,21 @@ package it.infodati.revolver;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -13,25 +24,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.ImageViewCompat;
 
 import it.infodati.revolver.dao.LinkDao;
+import it.infodati.revolver.fragment.ActionFragment;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.ByteArrayOutputStream;
+
 public class LinkActivity extends AppCompatActivity {
 
     private int id;
     private String url;
-    private String description;
-    private String note;
+    private String title;
+    private String icon;
 
     private AppCompatEditText editTextUrl;
-    private AppCompatEditText editTextDescription;
-    private AppCompatEditText editTextNote;
+    private AppCompatEditText editTextTitle;
+    private ImageView imageViewIcon;
+    private AppCompatButton buttonDownload;
     private AppCompatButton buttonDelete;
     private AppCompatButton buttonSave;
+    private ProgressBar progressBar;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +59,7 @@ public class LinkActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getIntExtra(getResources().getString(R.string.id).toString(),0);
         url = intent.getStringExtra(getResources().getString(R.string.url));
-        description = intent.getStringExtra(getResources().getString(R.string.description));
-        note = intent.getStringExtra(getResources().getString(R.string.note));
+        title = intent.getStringExtra(getResources().getString(R.string.title));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         if (id>0) {
@@ -60,8 +77,9 @@ public class LinkActivity extends AppCompatActivity {
         }
 
         editTextUrl = findViewById(R.id.edittext_url);
-        editTextDescription = findViewById(R.id.edittext_description);
-        editTextNote = findViewById(R.id.edittext_note);
+        editTextTitle = findViewById(R.id.edittext_title);
+        imageViewIcon = findViewById(R.id.imageview_icon);
+        buttonDownload = findViewById(R.id.button_download);
         buttonDelete = findViewById(R.id.button_delete);
         if (id>0 && GlobalVar.getInstance().isButtonRemoveEnabeld()) {
             buttonDelete.setVisibility(View.VISIBLE);
@@ -71,35 +89,22 @@ public class LinkActivity extends AppCompatActivity {
         }
         buttonSave = findViewById(R.id.button_save);
 
+        progressBar = findViewById(R.id.progressbar);
+        webView = findViewById(R.id.webview);
+
+        loadInterface();
         loadData();
 
         if (id==0) {
             if (url!=null && !url.isEmpty())
                 editTextUrl.setText(url);
-            if (description!=null && !description.isEmpty())
-                editTextDescription.setText(description);
-            if (note!=null && !note.isEmpty())
-                editTextNote.setText(note);
-        }
-/*
-            String action = intent.getAction();
-            String type = intent.getType();
-            String scheme = intent.getScheme();
+            if (title!=null && !title.isEmpty())
+                editTextTitle.setText(title);
 
-            if (Intent.ACTION_SEND.equals(action) && type != null) {
-                String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
-*/
-/*
-                Snackbar.make( editTextUrl, "[" + type.toString() + "][" + scheme + "] " + sharedText, Snackbar.LENGTH_LONG)
-                        .setAction( "[" + type.toString() + "][" + scheme + "] " + sharedText, null)
-                        .show();
-*//*
-
-                if (sharedText.trim().toUpperCase().startsWith("HTTP"))
-                    editTextUrl.setText(sharedText);
-            }
+            String iconName = getApplicationContext().getResources().getResourceEntryName(android.R.drawable.ic_menu_myplaces);
+            int iconId = getApplicationContext().getResources().getIdentifier(iconName, "drawable", "android");
+            this.imageViewIcon.setImageResource(iconId);
         }
-*/
     }
 
     @Override
@@ -131,12 +136,63 @@ public class LinkActivity extends AppCompatActivity {
         }
     }
 
+    public void loadInterface() {
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadsImagesAutomatically(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setAppCacheEnabled(true);
+        webSettings.setBuiltInZoomControls(GlobalVar.getInstance().isSubZoomEnabled());
+        webSettings.setSupportZoom(true);
+
+/*
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setSupportMultipleWindows(true);
+*/
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            webSettings.setMixedContentMode( WebSettings.MIXED_CONTENT_ALWAYS_ALLOW );
+        }
+
+        webSettings.setSavePassword(true);
+        webSettings.setSaveFormData(true);
+
+        //Cookie manager for the webview
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+
+        //        webView.getSettings().getUseWideViewPort();
+
+        webView.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
+//        webView.setScrollBarStyle(WebView.SCROLLBARS_INSIDE_OVERLAY);
+//        webView.setInitialScale(1);
+
+        webView.setWebViewClient(new LinkActivity.WebViewClient());
+        webView.setWebChromeClient(new LinkActivity.WebChromeClient());
+    }
+
     private void loadData() {
         Link model = LinkDao.getLink(this.id);
         if (model!=null) {
             editTextUrl.setText(model.getUrl());
-            editTextDescription.setText(model.getDescription());
-            editTextNote.setText(model.getNote());
+            editTextTitle.setText(model.getTitle());
+
+            String iconName = getApplicationContext().getResources().getResourceEntryName(android.R.drawable.ic_menu_myplaces);
+            int iconId = getApplicationContext().getResources().getIdentifier(iconName, "drawable", "android");
+            byte[] arIcon = model.getIcon();
+            if (arIcon!=null && arIcon.length>0) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(arIcon, 0, arIcon.length);
+                this.imageViewIcon.setImageBitmap(bitmap);
+            } else {
+                this.imageViewIcon.setImageResource(iconId);
+            }
+        }
+    }
+
+    public void onDownloadBtnClick(View v) {
+        String url = editTextUrl.getText().toString();
+        if (url!=null && !url.isEmpty() && url.trim().toUpperCase().startsWith("HTTP")) {
+            webView.loadUrl(url);
         }
     }
 
@@ -163,10 +219,75 @@ public class LinkActivity extends AppCompatActivity {
         } else {
             id = LinkDao.getLastLink().getId()+1;
         }
+
+
         LinkDao.createLink(
-                new Link(id, editTextUrl.getText().toString(), editTextDescription.getText().toString(), editTextNote.getText().toString()));
+                new Link(
+                        id,
+                        editTextUrl.getText().toString(),
+                        editTextTitle.getText().toString(),
+                        getByteArrayFromImageView(imageViewIcon)));
 
         setResult(Activity.RESULT_OK);
         this.finish();
+    }
+
+    private byte[] getByteArrayFromImageView(ImageView view) {
+        byte[] arIcon = null;
+
+        BitmapDrawable drawable = (BitmapDrawable) view.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
+        arIcon = stream.toByteArray();
+        if (arIcon!=null && arIcon.length<=0)
+            arIcon = null;
+
+        return arIcon;
+    }
+
+    private class WebViewClient extends android.webkit.WebViewClient {
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            String url = request.getUrl().toString();
+
+            if( url.startsWith("http:") || url.startsWith("https:") ) {
+                view.loadUrl(url);
+            }
+            return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    private class WebChromeClient extends android.webkit.WebChromeClient {
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            progressBar.setProgress(newProgress);
+        }
+
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            editTextTitle.setText(title);
+        }
+
+        @Override
+        public void onReceivedIcon(WebView view, Bitmap icon) {
+            super.onReceivedIcon(view, icon);
+            if (icon!=null) {
+                imageViewIcon.setImageBitmap(icon);
+            }
+        }
     }
 }

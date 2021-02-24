@@ -24,14 +24,6 @@
             android:singleLine="true"
             android:text="@string/id"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/url"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:singleLine="true"
-            android:text="@string/url"/>
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon"
             android:layout_width="wrap_content"
@@ -46,26 +38,26 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/description"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:textStyle="normal"
                 android:textSize="16sp"
-                android:text="@string/description"/>
+                android:text="@string/title"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/note"
+                android:id="@+id/url"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:ellipsize="marquee"
-                android:maxLines="2"
-                android:textColor="#F0F0F0"
+                android:gravity="center_vertical"
+                android:singleLine="true"
                 android:textStyle="italic"
-                android:textSize="16sp"
-                android:text="@string/note"/>
+                android:textSize="14sp"
+                android:text="@string/url"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

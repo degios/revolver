@@ -21,6 +21,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.List;
 
 import it.infodati.revolver.dao.LinkDao;
@@ -122,8 +124,8 @@ public class ActionActivity extends AppCompatActivity {
 
             Link model = LinkDao.getLink(id);
             if (model!=null) {
-                if (!model.getDescription().toString().isEmpty())
-                    toolbar.setTitle(model.getDescription().toString());
+                if (!model.getTitle().toString().isEmpty())
+                    toolbar.setTitle(model.getTitle().toString());
                 if (!model.getUrl().toString().isEmpty()) {
                     webView.loadUrl(model.getUrl().toString());
                     actionBar.show();

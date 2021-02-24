@@ -1,6 +1,8 @@
 package it.infodati.revolver.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ public class LinksAdapter extends RecyclerView.Adapter<LinksAdapter.LinkViewHold
 
     private List<Link> list;
     private final ListItemClickListener onClickListener;
+    private Context context;
 
 
     // Constructor
@@ -32,7 +35,7 @@ public class LinksAdapter extends RecyclerView.Adapter<LinksAdapter.LinkViewHold
     @NonNull
     @Override
     public LinkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_links, parent, false);
         return new LinkViewHolder(view);
@@ -69,32 +72,39 @@ public class LinksAdapter extends RecyclerView.Adapter<LinksAdapter.LinkViewHold
         private final TextView id;
         private final TextView url;
         private final ImageView icon;
-        private final TextView description;
-        private final TextView note;
+        private final TextView title;
 
         public LinkViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.id = (TextView) itemView.findViewById(R.id.id);
-            this.url = (TextView) itemView.findViewById(R.id.url);
             this.icon = (ImageView) itemView.findViewById(R.id.icon);
-            this.description = (TextView) itemView.findViewById(R.id.description);
-            this.note = (TextView) itemView.findViewById(R.id.note);
+            this.title = (TextView) itemView.findViewById(R.id.title);
+            this.url = (TextView) itemView.findViewById(R.id.url);
 
             itemView.setOnClickListener(this);
         }
 
         public void bind(Link model) {
             this.id.setText(String.valueOf(model.getId()));
+            this.title.setText(model.getTitle());
             this.url.setText(model.getUrl());
-            this.description.setText(model.getDescription());
-            this.bindOrHideTextView(this.note,model.getNote());
 
             // Set as preferred
             if (GlobalVar.getInstance().getLinkId()==model.getId()) {
-                this.description.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
+                this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
             } else {
-                this.description.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+            }
+
+            String iconName = context.getResources().getResourceEntryName(android.R.drawable.ic_menu_myplaces);
+            int iconId = context.getResources().getIdentifier(iconName, "drawable", "android");
+            byte[] arIcon = model.getIcon();
+            if (arIcon!=null && arIcon.length>0) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(arIcon, 0, arIcon.length);
+                this.icon.setImageBitmap(bitmap);
+            } else {
+                this.icon.setImageResource(iconId);
             }
         }
 
@@ -111,8 +121,7 @@ public class LinksAdapter extends RecyclerView.Adapter<LinksAdapter.LinkViewHold
         public TextView getId() { return this.id; }
         public TextView getUrl() { return this.url; }
         public ImageView getIcon() { return this.icon; }
-        public TextView getDescription() { return this.description; }
-        public TextView getNote() { return this.note; }
+        public TextView getTitle() { return this.title; }
 
         @Override
         public void onClick(View v) {

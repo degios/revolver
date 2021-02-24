@@ -21,6 +21,7 @@
     <string name="delete">Delete</string>
     <string name="delete_link">Delete link</string>
     <string name="description">Description</string>
+    <string name="download">Download</string>
     <string name="home" translatable="false">Home</string>
     <string name="icon">Icon</string>
     <string name="id" translatable="false">Id</string>
@@ -46,6 +47,7 @@
     <string name="subzoom_note">Enable built-in zoom control</string>
     <string name="swipe">Swipe</string>
     <string name="swipe_note">Enable swipe refresh</string>
+    <string name="title">Title</string>
     <string name="toolbar">Toolbar</string>
     <string name="toolbar_note">Show toolbar</string>
     <string name="url" translatable="false">Url</string>

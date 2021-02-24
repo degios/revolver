@@ -14,16 +14,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String LOG = "DatabaseHelper";
 
     // Database version
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 
     // Table create statement
     // Links
     public static final String CREATE_TABLE_LINKS = "CREATE TABLE IF NOT EXISTS " + TABLE_LINKS + " ( "
             + FIELD_ID + " INTEGER PRIMARY KEY, "
             + FIELD_URL + " TEXT NOT NULL, "
-            + FIELD_DESCRIPTION_ENG + " TEXT NOT NULL UNIQUE, "
-            + FIELD_DESCRIPTION_ITA + " TEXT NOT NULL UNIQUE, "
-            + FIELD_ICON + " TEXT "
+            + FIELD_TITLE + " TEXT NOT NULL UNIQUE, "
+            + FIELD_ICON + " BLOB "
             + ")";
 
     // Constructor

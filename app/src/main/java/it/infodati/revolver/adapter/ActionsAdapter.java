@@ -1,6 +1,10 @@
 package it.infodati.revolver.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,14 +88,14 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
 
         private final TextView id;
         private final ImageView icon;
-        private final TextView description;
+        private final TextView title;
 
         public ActionViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.id = (TextView) itemView.findViewById(R.id.id);
             this.icon = (ImageView) itemView.findViewById(R.id.icon);
-            this.description = (TextView) itemView.findViewById(R.id.description);
+            this.title = (TextView) itemView.findViewById(R.id.title);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -99,22 +103,31 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
 
         public void bind(Link model) {
             this.id.setText(String.valueOf(model.getId()));
-            this.description.setText(model.getDescription());
+            this.title.setText(model.getTitle());
 
             // Set as preferred
             if (GlobalVar.getInstance().getLinkId()==model.getId()) {
-                this.description.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
+                this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
             } else {
-                this.description.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             }
 
             String iconName = context.getResources().getResourceEntryName(android.R.drawable.ic_menu_myplaces);
             int iconId = context.getResources().getIdentifier(iconName, "drawable", "android");
+            byte[] arIcon = model.getIcon();
+            if (arIcon!=null && arIcon.length>0) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(arIcon, 0, arIcon.length);
+                this.icon.setImageBitmap(bitmap);
+            } else {
+                this.icon.setImageResource(iconId);
+            }
+/*
             if (model.getIcon()!=null && model.getIcon().trim().toUpperCase().startsWith("HTTP")) {
                 Glide.with(this.icon.getContext()).load(model.getIcon()).error(iconId).into(this.icon);
             } else {
                 this.icon.setImageResource(iconId);
             }
+*/
         }
 
         private void bindOrHideTextView(TextView textView, String data) {
@@ -129,7 +142,7 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
         // getter
         public TextView getId() { return this.id; }
         public ImageView getIcon() { return this.icon; }
-        public TextView getDescription() { return this.description; }
+        public TextView getTitle() { return this.title; }
 
         @Override
         public void onClick(View v) {

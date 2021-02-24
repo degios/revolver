@@ -17,6 +17,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.Menu;
@@ -313,6 +317,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (GlobalVar.getInstance().getDatabaseName().equals(DatabaseStrings.DATABASE_DEMO)) {
             Link lastLink = LinkDao.getLastLink();
             if (lastLink.getId() <= 0) {
+/*
                 ArrayList<Link> links = new ArrayList<Link>();
                 links.add(new Link(1, getString(R.string.ALL_demo_link_1), getString(R.string.ENG_demo_link_1_desc), getString(R.string.ITA_demo_link_1_desc), "", ""));
                 links.add(new Link(2, getString(R.string.ALL_demo_link_2), getString(R.string.ENG_demo_link_2_desc), getString(R.string.ITA_demo_link_2_desc), "", ""));
@@ -324,6 +329,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 editor.putInt(GlobalVar.LINK_ID,1);
                 editor.apply();
+*/
             }
         }
         GlobalVar.getInstance().setLinkId(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getInt(GlobalVar.LINK_ID, 0));
@@ -349,9 +355,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             for (Link link : list) {
                 menuIndex = GlobalVar.getInstance().CUSTOM_MIN + link.getId();
                 menuOrder += 1;
-                navigationMenu.add(R.id.nav_custom, menuIndex, menuOrder, link.getDescription());
+                navigationMenu.add(R.id.nav_custom, menuIndex, menuOrder, link.getTitle());
                 menuItem = navigationMenu.findItem(menuIndex);
-                menuItem.setIcon(android.R.drawable.ic_menu_share);
+
+                byte[] arIcon = link.getIcon();
+                if (arIcon!=null && arIcon.length>0) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(arIcon, 0, arIcon.length);
+                    Drawable drawable = (Drawable) new BitmapDrawable(bitmap);
+                    menuItem.setIcon(drawable);
+                } else {
+                    menuItem.setIcon(android.R.drawable.ic_menu_share);
+                }
             }
         }
         drawerLayout.refreshDrawableState();

@@ -22,7 +22,8 @@
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -48,45 +49,83 @@
                 android:layout_gravity="left|top"
                 android:textSize="16sp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textview_description"
+            <ProgressBar
+                android:id="@+id/progressbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:layout_gravity="left|top"
-                android:textSize="14sp"
-                android:textColor="@color/subTextColor"
-                android:text="@string/description"/>
+                style="?android:attr/progressBarStyleHorizontal"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="1"
+                android:progressTint="@color/colorPrimary"
+                android:visibility="invisible" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edittext_description"
+            <WebView
+                android:id="@+id/webview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:layout_gravity="left|top"
-                android:textSize="16sp" />
+                android:layout_height="0dp"
+                android:visibility="invisible"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textview_note"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:singleLine="true"
-                android:layout_gravity="left|top"
-                android:textSize="14sp"
-                android:textColor="@color/subTextColor"
-                android:text="@string/note"/>
+                android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edittext_note"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageview_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="6dp"
+                    android:contentDescription="@string/icon"
+                    android:src="@android:drawable/ic_menu_myplaces" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:layout_gravity="left|top"
+                        android:textSize="14sp"
+                        android:textColor="@color/subTextColor"
+                        android:text="@string/title"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edittext_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:layout_gravity="left|top"
+                        android:textSize="16sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|top"
-                android:lines="4"
-                android:maxLines="4"
-                android:gravity="top|left"
-                android:inputType="textMultiLine"
-                android:textSize="16sp" />
+                android:layout_marginTop="5sp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_download"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:text="@string/download"
+                    android:drawableLeft="@android:drawable/ic_menu_camera"
+                    android:onClick="onDownloadBtnClick"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/view_two_button"

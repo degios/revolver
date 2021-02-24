@@ -187,6 +187,8 @@ public class LinkActivity extends AppCompatActivity {
         String url = editTextUrl.getText().toString();
         if (url!=null && !url.isEmpty() && url.trim().toUpperCase().startsWith("HTTP")) {
             webView.loadUrl(url);
+            buttonDelete.setEnabled(false);
+            buttonSave.setEnabled(false);
         }
     }
 
@@ -260,7 +262,6 @@ public class LinkActivity extends AppCompatActivity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            progressBar.setVisibility(View.GONE);
         }
     }
 
@@ -273,14 +274,17 @@ public class LinkActivity extends AppCompatActivity {
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
-            editTextTitle.setText(title);
         }
 
         @Override
         public void onReceivedIcon(WebView view, Bitmap icon) {
             super.onReceivedIcon(view, icon);
             if (icon!=null) {
+                editTextTitle.setText(view.getTitle());
                 imageViewIcon.setImageBitmap(icon);
+                buttonDelete.setEnabled(true);
+                buttonSave.setEnabled(true);
+                progressBar.setVisibility(View.GONE);
             }
         }
     }

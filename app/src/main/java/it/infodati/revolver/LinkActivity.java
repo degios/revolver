@@ -187,6 +187,7 @@ public class LinkActivity extends AppCompatActivity {
         String url = editTextUrl.getText().toString();
         if (url!=null && !url.isEmpty() && url.trim().toUpperCase().startsWith("HTTP")) {
             webView.loadUrl(url);
+            editTextTitle.setEnabled(false);
             buttonDelete.setEnabled(false);
             buttonSave.setEnabled(false);
         }
@@ -282,6 +283,7 @@ public class LinkActivity extends AppCompatActivity {
             if (icon!=null) {
                 editTextTitle.setText(view.getTitle());
                 imageViewIcon.setImageBitmap(icon);
+                editTextTitle.setEnabled(true);
                 buttonDelete.setEnabled(true);
                 buttonSave.setEnabled(true);
                 progressBar.setVisibility(View.GONE);

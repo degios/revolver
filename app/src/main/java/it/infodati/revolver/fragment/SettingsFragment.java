@@ -176,6 +176,13 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
                     .show();
 */
                 GlobalVar.getInstance().setLinkId(sharedPreferences.getInt(GlobalVar.LINK_ID,0));
+                if (GlobalVar.getInstance().getLinkId()>0) {
+                    model = LinkDao.getLink(GlobalVar.getInstance().getLinkId());
+                    if (!model.hasBookmark()) {
+                        model.setBookmark(true);
+                        LinkDao.createLink(model);
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -92,7 +92,7 @@ public class LinksAdapter extends RecyclerView.Adapter<LinksAdapter.LinkViewHold
 
             // Set as preferred
             if (GlobalVar.getInstance().getLinkId()==model.getId()) {
-                this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
+                this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_run_circle_24, 0);
             } else {
                 this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             }

@@ -333,6 +333,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         GlobalVar.getInstance().setLinkId(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getInt(GlobalVar.LINK_ID, 0));
+        if (GlobalVar.getInstance().getLinkId()>0) {
+            Link model = LinkDao.getLink(GlobalVar.getInstance().getLinkId());
+            if (!model.hasBookmark()) {
+                model.setBookmark(true);
+                LinkDao.createLink(model);
+            }
+        }
     }
 
     private void loadInterface() {
@@ -350,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationMenu.clear();
         navigationView.inflateMenu(R.menu.activity_main_drawer);
 
-        List<Link> list = LinkDao.getAllOrderedLinks();
+        List<Link> list = LinkDao.getAllOrderedBookmarkedLinks();
         if (list!=null) {
             for (Link link : list) {
                 menuIndex = GlobalVar.getInstance().CUSTOM_MIN + link.getId();

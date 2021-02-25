@@ -105,6 +105,8 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
 
             // Set as preferred
             if (GlobalVar.getInstance().getLinkId()==model.getId()) {
+                this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_run_circle_24, 0);
+            } else if (model.hasBookmark()) {
                 this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
             } else {
                 this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
@@ -119,13 +121,6 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
             } else {
                 this.icon.setImageResource(iconId);
             }
-/*
-            if (model.getIcon()!=null && model.getIcon().trim().toUpperCase().startsWith("HTTP")) {
-                Glide.with(this.icon.getContext()).load(model.getIcon()).error(iconId).into(this.icon);
-            } else {
-                this.icon.setImageResource(iconId);
-            }
-*/
         }
 
         private void bindOrHideTextView(TextView textView, String data) {

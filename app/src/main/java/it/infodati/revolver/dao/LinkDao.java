@@ -12,6 +12,7 @@ import it.infodati.revolver.database.DatabaseManager;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
+import static it.infodati.revolver.database.DatabaseStrings.FIELD_BOOKMARK;
 import static it.infodati.revolver.database.DatabaseStrings.FIELD_ICON;
 import static it.infodati.revolver.database.DatabaseStrings.FIELD_ID;
 import static it.infodati.revolver.database.DatabaseStrings.FIELD_TITLE;
@@ -27,6 +28,7 @@ public class LinkDao {
         values.put(FIELD_ID, model.getId());
         values.put(FIELD_URL, model.getUrl());
         values.put(FIELD_TITLE, model.getTitle());
+        values.put(FIELD_BOOKMARK, model.getBookmark());
         values.put(FIELD_ICON, model.getIcon());
 
         return DatabaseManager.insertOrUpadte(TABLE_LINKS, values);
@@ -43,7 +45,7 @@ public class LinkDao {
 
         Cursor cur = db.query(
                 TABLE_LINKS,
-                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_ICON },
+                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_ICON },
                 FIELD_ID + "=?",
                 new String[] { String.valueOf(id) },
                 null, null, null);
@@ -54,6 +56,7 @@ public class LinkDao {
                     model.setId(cur.getInt(cur.getColumnIndex(FIELD_ID)));
                     model.setUrl(cur.getString(cur.getColumnIndex(FIELD_URL)));
                     model.setTitle(cur.getString(cur.getColumnIndex(FIELD_TITLE)));
+                    model.setBookmark(cur.getInt(cur.getColumnIndex(FIELD_BOOKMARK)));
                     model.setIcon(cur.getBlob(cur.getColumnIndex(FIELD_ICON)));
                 } while (cur.moveToNext());
             }
@@ -68,7 +71,7 @@ public class LinkDao {
 
         Cursor cur = db.query(
                 TABLE_LINKS,
-                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_ICON },
+                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_ICON },
                 null,
                 null,
                 null,
@@ -82,6 +85,7 @@ public class LinkDao {
                     model.setId(cur.getInt(cur.getColumnIndex(FIELD_ID)));
                     model.setUrl(cur.getString(cur.getColumnIndex(FIELD_URL)));
                     model.setTitle(cur.getString(cur.getColumnIndex(FIELD_TITLE)));
+                    model.setBookmark(cur.getInt(cur.getColumnIndex(FIELD_BOOKMARK)));
                     model.setIcon(cur.getBlob(cur.getColumnIndex(FIELD_ICON)));
                 } while (cur.moveToNext());
             }
@@ -108,7 +112,7 @@ public class LinkDao {
 
         Cursor cur = db.query(
                 TABLE_LINKS,
-                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_ICON },
+                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_ICON },
                 null,
                 null,
                 null, null,
@@ -121,6 +125,7 @@ public class LinkDao {
                     model.setId(cur.getInt(cur.getColumnIndex(FIELD_ID)));
                     model.setUrl(cur.getString(cur.getColumnIndex(FIELD_URL)));
                     model.setTitle(cur.getString(cur.getColumnIndex(FIELD_TITLE)));
+                    model.setBookmark(cur.getInt(cur.getColumnIndex(FIELD_BOOKMARK)));
                     model.setIcon(cur.getBlob(cur.getColumnIndex(FIELD_ICON)));
                     models.add(model);
                 } while (cur.moveToNext());
@@ -133,7 +138,38 @@ public class LinkDao {
     public static List<Link> getAllLinks() {
         return getAllLinks(FIELD_ID);
     }
-    public static List<Link> getAllOrderedLinks() {
-        return getAllLinks(FIELD_TITLE);
+    public static List<Link> getAllOrderedLinks() { return getAllLinks(FIELD_TITLE); }
+    public static List<Link> getAllBookmarkedLinks(String orderBy) {
+        List<Link> models = new ArrayList<Link>();
+        SQLiteDatabase db = GlobalVar.getInstance().getDatabaseHelper().getReadableDatabase();
+
+        Cursor cur = db.query(
+                TABLE_LINKS,
+                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_ICON },
+                FIELD_BOOKMARK + "=?",
+                new String[] { String.valueOf(1) },
+                null, null,
+                orderBy);
+
+        if (cur != null) {
+            if (cur.moveToFirst()) {
+                do {
+                    Link model = new Link();
+                    model.setId(cur.getInt(cur.getColumnIndex(FIELD_ID)));
+                    model.setUrl(cur.getString(cur.getColumnIndex(FIELD_URL)));
+                    model.setTitle(cur.getString(cur.getColumnIndex(FIELD_TITLE)));
+                    model.setBookmark(cur.getInt(cur.getColumnIndex(FIELD_BOOKMARK)));
+                    model.setIcon(cur.getBlob(cur.getColumnIndex(FIELD_ICON)));
+                    models.add(model);
+                } while (cur.moveToNext());
+            }
+            cur.close();
+        }
+
+        return models;
     }
+    public static List<Link> getAllBookmarkedLinks() {
+        return getAllBookmarkedLinks(FIELD_ID);
+    }
+    public static List<Link> getAllOrderedBookmarkedLinks() { return getAllBookmarkedLinks(FIELD_TITLE); }
 }

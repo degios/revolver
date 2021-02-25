@@ -23,6 +23,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.ImageViewCompat;
 
@@ -40,6 +41,7 @@ public class LinkActivity extends AppCompatActivity {
     private int id;
     private String url;
 
+    private SwitchCompat switchBookmark;
     private AppCompatEditText editTextUrl;
     private AppCompatEditText editTextTitle;
     private ImageView imageViewIcon;
@@ -72,6 +74,7 @@ public class LinkActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        switchBookmark = findViewById(R.id.switch_bookmark);
         editTextUrl = findViewById(R.id.edittext_url);
         editTextTitle = findViewById(R.id.edittext_title);
         imageViewIcon = findViewById(R.id.imageview_icon);
@@ -168,6 +171,7 @@ public class LinkActivity extends AppCompatActivity {
     private void loadData() {
         Link model = LinkDao.getLink(this.id);
         if (model!=null) {
+            switchBookmark.setChecked(model.hasBookmark());
             editTextUrl.setText(model.getUrl());
             editTextTitle.setText(model.getTitle());
 
@@ -223,6 +227,7 @@ public class LinkActivity extends AppCompatActivity {
                         id,
                         editTextUrl.getText().toString(),
                         editTextTitle.getText().toString(),
+                        switchBookmark.isChecked(),
                         getByteArrayFromImageView(imageViewIcon)));
 
         setResult(Activity.RESULT_OK);

@@ -53,4 +53,6 @@
     <string name="subzoom_note">Attiva lo zoom contestuale</string>
     <string name="title">Titolo</string>
     <string name="download">Scarica</string>
+    <string name="bookmark">Segnalibro</string>
+    <string name="bookmark_note">Aggiungi il collegamento tra i segnalibri</string>
 </resources>

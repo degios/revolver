@@ -12,6 +12,7 @@ import it.infodati.revolver.database.DatabaseManager;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
+import static it.infodati.revolver.database.DatabaseStrings.FIELD_AUTORUN;
 import static it.infodati.revolver.database.DatabaseStrings.FIELD_BOOKMARK;
 import static it.infodati.revolver.database.DatabaseStrings.FIELD_ICON;
 import static it.infodati.revolver.database.DatabaseStrings.FIELD_ID;
@@ -29,6 +30,7 @@ public class LinkDao {
         values.put(FIELD_URL, model.getUrl());
         values.put(FIELD_TITLE, model.getTitle());
         values.put(FIELD_BOOKMARK, model.getBookmark());
+        values.put(FIELD_AUTORUN, model.getAutorun());
         values.put(FIELD_ICON, model.getIcon());
 
         return DatabaseManager.insertOrUpadte(TABLE_LINKS, values);
@@ -45,7 +47,7 @@ public class LinkDao {
 
         Cursor cur = db.query(
                 TABLE_LINKS,
-                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_ICON },
+                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_AUTORUN, FIELD_ICON },
                 FIELD_ID + "=?",
                 new String[] { String.valueOf(id) },
                 null, null, null);
@@ -57,6 +59,7 @@ public class LinkDao {
                     model.setUrl(cur.getString(cur.getColumnIndex(FIELD_URL)));
                     model.setTitle(cur.getString(cur.getColumnIndex(FIELD_TITLE)));
                     model.setBookmark(cur.getInt(cur.getColumnIndex(FIELD_BOOKMARK)));
+                    model.setAutorun(cur.getInt(cur.getColumnIndex(FIELD_AUTORUN)));
                     model.setIcon(cur.getBlob(cur.getColumnIndex(FIELD_ICON)));
                 } while (cur.moveToNext());
             }
@@ -71,7 +74,7 @@ public class LinkDao {
 
         Cursor cur = db.query(
                 TABLE_LINKS,
-                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_ICON },
+                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_AUTORUN, FIELD_ICON },
                 null,
                 null,
                 null,
@@ -86,6 +89,7 @@ public class LinkDao {
                     model.setUrl(cur.getString(cur.getColumnIndex(FIELD_URL)));
                     model.setTitle(cur.getString(cur.getColumnIndex(FIELD_TITLE)));
                     model.setBookmark(cur.getInt(cur.getColumnIndex(FIELD_BOOKMARK)));
+                    model.setAutorun(cur.getInt(cur.getColumnIndex(FIELD_AUTORUN)));
                     model.setIcon(cur.getBlob(cur.getColumnIndex(FIELD_ICON)));
                 } while (cur.moveToNext());
             }
@@ -106,13 +110,40 @@ public class LinkDao {
     public static Link getLastOrderedLink() {
         return getLink(FIELD_TITLE + " desc", 1);
     }
+    public static Link getAutorunLink() {
+        Link model = new Link();
+        SQLiteDatabase db = GlobalVar.getInstance().getDatabaseHelper().getReadableDatabase();
+
+        Cursor cur = db.query(
+                TABLE_LINKS,
+                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_AUTORUN, FIELD_ICON },
+                FIELD_AUTORUN + "=?",
+                new String[] { String.valueOf(1) },
+                null, null, null);
+
+        if (cur != null) {
+            if  (cur.moveToFirst()) {
+                do {
+                    model.setId(cur.getInt(cur.getColumnIndex(FIELD_ID)));
+                    model.setUrl(cur.getString(cur.getColumnIndex(FIELD_URL)));
+                    model.setTitle(cur.getString(cur.getColumnIndex(FIELD_TITLE)));
+                    model.setBookmark(cur.getInt(cur.getColumnIndex(FIELD_BOOKMARK)));
+                    model.setAutorun(cur.getInt(cur.getColumnIndex(FIELD_AUTORUN)));
+                    model.setIcon(cur.getBlob(cur.getColumnIndex(FIELD_ICON)));
+                } while (cur.moveToNext());
+            }
+            cur.close();
+        }
+
+        return model;
+    }
     public static List<Link> getAllLinks(String orderBy) {
         List<Link> models = new ArrayList<Link>();
         SQLiteDatabase db = GlobalVar.getInstance().getDatabaseHelper().getReadableDatabase();
 
         Cursor cur = db.query(
                 TABLE_LINKS,
-                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_ICON },
+                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_AUTORUN, FIELD_ICON },
                 null,
                 null,
                 null, null,
@@ -126,6 +157,7 @@ public class LinkDao {
                     model.setUrl(cur.getString(cur.getColumnIndex(FIELD_URL)));
                     model.setTitle(cur.getString(cur.getColumnIndex(FIELD_TITLE)));
                     model.setBookmark(cur.getInt(cur.getColumnIndex(FIELD_BOOKMARK)));
+                    model.setAutorun(cur.getInt(cur.getColumnIndex(FIELD_AUTORUN)));
                     model.setIcon(cur.getBlob(cur.getColumnIndex(FIELD_ICON)));
                     models.add(model);
                 } while (cur.moveToNext());
@@ -145,9 +177,9 @@ public class LinkDao {
 
         Cursor cur = db.query(
                 TABLE_LINKS,
-                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_ICON },
-                FIELD_BOOKMARK + "=?",
-                new String[] { String.valueOf(1) },
+                new String[] { FIELD_ID, FIELD_URL, FIELD_TITLE, FIELD_BOOKMARK, FIELD_AUTORUN, FIELD_ICON },
+                FIELD_BOOKMARK + "=? OR " + FIELD_AUTORUN + "=?",
+                new String[] { String.valueOf(1), String.valueOf(1) },
                 null, null,
                 orderBy);
 
@@ -159,6 +191,7 @@ public class LinkDao {
                     model.setUrl(cur.getString(cur.getColumnIndex(FIELD_URL)));
                     model.setTitle(cur.getString(cur.getColumnIndex(FIELD_TITLE)));
                     model.setBookmark(cur.getInt(cur.getColumnIndex(FIELD_BOOKMARK)));
+                    model.setAutorun(cur.getInt(cur.getColumnIndex(FIELD_AUTORUN)));
                     model.setIcon(cur.getBlob(cur.getColumnIndex(FIELD_ICON)));
                     models.add(model);
                 } while (cur.moveToNext());

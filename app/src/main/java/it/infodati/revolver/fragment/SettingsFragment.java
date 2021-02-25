@@ -22,9 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.infodati.revolver.R;
-import it.infodati.revolver.dao.LinkDao;
 import it.infodati.revolver.database.DatabaseStrings;
-import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
 
 public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
@@ -33,7 +31,6 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     private SwitchCompat switchBottombar;
     private SwitchCompat switchFloating;
     private SwitchCompat switchSwipe;
-    private AppCompatSpinner spinnerLinks;
     private SwitchCompat switchSubBlock;
     private SwitchCompat switchSubZoom;
     private SwitchCompat switchSubSwipe;
@@ -57,7 +54,6 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         switchBottombar = view.findViewById(R.id.switch_bottombar);
         switchFloating = view.findViewById(R.id.switch_floating);
         switchSwipe = view.findViewById(R.id.switch_swipe);
-        spinnerLinks = view.findViewById(R.id.spinner_links);
         switchSubBlock = view.findViewById(R.id.switch_subblock);
         switchSubZoom = view.findViewById(R.id.switch_subzoom);
         switchSubSwipe = view.findViewById(R.id.switch_subswipe);
@@ -67,14 +63,12 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         spinnerDatabases = view.findViewById(R.id.spinner_databases);
 
         this.loadSwitches();
-        this.loadSpinnerLinksData();
         this.loadSpinnerDatabasesData();
 
         switchToolbar.setOnCheckedChangeListener(this);
         switchBottombar.setOnCheckedChangeListener(this);
         switchFloating.setOnCheckedChangeListener(this);
         switchSwipe.setOnCheckedChangeListener(this);
-        spinnerLinks.setOnItemSelectedListener(this);
         switchSubBlock.setOnCheckedChangeListener(this);
         switchSubZoom.setOnCheckedChangeListener(this);
         switchSubSwipe.setOnCheckedChangeListener(this);
@@ -82,44 +76,6 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         switchSubToolbar.setOnCheckedChangeListener(this);
         switchButtonRemove.setOnCheckedChangeListener(this);
         spinnerDatabases.setOnItemSelectedListener(this);
-    }
-
-    public void loadSpinnerLinksData() {
-        Link homeLink = new Link(0,"", getResources().getString(R.string.home));
-
-        List<Link> list = LinkDao.getAllOrderedLinks();
-        list.add(0, homeLink);
-/*
-        if (list!=null)
-            Snackbar.make( spinner, "[" + String.valueOf(list.size()) + "] " + " links loaded", Snackbar.LENGTH_LONG)
-                    .setAction( "[" + String.valueOf(list.size()) + "] " + " links loaded", null)
-                    .show();
-*/
-
-        if (list!=null) {
-            ArrayAdapter adapter = new ArrayAdapter<Link>(getActivity(),
-                    android.R.layout.simple_spinner_item, list);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerLinks.setAdapter(adapter);
-
-            int position = 0;
-            if (GlobalVar.getInstance().getLinkId()>0) {
-                Link model = LinkDao.getLink(GlobalVar.getInstance().getLinkId());
-                if (model!=null) {
-                    position = GlobalVar.getInstance().getListIndexByString((ArrayList<Object>)(ArrayList<?>)(list), model);
-/*
-                    Snackbar.make( spinnerLinks, "[" + String.valueOf(model.getId()) + "][" + String.valueOf(position) + "] " + " fund position", Snackbar.LENGTH_LONG)
-                            .setAction( "[" + String.valueOf(position) + "] " + " link position", null)
-                            .show();
-*/
-                }
-            } else {
-                position = 0;
-            }
-            if (position>=0) {
-                spinnerLinks.setSelection(position);
-            }
-        }
     }
 
     public void loadSwitches() {
@@ -165,28 +121,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        if (parent.getId() == R.id.spinner_links) {
-            Link model = (Link) parent.getItemAtPosition(position);
-            try {
-                editor.putInt(GlobalVar.LINK_ID,model.getId());
-                editor.apply();
-/*
-            Snackbar.make( view, "[" + String.valueOf(model.getId()) + "] " + model.getDescription() + " selected", Snackbar.LENGTH_LONG)
-                    .setAction( "[" + String.valueOf(model.getId()) + "] " + model.getDescription() + " selected", null)
-                    .show();
-*/
-                GlobalVar.getInstance().setLinkId(sharedPreferences.getInt(GlobalVar.LINK_ID,0));
-                if (GlobalVar.getInstance().getLinkId()>0) {
-                    model = LinkDao.getLink(GlobalVar.getInstance().getLinkId());
-                    if (!model.hasBookmark()) {
-                        model.setBookmark(true);
-                        LinkDao.createLink(model);
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (parent.getId() == R.id.spinner_databases) {
+        if (parent.getId() == R.id.spinner_databases) {
             String name = (String) parent.getItemAtPosition(position);
             try {
                 if (!sharedPreferences.getString(GlobalVar.DATABASE_NAME,DatabaseStrings.DATABASE_DEMO).equals(name)) {

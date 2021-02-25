@@ -11,6 +11,7 @@ public class DatabaseStrings {
     public static final String TABLE_LINKS = "links";
 
     // Common columns names3
+    public static final String FIELD_AUTORUN = "autorun";
     public static final String FIELD_BOOKMARK = "bookmark";
     public static final String FIELD_ICON = "icon";
     public static final String FIELD_ID = "id";

@@ -55,4 +55,6 @@
     <string name="download">Scarica</string>
     <string name="bookmark">Segnalibro</string>
     <string name="bookmark_note">Aggiungi il collegamento tra i segnalibri</string>
+    <string name="autorun">Esecuzione automatica</string>
+    <string name="autorun_note">Esegui automaticamente questo collegamento in fase di avvio</string>
 </resources>

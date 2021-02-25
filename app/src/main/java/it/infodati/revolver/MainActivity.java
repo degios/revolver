@@ -326,20 +326,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 for (Link link : links)
                     LinkDao.createLink(link);
-
-                editor.putInt(GlobalVar.LINK_ID,1);
-                editor.apply();
 */
             }
         }
+
+        // Manager autorun link
+        Link autorunLink = LinkDao.getAutorunLink();
+        editor.putInt(GlobalVar.LINK_ID, (autorunLink!=null && autorunLink.getId()>0 ? autorunLink.getId() : 0));
+        editor.apply();
         GlobalVar.getInstance().setLinkId(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getInt(GlobalVar.LINK_ID, 0));
-        if (GlobalVar.getInstance().getLinkId()>0) {
-            Link model = LinkDao.getLink(GlobalVar.getInstance().getLinkId());
-            if (!model.hasBookmark()) {
-                model.setBookmark(true);
-                LinkDao.createLink(model);
-            }
-        }
     }
 
     private void loadInterface() {

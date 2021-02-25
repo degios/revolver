@@ -41,10 +41,11 @@ public class LinkActivity extends AppCompatActivity {
     private int id;
     private String url;
 
-    private SwitchCompat switchBookmark;
     private AppCompatEditText editTextUrl;
     private AppCompatEditText editTextTitle;
     private ImageView imageViewIcon;
+    private SwitchCompat switchBookmark;
+    private SwitchCompat switchAutorun;
     private AppCompatButton buttonDelete;
     private AppCompatButton buttonSave;
     private ProgressBar progressBar;
@@ -74,10 +75,11 @@ public class LinkActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        switchBookmark = findViewById(R.id.switch_bookmark);
         editTextUrl = findViewById(R.id.edittext_url);
         editTextTitle = findViewById(R.id.edittext_title);
         imageViewIcon = findViewById(R.id.imageview_icon);
+        switchBookmark = findViewById(R.id.switch_bookmark);
+        switchAutorun = findViewById(R.id.switch_autorun);
         buttonDelete = findViewById(R.id.button_delete);
         if (id>0 && GlobalVar.getInstance().isButtonRemoveEnabeld()) {
             buttonDelete.setVisibility(View.VISIBLE);
@@ -171,7 +173,6 @@ public class LinkActivity extends AppCompatActivity {
     private void loadData() {
         Link model = LinkDao.getLink(this.id);
         if (model!=null) {
-            switchBookmark.setChecked(model.hasBookmark());
             editTextUrl.setText(model.getUrl());
             editTextTitle.setText(model.getTitle());
 
@@ -184,6 +185,9 @@ public class LinkActivity extends AppCompatActivity {
             } else {
                 this.imageViewIcon.setImageResource(iconId);
             }
+
+            switchBookmark.setChecked(model.hasBookmark());
+            switchAutorun.setChecked(model.hasAutorun());
         }
     }
 
@@ -214,21 +218,31 @@ public class LinkActivity extends AppCompatActivity {
     }
 
     public void onSaveBtnClick(View v) {
+        Link link = null;
         int id;
+
         if (this.id>0) {
             id = this.id;
         } else {
             id = LinkDao.getLastLink().getId()+1;
         }
 
+        if (switchAutorun.isChecked()) {
+            link = LinkDao.getAutorunLink();
+            if (link!=null && link.getId()>0) {
+                link.setAutorun(false);
+                LinkDao.createLink(link);
+            }
+        }
 
-        LinkDao.createLink(
-                new Link(
-                        id,
-                        editTextUrl.getText().toString(),
-                        editTextTitle.getText().toString(),
-                        switchBookmark.isChecked(),
-                        getByteArrayFromImageView(imageViewIcon)));
+        link = new Link(
+                id,
+                editTextUrl.getText().toString(),
+                editTextTitle.getText().toString(),
+                switchBookmark.isChecked(),
+                switchAutorun.isChecked(),
+                getByteArrayFromImageView(imageViewIcon));
+        LinkDao.createLink(link);
 
         setResult(Activity.RESULT_OK);
         this.finish();

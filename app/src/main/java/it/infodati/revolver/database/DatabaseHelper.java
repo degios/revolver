@@ -14,7 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String LOG = "DatabaseHelper";
 
     // Database version
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 6;
 
     // Table create statement
     // Links
@@ -23,6 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + FIELD_URL + " TEXT NOT NULL, "
             + FIELD_TITLE + " TEXT NOT NULL UNIQUE, "
             + FIELD_BOOKMARK + " INTEGER, "
+            + FIELD_AUTORUN + " AUTORUN, "
             + FIELD_ICON + " BLOB "
             + ")";
 

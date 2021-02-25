@@ -133,7 +133,7 @@ public class LinkActivity extends AppCompatActivity {
     }
 
     public void loadInterface() {
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
         webView.setVisibility(View.GONE);
 
         WebSettings webSettings = webView.getSettings();
@@ -305,7 +305,7 @@ public class LinkActivity extends AppCompatActivity {
                 editTextTitle.setEnabled(true);
                 buttonDelete.setEnabled(true);
                 buttonSave.setEnabled(true);
-                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.INVISIBLE);
             }
         }
     }

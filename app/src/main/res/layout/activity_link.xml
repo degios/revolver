@@ -52,12 +52,6 @@
                 android:singleLine="true"
                 android:textSize="16sp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:textSize="16sp"/>
-
             <ProgressBar
                 android:id="@+id/progressbar"
                 android:layout_width="match_parent"

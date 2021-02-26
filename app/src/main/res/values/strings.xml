@@ -56,8 +56,10 @@
     <string name="toolbar_note">Show toolbar</string>
     <string name="url" translatable="false">Url</string>
     <string name="yes">Yes</string>
+    <string name="wizard">Wizard</string>
+    <string name="wizard_note">Use a wizard to add new links</string>
 
-    <string name="nav_header_subtitle" traslatable="false" translatable="false">Innovative bridge by Infodati S.p.A.</string>
+    <string name="nav_header_subtitle" translatable="false" traslatable="false">Innovative bridge by Infodati S.p.A.</string>
     <string name="nav_header_title" translatable="false">Revolver</string>
 
     <string name="navigation_drawer_close">Close navigation drawer</string>

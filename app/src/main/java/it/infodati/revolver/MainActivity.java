@@ -181,8 +181,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int itemId = item.getItemId();
         if (itemId == R.id.menu_add) {
-            activityClassName = this.getClass().getPackage().getName()+"."+"LinkActivity";
-            GlobalVar.getInstance().setCurrentLinkId(0);
+            activityClassName = this.getClass().getPackage().getName() + "." + (GlobalVar.getInstance().isWizardEnabled() ? "WizardActivity" : "LinkActicity");
+            if (!GlobalVar.getInstance().isWizardEnabled())
+                GlobalVar.getInstance().setCurrentLinkId(0);
             activityWithResult = true;
 /*
         } else if (itemId == R.id.menu_links) {
@@ -303,6 +304,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GlobalVar.getInstance().setBottombarEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.BOTTOMBAR_ENABLED, false));
         GlobalVar.getInstance().setFloatingEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.FLOATING_ENABLED, false));
         GlobalVar.getInstance().setSwipeEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SWIPE_ENABLED, false));
+        GlobalVar.getInstance().setWizardEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.WIZARD_ENABLED, false));
         GlobalVar.getInstance().setSubBlockEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBBLOCK_ENABLED, false));
         GlobalVar.getInstance().setSubActivityEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBACTIVITY_ENABLED, false));
         GlobalVar.getInstance().setSubToolbarEnabled(getSharedPreferences(GlobalVar.getInstance().getPrefsName(), Context.MODE_PRIVATE).getBoolean(GlobalVar.SUBTOOLBAR_ENABLED, false));

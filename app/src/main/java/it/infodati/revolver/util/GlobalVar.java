@@ -12,9 +12,10 @@ import it.infodati.revolver.database.DatabaseStrings;
 public class GlobalVar {
     private static GlobalVar instance = new GlobalVar();
 
-    public static final String TOOLBAR_ENABLED = "TOOLBAR_ENABLED";
     public static final String BOTTOMBAR_ENABLED = "BOTTOMBAR_ENABLED";
+    public static final String DATABASE_NAME = "DATABASE_NAME";
     public static final String FLOATING_ENABLED = "FLOATING_ENABLED";
+    public static final String LINK_ID = "LINK_ID";
     public static final String SWIPE_ENABLED = "SWIPE_ENABLED";
     public static final String SUBBLOCK_ENABLED = "SUBBLOCK_ENABLED";
     public static final String SUBSWIPE_ENABLED = "SUBSWIPE_ENABLED";
@@ -22,8 +23,8 @@ public class GlobalVar {
     public static final String SUBACTIVITY_ENABLED = "SUBACTIVITY_ENABLED";
     public static final String SUBTOOLBAR_ENABLED = "SUBTOOLBAR_ENABLED";
     public static final String BUTTONREMOVE_ENABLED = "BUTTONREMOVE_ENABLED";
-    public static final String LINK_ID = "LINK_ID";
-    public static final String DATABASE_NAME = "DATABASE_NAME";
+    public static final String TOOLBAR_ENABLED = "TOOLBAR_ENABLED";
+    public static final String WIZARD_ENABLED = "WIZARD_ENABLED";
 
     public static final int CUSTOM_MIN = 20000;
     public static final int CUSTOM_MAX = 29999;
@@ -35,6 +36,7 @@ public class GlobalVar {
     private boolean bottombarEnabled;
     private boolean floatingEnabled;
     private boolean swipeEnabled;
+    private boolean wizardEnabled;
     private boolean subBlockEnabled;
     private boolean subSwipeEnabled;
     private boolean subZoomEnabled;
@@ -59,6 +61,7 @@ public class GlobalVar {
     public void setBottombarEnabled(boolean enabled) { this.bottombarEnabled = enabled; }
     public void setFloatingEnabled(boolean enabled) { this.floatingEnabled = enabled; }
     public void setSwipeEnabled(boolean enabled) { this.swipeEnabled = enabled; }
+    public void setWizardEnabled(boolean enabled) { this.wizardEnabled = enabled; }
     public void setSubBlockEnabled(boolean enabled) { this.subBlockEnabled = enabled; }
     public void setSubActivityEnabled(boolean enabled) { this.subActivityEnabled = enabled; }
     public void setSubSwipeEnabled(boolean enabled) { this.subSwipeEnabled = enabled; }
@@ -87,6 +90,7 @@ public class GlobalVar {
     public boolean isBottombarEnabled() { return this.bottombarEnabled; }
     public boolean isFloatingEnabled() { return this.floatingEnabled; }
     public boolean isSwipeEnabled() { return this.swipeEnabled; }
+    public boolean isWizardEnabled() { return this.wizardEnabled; }
     public boolean isSubBlockEnabled() { return this.subBlockEnabled; }
     public boolean isSubActivityEnabled() { return this.subActivityEnabled; }
     public boolean isSubToolbarEnabled() { return this.subToolbarEnabled; }

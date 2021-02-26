@@ -187,6 +187,46 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_wizard"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:text="@string/wizard"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switch_wizard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:textAlignment="textEnd"
+                        android:textSize="16sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_wizard_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    android:textSize="14sp"
+                    android:textColor="@color/subTextColor"
+                    android:text="@string/wizard_note"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
             <View style="@style/Divider.Horizontal"/>
 
             <androidx.appcompat.widget.AppCompatTextView

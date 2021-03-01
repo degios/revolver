@@ -2,6 +2,7 @@ package it.infodati.revolver.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -89,6 +90,20 @@ public class ActionsFragment extends Fragment implements ListItemClickListener, 
             ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         } else {
             ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (GlobalVar.getInstance().isGridViewEnabled())
+                ((GridLayoutManager) recyclerView.getLayoutManager()).setSpanCount(Utility.calculateNoOfColumns(getContext(),150));
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (GlobalVar.getInstance().isGridViewEnabled())
+                ((GridLayoutManager) recyclerView.getLayoutManager()).setSpanCount(Utility.calculateNoOfColumns(getContext(),150));
         }
     }
 

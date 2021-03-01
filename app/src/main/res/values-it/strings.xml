@@ -59,4 +59,6 @@
     <string name="autorun_note">Esegui automaticamente questo collegamento in fase di avvio</string>
     <string name="wizard">Aggiunta guidata</string>
     <string name="wizard_note">Usa una procedura guidata di inserimento nuovo collegamento</string>
+    <string name="search">Ricerca</string>
+    <string name="cancel">Annulla</string>
 </resources>

@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int itemId = item.getItemId();
         if (itemId == R.id.menu_add) {
-            activityClassName = this.getClass().getPackage().getName() + "." + (GlobalVar.getInstance().isWizardEnabled() ? "WizardActivity" : "LinkActicity");
+            activityClassName = this.getClass().getPackage().getName() + "." + (GlobalVar.getInstance().isWizardEnabled() ? "WizardActivity" : "LinkActivity");
             if (!GlobalVar.getInstance().isWizardEnabled())
                 GlobalVar.getInstance().setCurrentLinkId(0);
             activityWithResult = true;

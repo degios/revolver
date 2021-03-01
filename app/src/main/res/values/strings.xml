@@ -13,6 +13,7 @@
     <string name="bookmark_note">Bookmark note</string>
     <string name="button_remove">Button remove</string>
     <string name="button_remove_note">Show button remove</string>
+    <string name="cancel">Cancel</string>
     <string name="confirm_delete">Confirm delete?</string>
     <string name="confirm_modify">Confirm modify?</string>
     <string name="connection">Connection</string>
@@ -42,6 +43,7 @@
     <string name="remove">Remove</string>
     <string name="remove_link">Remove link</string>
     <string name="save">Save</string>
+    <string name="search">Search</string>
     <string name="settings">Settings</string>
     <string name="subblock">Block</string>
     <string name="subblock_note">Block exit from action</string>

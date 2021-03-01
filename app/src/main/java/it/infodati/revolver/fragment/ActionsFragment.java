@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,7 @@ import it.infodati.revolver.listener.ListItemClickListener;
 import it.infodati.revolver.listener.ListItemLongClickListener;
 import it.infodati.revolver.model.Link;
 import it.infodati.revolver.util.GlobalVar;
+import it.infodati.revolver.util.Utility;
 
 public class ActionsFragment extends Fragment implements ListItemClickListener, ListItemLongClickListener, LoadDataFragment, LoadInterfaceFragment {
 
@@ -52,8 +54,10 @@ public class ActionsFragment extends Fragment implements ListItemClickListener, 
         progressBar = view.findViewById(R.id.progressbar);
         recyclerView = view.findViewById(R.id.recyclerview);
 //        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        adapter = new ActionsAdapter(this, ActionsAdapter.LISTVIEW);
+        recyclerView.setLayoutManager(
+                GlobalVar.getInstance().isGridViewEnabled() ? new GridLayoutManager(view.getContext(), Utility.calculateNoOfColumns(getContext(),150)) :  new LinearLayoutManager(view.getContext()));
+        adapter = new ActionsAdapter(this,
+                GlobalVar.getInstance().isGridViewEnabled() ? ActionsAdapter.GRIDVIEW : ActionsAdapter.LISTVIEW);
         recyclerView.setAdapter(adapter);
 
         fab = view.findViewById(R.id.fab);

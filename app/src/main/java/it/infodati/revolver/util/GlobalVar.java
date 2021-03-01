@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 
 import java.util.ArrayList;
 
+import it.infodati.revolver.adapter.ActionsAdapter;
 import it.infodati.revolver.database.DatabaseHelper;
 import it.infodati.revolver.database.DatabaseStrings;
 
@@ -15,6 +16,7 @@ public class GlobalVar {
     public static final String BOTTOMBAR_ENABLED = "BOTTOMBAR_ENABLED";
     public static final String DATABASE_NAME = "DATABASE_NAME";
     public static final String FLOATING_ENABLED = "FLOATING_ENABLED";
+    public static final String GRIDVIEW_ENABLED = "GRIDVIEW_ENABLED";
     public static final String LINK_ID = "LINK_ID";
     public static final String SWIPE_ENABLED = "SWIPE_ENABLED";
     public static final String SUBBLOCK_ENABLED = "SUBBLOCK_ENABLED";
@@ -37,6 +39,7 @@ public class GlobalVar {
     private boolean floatingEnabled;
     private boolean swipeEnabled;
     private boolean wizardEnabled;
+    private boolean gridViewEnabled;
     private boolean subBlockEnabled;
     private boolean subSwipeEnabled;
     private boolean subZoomEnabled;
@@ -62,6 +65,7 @@ public class GlobalVar {
     public void setFloatingEnabled(boolean enabled) { this.floatingEnabled = enabled; }
     public void setSwipeEnabled(boolean enabled) { this.swipeEnabled = enabled; }
     public void setWizardEnabled(boolean enabled) { this.wizardEnabled = enabled; }
+    public void setGridviewEnabled(boolean enabled) { this.gridViewEnabled = enabled; }
     public void setSubBlockEnabled(boolean enabled) { this.subBlockEnabled = enabled; }
     public void setSubActivityEnabled(boolean enabled) { this.subActivityEnabled = enabled; }
     public void setSubSwipeEnabled(boolean enabled) { this.subSwipeEnabled = enabled; }
@@ -91,6 +95,7 @@ public class GlobalVar {
     public boolean isFloatingEnabled() { return this.floatingEnabled; }
     public boolean isSwipeEnabled() { return this.swipeEnabled; }
     public boolean isWizardEnabled() { return this.wizardEnabled; }
+    public boolean isGridViewEnabled() { return this.gridViewEnabled; }
     public boolean isSubBlockEnabled() { return this.subBlockEnabled; }
     public boolean isSubActivityEnabled() { return this.subActivityEnabled; }
     public boolean isSubToolbarEnabled() { return this.subToolbarEnabled; }

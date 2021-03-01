@@ -32,6 +32,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     private SwitchCompat switchFloating;
     private SwitchCompat switchSwipe;
     private SwitchCompat switchWizard;
+    private SwitchCompat switchGridView;
     private SwitchCompat switchSubBlock;
     private SwitchCompat switchSubZoom;
     private SwitchCompat switchSubSwipe;
@@ -56,6 +57,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         switchFloating = view.findViewById(R.id.switch_floating);
         switchSwipe = view.findViewById(R.id.switch_swipe);
         switchWizard = view.findViewById(R.id.switch_wizard);
+        switchGridView = view.findViewById(R.id.switch_gridview);
         switchSubBlock = view.findViewById(R.id.switch_subblock);
         switchSubZoom = view.findViewById(R.id.switch_subzoom);
         switchSubSwipe = view.findViewById(R.id.switch_subswipe);
@@ -72,6 +74,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         switchFloating.setOnCheckedChangeListener(this);
         switchSwipe.setOnCheckedChangeListener(this);
         switchWizard.setOnCheckedChangeListener(this);
+        switchGridView.setOnCheckedChangeListener(this);
         switchSubBlock.setOnCheckedChangeListener(this);
         switchSubZoom.setOnCheckedChangeListener(this);
         switchSubSwipe.setOnCheckedChangeListener(this);
@@ -87,6 +90,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         this.switchFloating.setChecked(GlobalVar.getInstance().isFloatingEnabled());
         this.switchSwipe.setChecked(GlobalVar.getInstance().isSwipeEnabled());
         this.switchWizard.setChecked(GlobalVar.getInstance().isWizardEnabled());
+        this.switchGridView.setChecked(GlobalVar.getInstance().isGridViewEnabled());
         this.switchSubBlock.setChecked(GlobalVar.getInstance().isSubBlockEnabled());
         this.switchSubZoom.setChecked(GlobalVar.getInstance().isSubZoomEnabled());
         this.switchSubSwipe.setChecked(GlobalVar.getInstance().isSubSwipeEnabled());
@@ -180,6 +184,12 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
                 editor.apply();
             }
             GlobalVar.getInstance().setWizardEnabled(sharedPreferences.getBoolean(GlobalVar.WIZARD_ENABLED,false));
+        } else if (buttonView.getId() == R.id.switch_gridview) {
+            if (sharedPreferences.getBoolean(GlobalVar.GRIDVIEW_ENABLED,false)!=isChecked) {
+                editor.putBoolean(GlobalVar.GRIDVIEW_ENABLED,isChecked);
+                editor.apply();
+            }
+            GlobalVar.getInstance().setGridviewEnabled(sharedPreferences.getBoolean(GlobalVar.GRIDVIEW_ENABLED,false));
         } else if (buttonView.getId() == R.id.switch_subblock) {
             if (sharedPreferences.getBoolean(GlobalVar.SUBBLOCK_ENABLED,false)!=isChecked) {
                 editor.putBoolean(GlobalVar.SUBBLOCK_ENABLED,isChecked);

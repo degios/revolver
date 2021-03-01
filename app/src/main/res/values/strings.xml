@@ -27,6 +27,8 @@
     <string name="delete_link">Delete link</string>
     <string name="description">Description</string>
     <string name="download">Download</string>
+    <string name="grid">Grid</string>
+    <string name="grid_note">List actions in grid layout</string>
     <string name="home" translatable="false">Home</string>
     <string name="icon">Icon</string>
     <string name="id" translatable="false">Id</string>

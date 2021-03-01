@@ -227,6 +227,46 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textview_gridview"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:text="@string/grid"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switch_gridview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:textAlignment="textEnd"
+                        android:textSize="16sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_gridview_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    android:textSize="14sp"
+                    android:textColor="@color/subTextColor"
+                    android:text="@string/grid_note"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
             <View style="@style/Divider.Horizontal"/>
 
             <androidx.appcompat.widget.AppCompatTextView

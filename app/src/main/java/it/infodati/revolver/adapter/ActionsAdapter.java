@@ -34,7 +34,6 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
     private Context context;
     private int itemViewType;
 
-
     // Constructor
     public ActionsAdapter(Fragment fragment, int itemViewType) {
         this.onClickListener = (ListItemClickListener) fragment;
@@ -47,7 +46,8 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
     public ActionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.row_actions, parent, false);
+        View view = inflater.inflate(
+                (viewType==GRIDVIEW ? R.layout.item_actions : R.layout.row_actions), parent, false);
         return new ActionViewHolder(view);
     }
 
@@ -105,9 +105,17 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
 
             // Set as preferred
             if (model.hasAutorun()) {
-                this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_run_circle_24, 0);
+                if (itemViewType==GRIDVIEW) {
+                    this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.ic_outline_run_circle_24);
+                } else {
+                    this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_run_circle_24, 0);
+                }
             } else if (model.hasBookmark()) {
-                this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
+                if (itemViewType==GRIDVIEW) {
+                    this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.ic_outline_star_border_24);
+                } else {
+                    this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
+                }
             } else {
                 this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             }

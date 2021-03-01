@@ -61,4 +61,6 @@
     <string name="wizard_note">Usa una procedura guidata di inserimento nuovo collegamento</string>
     <string name="search">Ricerca</string>
     <string name="cancel">Annulla</string>
+    <string name="grid">Griglia</string>
+    <string name="grid_note">Elenca le azioni come una griglia</string>
 </resources>

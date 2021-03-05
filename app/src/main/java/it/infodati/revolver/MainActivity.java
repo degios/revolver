@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.LoadAdError;
@@ -75,8 +76,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
         });
         adView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
+        if (GlobalVar.isFree(getApplicationContext())) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            adView.loadAd(adRequest);
+        }
+
+/*
+        Snackbar.make( adView, getApplicationContext().getPackageName(), Snackbar.LENGTH_LONG)
+                .setAction( getApplicationContext().getPackageName(), null)
+                .show();
+*/
 
         GlobalVar.getInstance().setPrefsName(getString(R.string.app_name ) + "PrefsFile");
         this.loadData();
@@ -366,6 +375,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (!GlobalVar.getInstance().isSwipeEnabled())
             swipe.setEnabled(false);
+
+        ImageView imageView = navigationView.getHeaderView(0).findViewById(R.id.nav_header_imageView);
+        if (imageView!=null)
+            imageView.setImageDrawable(getResources().getDrawable(GlobalVar.isFree(getApplicationContext()) ? R.mipmap.ic_launcher_free : R.mipmap.ic_launcher_pro));
 
         int menuIndex = 0;
         int menuOrder = GlobalVar.getInstance().CUSTOM_MIN;

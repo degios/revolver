@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Revolver</string>
     <string name="informations">Informazioni</string>
     <string name="settings">Impostazioni</string>
     <string name="navigation_drawer_close">Chiudi barra laterale</string>

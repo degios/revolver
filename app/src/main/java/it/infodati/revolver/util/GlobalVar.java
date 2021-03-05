@@ -128,4 +128,7 @@ public class GlobalVar {
         return (netInfo != null && (netInfo.isConnected() && netInfo.isAvailable()));
     }
 
+    public static boolean isFree(Context context) {
+        return context.getPackageName().endsWith(".free");
+    }
 }

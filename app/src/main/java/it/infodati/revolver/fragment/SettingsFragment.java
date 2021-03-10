@@ -229,4 +229,32 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
             GlobalVar.getInstance().setButtonRemoveEnabled(sharedPreferences.getBoolean(GlobalVar.BUTTONREMOVE_ENABLED,false));
         }
     }
+
+    public void onTextClick(View textView) {
+        if (textView.getId()==R.id.textview_toolbar || textView.getId()==R.id.textview_toolbar_note) {
+            switchToolbar.setChecked(!switchToolbar.isChecked());
+        } else if (textView.getId()==R.id.textview_bottombar || textView.getId()==R.id.textview_bottombar_note) {
+            switchBottombar.setChecked(!switchBottombar.isChecked());
+        } else if (textView.getId()==R.id.textview_floating || textView.getId()==R.id.textview_floating_note) {
+            switchFloating.setChecked(!switchFloating.isChecked());
+        } else if (textView.getId()==R.id.textview_swipe || textView.getId()==R.id.textview_swipe_note) {
+            switchSwipe.setChecked(!switchSwipe.isChecked());
+        } else if (textView.getId()==R.id.textview_wizard || textView.getId()==R.id.textview_wizard_note) {
+            switchWizard.setChecked(!switchWizard.isChecked());
+        } else if (textView.getId()==R.id.textview_gridview || textView.getId()==R.id.textview_gridview_note) {
+            switchGridView.setChecked(!switchGridView.isChecked());
+        } else if (textView.getId()==R.id.textview_subblock || textView.getId()==R.id.textview_subblock_note) {
+            switchSubBlock.setChecked(!switchSubBlock.isChecked());
+        } else if (textView.getId()==R.id.textview_subzoom || textView.getId()==R.id.textview_subzoom_note) {
+            switchSubZoom.setChecked(!switchSubZoom.isChecked());
+        } else if (textView.getId()==R.id.textview_subswipe || textView.getId()==R.id.textview_subswipe_note) {
+            switchSubSwipe.setChecked(!switchSubSwipe.isChecked());
+        } else if (textView.getId()==R.id.textview_subactivity || textView.getId()==R.id.textview_subactivity_note) {
+            switchSubActivity.setChecked(!switchSubActivity.isChecked());
+        } else if (textView.getId()==R.id.textview_subtoolbar || textView.getId()==R.id.textview_subtoolbar_note) {
+            switchSubToolbar.setChecked(!switchSubToolbar.isChecked());
+        } else if (textView.getId()==R.id.textview_button_remove || textView.getId()==R.id.textview_button_remove_note) {
+            switchButtonRemove.setChecked(!switchButtonRemove.isChecked());
+        }
+    }
 }

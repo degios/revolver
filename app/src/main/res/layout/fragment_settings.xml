@@ -44,7 +44,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/toolbar"/>
+                        android:text="@string/toolbar"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_toolbar"
@@ -63,7 +64,8 @@
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/toolbar_note"/>
+                    android:text="@string/toolbar_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -84,7 +86,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/bottombar"/>
+                        android:text="@string/bottombar"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_bottombar"
@@ -97,13 +100,14 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textview_linkbar_note"
+                    android:id="@+id/textview_bottombar_note"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/bottombar_note"/>
+                    android:text="@string/bottombar_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -124,7 +128,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/floating"/>
+                        android:text="@string/floating"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_floating"
@@ -143,7 +148,8 @@
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/floating_note"/>
+                    android:text="@string/floating_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -164,7 +170,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/swipe"/>
+                        android:text="@string/swipe"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_swipe"
@@ -183,7 +190,8 @@
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/swipe_note"/>
+                    android:text="@string/swipe_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -204,7 +212,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/wizard"/>
+                        android:text="@string/wizard"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_wizard"
@@ -223,7 +232,8 @@
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/wizard_note"/>
+                    android:text="@string/wizard_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -244,7 +254,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/grid"/>
+                        android:text="@string/grid"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_gridview"
@@ -263,7 +274,8 @@
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/grid_note"/>
+                    android:text="@string/grid_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -295,7 +307,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/subblock"/>
+                        android:text="@string/subblock"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_subblock"
@@ -314,7 +327,8 @@
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/subblock_note"/>
+                    android:text="@string/subblock_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -335,7 +349,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/subzoom"/>
+                        android:text="@string/subzoom"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_subzoom"
@@ -354,7 +369,8 @@
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/subzoom_note"/>
+                    android:text="@string/subzoom_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -375,7 +391,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/activity"/>
+                        android:text="@string/activity"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_subactivity"
@@ -394,7 +411,8 @@
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/activity_note"/>
+                    android:text="@string/activity_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -415,7 +433,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/toolbar"/>
+                        android:text="@string/toolbar"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_subtoolbar"
@@ -434,7 +453,8 @@
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/toolbar_note"/>
+                    android:text="@string/toolbar_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -455,7 +475,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/subswipe"/>
+                        android:text="@string/subswipe"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_subswipe"
@@ -474,7 +495,8 @@
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/subswipe_note"/>
+                    android:text="@string/subswipe_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -506,7 +528,8 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:textSize="16sp"
-                        android:text="@string/button_remove"/>
+                        android:text="@string/button_remove"
+                        android:onClick="onTextClick"/>
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_button_remove"
@@ -525,7 +548,8 @@
                     android:textStyle="italic"
                     android:textSize="14sp"
                     android:textColor="@color/subTextColor"
-                    android:text="@string/button_remove_note"/>
+                    android:text="@string/button_remove_note"
+                    android:onClick="onTextClick"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -1,6 +1,7 @@
 package it.infodati.revolver;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import androidx.fragment.app.FragmentManager;
 import it.infodati.revolver.fragment.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    private SettingsFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +30,12 @@ public class SettingsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        SettingsFragment fragment = new SettingsFragment();
+        fragment = new SettingsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+    }
+
+    public void onTextClick(View textView) {
+        fragment.onTextClick(textView);
     }
 }

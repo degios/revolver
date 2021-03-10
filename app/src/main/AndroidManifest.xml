@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <!-- Add the following attribute to the <application> tag to enable hardware acceleration for your entire application -->
     <application
         android:allowBackup="true"
         android:icon="${appIcon}"
@@ -13,12 +14,17 @@
         android:roundIcon="${appIconRound}"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="true">
+
+        <!-- For activities that use ads, hardwareAcceleration should be true. -->
+        <!-- For activities that don't use ads, hardwareAcceleration can be false. -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="unspecified">
+            android:screenOrientation="unspecified"
+            android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,47 +38,57 @@
                 <data android:mimeType="text/*" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ActionActivity"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="unspecified">
+            android:screenOrientation="unspecified"
+            android:hardwareAccelerated="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <activity
             android:name=".LinksActivity"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="unspecified">
+            android:screenOrientation="unspecified"
+            android:hardwareAccelerated="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <activity
             android:name=".LinkActivity"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="unspecified">
+            android:screenOrientation="unspecified"
+            android:hardwareAccelerated="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <activity
             android:name=".WizardActivity"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="unspecified">
+            android:screenOrientation="unspecified"
+            android:hardwareAccelerated="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="unspecified">
+            android:screenOrientation="unspecified"
+            android:hardwareAccelerated="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -81,6 +97,7 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-1746064617723803~6755039444"/>
+
     </application>
 
 </manifest>

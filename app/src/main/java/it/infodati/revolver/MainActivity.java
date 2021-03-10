@@ -23,11 +23,16 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SwipeRefreshLayout swipe;
     private Fragment fragment;
     private Snackbar snackBar;
+    FrameLayout adViewContainer;
     private AdView adView;
 
     @Override
@@ -75,11 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onInitializationComplete(InitializationStatus initializationStatus) {
                 }
         });
-        adView = findViewById(R.id.adView);
-        if (GlobalVar.isFree(getApplicationContext())) {
-            AdRequest adRequest = new AdRequest.Builder().build();
-            adView.loadAd(adRequest);
-        }
+        adViewContainer = findViewById(R.id.adview_container);
 
 /*
         Snackbar.make( adView, getApplicationContext().getPackageName(), Snackbar.LENGTH_LONG)
@@ -325,6 +327,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         toggle.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+            loadBanner();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+//            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+            loadBanner();
+        }
     }
 
     private void loadData() {
@@ -409,6 +420,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.refreshDrawableState();
         drawerLayout.invalidate();
         toggle.syncState();
+
+        loadBanner();
     }
 
     @Override
@@ -422,4 +435,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             swipe.setRefreshing(false);
         }
     }
+
+    private void loadBanner() {
+        adViewContainer.removeAllViews();
+        if (GlobalVar.isFree(getApplicationContext())) {
+            adView = new AdView(this);
+            // Revolver: ca-app-pub-1746064617723803/7076078428
+            // Test ads: ca-app-pub-3940256099942544/6300978111
+            adView.setAdUnitId("ca-app-pub-1746064617723803/7076078428");
+            adViewContainer.addView(adView);
+
+            // Create an ad request. Check your logcat output for the hashed device ID
+            // to get test ads on a physical device, e.g.,
+            // "Use AdRequest.Builder.addTestDevice("ABCDE0123") to get test ads on this
+            // device."
+            AdRequest adRequest = new AdRequest.Builder().build();
+
+            AdSize adSize = getAdSize();
+            // Step 4 - Set the adaptive ad size on the ad view.
+            adView.setAdSize(adSize);
+            // Step 5 - Start loading the ad in the background.
+            adView.loadAd(adRequest);
+        }
+    }
+
+    private AdSize getAdSize() {
+        // Step 2 - Determine the screen width (less decorations) to use for the ad width.
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+
+        float widthPixels = outMetrics.widthPixels;
+        float density = outMetrics.density;
+
+        int adWidth = (int) (widthPixels / density);
+
+        // Step 3 - Get adaptive ad size and return for setting on the ad view.
+        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
+    }
+
 }

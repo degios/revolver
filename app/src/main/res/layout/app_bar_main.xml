@@ -20,6 +20,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+<!--
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
@@ -27,8 +28,15 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        ads:adUnitId="ca-app-pub-1746064617723803/7076078428">
     </com.google.android.gms.ads.AdView>
+    &lt;!&ndash; Revolver: ca-app-pub-1746064617723803/7076078428 &ndash;&gt;
+    &lt;!&ndash; Test google: ca-app-pub-3940256099942544/6300978111 &ndash;&gt;
+-->
+    <FrameLayout
+        android:id="@+id/adview_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe"

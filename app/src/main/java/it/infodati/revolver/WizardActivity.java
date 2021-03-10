@@ -93,8 +93,10 @@ public class WizardActivity extends AppCompatActivity {
             webView.setVisibility(View.GONE);
             return true;
         } else if (itemId == R.id.menu_search) {
+            loadData();
             return true;
         } else if (itemId == R.id.menu_refresh) {
+            webView.reload();
             return true;
         } else {
             return super.onOptionsItemSelected(item);

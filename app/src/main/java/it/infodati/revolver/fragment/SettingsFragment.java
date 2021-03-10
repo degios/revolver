@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -82,7 +83,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         switchSubToolbar.setOnCheckedChangeListener(this);
         switchButtonRemove.setOnCheckedChangeListener(this);
         spinnerDatabases.setOnItemSelectedListener(this);
-    }
+   }
 
     public void loadSwitches() {
         this.switchToolbar.setChecked(GlobalVar.getInstance().isToolbarEnabled());

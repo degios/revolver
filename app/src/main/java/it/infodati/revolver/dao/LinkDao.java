@@ -205,4 +205,5 @@ public class LinkDao {
         return getAllBookmarkedLinks(FIELD_ID);
     }
     public static List<Link> getAllOrderedBookmarkedLinks() { return getAllBookmarkedLinks(FIELD_TITLE); }
+    public static int getLinksCount() { return getAllLinks().size(); }
 }

@@ -42,6 +42,7 @@
     <string name="floating_note">Show links button</string>
     <string name="modify_link">Modify link</string>
     <string name="note">Note</string>
+    <string name="over_quota">Free version has reach the maximum links number!</string>
     <string name="refresh">Refresh</string>
     <string name="remove">Remove</string>
     <string name="remove_link">Remove link</string>

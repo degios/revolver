@@ -166,26 +166,32 @@ public class WizardActivity extends AppCompatActivity {
         Link link = null;
         int id;
 
-        id = LinkDao.getLastLink().getId()+1;
-        if (switchAutorun.isChecked()) {
-            link = LinkDao.getAutorunLink();
-            if (link!=null && link.getId()>0) {
-                link.setAutorun(false);
-                LinkDao.createLink(link);
+        if (GlobalVar.isOverQuota(getApplicationContext())) {
+            Snackbar.make( toolbar, getResources().getString(R.string.over_quota), Snackbar.LENGTH_LONG)
+                    .setAction( getResources().getString(R.string.over_quota), null)
+                    .show();
+        } else {
+            id = LinkDao.getLastLink().getId() + 1;
+            if (switchAutorun.isChecked()) {
+                link = LinkDao.getAutorunLink();
+                if (link != null && link.getId() > 0) {
+                    link.setAutorun(false);
+                    LinkDao.createLink(link);
+                }
             }
+
+            link = new Link(
+                    id,
+                    editTextUrl.getText().toString(),
+                    editTextTitle.getText().toString(),
+                    switchBookmark.isChecked(),
+                    switchAutorun.isChecked(),
+                    getByteArrayFromImageView(imageViewIcon));
+            LinkDao.createLink(link);
+
+            setResult(Activity.RESULT_OK);
+            this.finish();
         }
-
-        link = new Link(
-                id,
-                editTextUrl.getText().toString(),
-                editTextTitle.getText().toString(),
-                switchBookmark.isChecked(),
-                switchAutorun.isChecked(),
-                getByteArrayFromImageView(imageViewIcon));
-        LinkDao.createLink(link);
-
-        setResult(Activity.RESULT_OK);
-        this.finish();
     }
 
     private byte[] getByteArrayFromImageView(ImageView view) {

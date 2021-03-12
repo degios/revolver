@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import java.util.ArrayList;
 
 import it.infodati.revolver.adapter.ActionsAdapter;
+import it.infodati.revolver.dao.LinkDao;
 import it.infodati.revolver.database.DatabaseHelper;
 import it.infodati.revolver.database.DatabaseStrings;
 
@@ -30,6 +31,7 @@ public class GlobalVar {
 
     public static final int CUSTOM_MIN = 20000;
     public static final int CUSTOM_MAX = 29999;
+    public static final int FREE_LINKS = 3;
 
     private String prefsName;
     private String databaseName;
@@ -130,5 +132,9 @@ public class GlobalVar {
 
     public static boolean isFree(Context context) {
         return context.getPackageName().endsWith(".free");
+    }
+
+    public static boolean isOverQuota(Context context) {
+        return (GlobalVar.isFree(context) && LinkDao.getLinksCount()>=GlobalVar.FREE_LINKS ? true : false );
     }
 }

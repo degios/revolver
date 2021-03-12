@@ -62,4 +62,5 @@
     <string name="cancel">Annulla</string>
     <string name="grid">Griglia</string>
     <string name="grid_note">Elenca le azioni come una griglia</string>
+    <string name="over_quota">La versione di prova ha raggiunto il numero massimo di collegamenti!</string>
 </resources>

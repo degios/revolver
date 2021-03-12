@@ -26,6 +26,7 @@ import java.util.List;
 import it.infodati.revolver.ActionActivity;
 import it.infodati.revolver.LinkActivity;
 import it.infodati.revolver.R;
+import it.infodati.revolver.WizardActivity;
 import it.infodati.revolver.adapter.ActionsAdapter;
 import it.infodati.revolver.dao.LinkDao;
 import it.infodati.revolver.listener.ListItemClickListener;
@@ -65,10 +66,17 @@ public class ActionsFragment extends Fragment implements ListItemClickListener, 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalVar.getInstance().setCurrentLinkId(0);
-                Intent intent = new Intent(getActivity(), LinkActivity.class);
-                intent.putExtra(getResources().getString(R.string.id).toString(), 0);
-                startActivityForResult(intent, 0);
+                if (!GlobalVar.getInstance().isWizardEnabled())
+                    GlobalVar.getInstance().setCurrentLinkId(0);
+                if (GlobalVar.isOverQuota(getActivity().getApplicationContext())) {
+                    Snackbar.make( progressBar, getResources().getString(R.string.over_quota), Snackbar.LENGTH_LONG)
+                            .setAction( getResources().getString(R.string.over_quota), null)
+                            .show();
+                } else {
+                    Intent intent = new Intent(getActivity(), GlobalVar.getInstance().isWizardEnabled() ? WizardActivity.class : LinkActivity.class);
+                    intent.putExtra(getResources().getString(R.string.id).toString(), 0);
+                    startActivityForResult(intent, 0);
+                }
             }
         });
 

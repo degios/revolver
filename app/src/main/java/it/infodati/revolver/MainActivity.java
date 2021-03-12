@@ -155,10 +155,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 host = "";
             }
 
-            intent = new Intent(this, LinkActivity.class);
-            intent.putExtra(getResources().getString(R.string.id).toString(),0);
-            intent.putExtra(getResources().getString(R.string.url), sharedText);
-            startActivityForResult(intent, 0);
+            if (GlobalVar.isOverQuota(getApplicationContext())) {
+                Snackbar.make( toolbar, getResources().getString(R.string.over_quota), Snackbar.LENGTH_LONG)
+                        .setAction( getResources().getString(R.string.over_quota), null)
+                        .show();
+            } else {
+                intent = new Intent(this, LinkActivity.class);
+                intent.putExtra(getResources().getString(R.string.id).toString(), 0);
+                intent.putExtra(getResources().getString(R.string.url), sharedText);
+                startActivityForResult(intent, 0);
+            }
         } else {
             int menuIndex = (GlobalVar.getInstance().getLinkId() > 0 ? GlobalVar.getInstance().CUSTOM_MIN + GlobalVar.getInstance().getLinkId() : R.id.nav_home);
             MenuItem menuItem = navigationView.getMenu().findItem(menuIndex);
@@ -212,10 +218,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int itemId = item.getItemId();
         if (itemId == R.id.menu_add) {
-            activityClassName = this.getClass().getPackage().getName() + "." + (GlobalVar.getInstance().isWizardEnabled() ? "WizardActivity" : "LinkActivity");
-            if (!GlobalVar.getInstance().isWizardEnabled())
-                GlobalVar.getInstance().setCurrentLinkId(0);
-            activityWithResult = true;
+            if (GlobalVar.isOverQuota(getApplicationContext())) {
+                Snackbar.make( toolbar, getResources().getString(R.string.over_quota), Snackbar.LENGTH_LONG)
+                        .setAction( getResources().getString(R.string.over_quota), null)
+                        .show();
+            } else {
+                activityClassName = this.getClass().getPackage().getName() + "." + (GlobalVar.getInstance().isWizardEnabled() ? "WizardActivity" : "LinkActivity");
+                if (!GlobalVar.getInstance().isWizardEnabled())
+                    GlobalVar.getInstance().setCurrentLinkId(0);
+                activityWithResult = true;
+            }
 /*
         } else if (itemId == R.id.menu_links) {
             activityClassName = this.getClass().getPackage().getName()+"."+"LinksActivity";

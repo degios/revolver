@@ -3,7 +3,9 @@ package it.infodati.revolver.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.graphics.drawable.WrappedDrawable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -117,7 +121,13 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
                     this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
                 }
             } else {
-                this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                if (itemViewType==GRIDVIEW) {
+                    Drawable transparent = context.getResources().getDrawable(android.R.drawable.ic_menu_camera);
+                    DrawableCompat.setTint(transparent,Color.TRANSPARENT);
+                    this.title.setCompoundDrawablesWithIntrinsicBounds(null, null, null, transparent);
+                } else {
+                    this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                }
             }
 
             String iconName = context.getResources().getResourceEntryName(android.R.drawable.ic_menu_myplaces);

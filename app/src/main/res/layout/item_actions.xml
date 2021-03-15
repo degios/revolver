@@ -41,6 +41,8 @@
             android:gravity="center"
             android:textStyle="normal"
             android:textSize="14dp"
+            android:maxLines="2"
+            android:minLines="2"
             android:text="@string/title"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

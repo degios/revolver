@@ -269,6 +269,14 @@ public class LinkActivity extends AppCompatActivity {
         return arIcon;
     }
 
+    public void onTextClick(View textView) {
+        if (textView.getId()==R.id.textview_bookmark || textView.getId()==R.id.textview_bookmark_note) {
+            switchBookmark.setChecked(!switchBookmark.isChecked());
+        } else if (textView.getId()==R.id.textview_autorun || textView.getId()==R.id.textview_autorun_note) {
+            switchAutorun.setChecked(!switchAutorun.isChecked());
+        }
+    }
+
     private class WebViewClient extends android.webkit.WebViewClient {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {

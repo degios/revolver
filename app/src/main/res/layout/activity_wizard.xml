@@ -127,7 +127,8 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textSize="16sp"
-                android:text="@string/bookmark"/>
+                android:text="@string/bookmark"
+                android:onClick="onTextClick"/>
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_bookmark"
@@ -146,7 +147,8 @@
             android:textStyle="italic"
             android:textSize="14sp"
             android:textColor="@color/subTextColor"
-            android:text="@string/bookmark_note"/>
+            android:text="@string/bookmark_note"
+            android:onClick="onTextClick"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
@@ -165,7 +167,8 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textSize="16sp"
-                android:text="@string/autorun"/>
+                android:text="@string/autorun"
+                android:onClick="onTextClick"/>
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_autorun"
@@ -184,7 +187,8 @@
             android:textStyle="italic"
             android:textSize="14sp"
             android:textColor="@color/subTextColor"
-            android:text="@string/autorun_note"/>
+            android:text="@string/autorun_note"
+            android:onClick="onTextClick"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"

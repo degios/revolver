@@ -6,14 +6,15 @@
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
     android:id="@+id/card"
-    card_view:cardCornerRadius="0dp"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="0dp"
     card_view:contentPadding="1dp"
     android:clickable="true">
 
     <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15sp"
+        android:padding="5dp"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -28,8 +29,8 @@
             android:id="@+id/icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:paddingBottom="5dp"
             android:layout_gravity="center"
-            android:paddingBottom="15sp"
             android:contentDescription="@string/icon"
             android:src="@android:drawable/ic_menu_myplaces" />
 
@@ -41,9 +42,17 @@
             android:gravity="center"
             android:textStyle="normal"
             android:textSize="14dp"
-            android:maxLines="2"
+            android:singleLine="false"
             android:minLines="2"
+            android:maxLines="2"
             android:text="@string/title"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/marker"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/icon"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

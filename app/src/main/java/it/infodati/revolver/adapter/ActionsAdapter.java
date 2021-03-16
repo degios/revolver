@@ -91,6 +91,8 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
         private final TextView id;
         private final ImageView icon;
         private final TextView title;
+        private final ImageView marker;
+        private final Drawable transparent;
 
         public ActionViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -98,6 +100,10 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
             this.id = (TextView) itemView.findViewById(R.id.id);
             this.icon = (ImageView) itemView.findViewById(R.id.icon);
             this.title = (TextView) itemView.findViewById(R.id.title);
+            this.marker = (ImageView) itemView.findViewById(R.id.marker);
+
+            transparent = context.getResources().getDrawable(android.R.drawable.ic_menu_camera);
+            DrawableCompat.setTint(transparent, Color.TRANSPARENT);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -109,24 +115,34 @@ public class ActionsAdapter extends RecyclerView.Adapter<ActionsAdapter.ActionVi
 
             // Set as preferred
             if (model.hasAutorun()) {
-                if (itemViewType==GRIDVIEW) {
-                    this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.ic_outline_run_circle_24);
+                if (this.marker!=null) {
+                    this.marker.setImageResource(R.drawable.ic_outline_run_circle_24);
                 } else {
-                    this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_run_circle_24, 0);
+                    if (itemViewType == GRIDVIEW) {
+                        this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.ic_outline_run_circle_24);
+                    } else {
+                        this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_run_circle_24, 0);
+                    }
                 }
             } else if (model.hasBookmark()) {
-                if (itemViewType==GRIDVIEW) {
-                    this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.ic_outline_star_border_24);
+                if (this.marker!=null) {
+                    this.marker.setImageResource(R.drawable.ic_outline_star_border_24);
                 } else {
-                    this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
+                    if (itemViewType == GRIDVIEW) {
+                        this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.ic_outline_star_border_24);
+                    } else {
+                        this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_outline_star_border_24, 0);
+                    }
                 }
             } else {
-                if (itemViewType==GRIDVIEW) {
-                    Drawable transparent = context.getResources().getDrawable(android.R.drawable.ic_menu_camera);
-                    DrawableCompat.setTint(transparent,Color.TRANSPARENT);
-                    this.title.setCompoundDrawablesWithIntrinsicBounds(null, null, null, transparent);
+                if (this.marker!=null) {
+                    this.marker.setImageDrawable(transparent);
                 } else {
-                    this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                    if (itemViewType == GRIDVIEW) {
+                        this.title.setCompoundDrawablesWithIntrinsicBounds(null, null, null, transparent);
+                    } else {
+                        this.title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                    }
                 }
             }
 
